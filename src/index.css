@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  background: #f3f4f6;
+  color: #18181b;
+}
+
+.dark body {
+  background: #0f172a;
+  color: #f1f5f9;
+}
+
+/* Glassmorphism utility */
+.glass {
+  @apply backdrop-blur-md bg-white/10 dark:bg-gray-900/40 border border-white/20 dark:border-gray-700/40 shadow-lg;
+} 
