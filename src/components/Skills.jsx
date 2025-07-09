@@ -1,5 +1,5 @@
-import { FaReact, FaNodeJs, FaGitAlt, FaDatabase } from 'react-icons/fa';
-import { SiTailwindcss, SiJavascript, SiMongodb, SiVite } from 'react-icons/si';
+import { FaReact, FaNodeJs, FaGitAlt, FaDatabase,FaJava,FaCss3 } from 'react-icons/fa';
+import { SiTailwindcss, SiJavascript,  SiVite ,SiHtml5,SiPython,SiC} from 'react-icons/si';
 import { motion } from 'framer-motion';
 
 const skills = [
@@ -9,21 +9,38 @@ const skills = [
       { name: 'React', icon: <FaReact className="text-cyan-400" /> },
       { name: 'Tailwind', icon: <SiTailwindcss className="text-cyan-300" /> },
       { name: 'JavaScript', icon: <SiJavascript className="text-yellow-400" /> },
-    ],
-  },
-  {
-    category: 'Backend',
-    items: [
-      { name: 'Node.js', icon: <FaNodeJs className="text-green-400" /> },
-      { name: 'MongoDB', icon: <SiMongodb className="text-green-500" /> },
       { name: 'Vite', icon: <SiVite className="text-purple-400" /> },
+      { name: 'HTML', icon: <SiHtml5 className="text-purple-400" /> },
+      { name: 'CSS', icon: <FaCss3 className="text-purple-400" /> },
+
+
+
     ],
   },
+  // {
+  //   category: 'Backend',
+  //   items: [
+  //     { name: 'Node.js', icon: <FaNodeJs className="text-green-400" /> },
+  //     { name: 'MongoDB', icon: <SiMongodb className="text-green-500" /> },
+  //   ],
+  // },
   {
-    category: 'Tools',
+    category: 'Others',
     items: [
       { name: 'Git', icon: <FaGitAlt className="text-orange-400" /> },
       { name: 'Database', icon: <FaDatabase className="text-blue-400" /> },
+      { name: 'Node.js', icon: <FaNodeJs className="text-green-400" /> },
+
+    ],
+  },
+    {
+    category: 'Languages',
+    items: [
+      { name: 'Python', icon: <SiPython className="text-orange-400" /> },
+      { name: 'java', icon: <FaJava className="text-blue-400" /> },
+      { name: 'C', icon: <SiC className="text-blue-400" /> },
+
+
     ],
   },
 ];

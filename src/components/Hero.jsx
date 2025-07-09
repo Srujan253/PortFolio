@@ -15,7 +15,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 1 }}
         >
-          Hi, I'm Your Name
+          Hi, I'm Srujan H M
         </motion.h1>
         <motion.h2
           className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-100 mb-4"
@@ -23,7 +23,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 1 }}
         >
-          Full Stack Developer
+          FrontEnd Developer and Cyber Security Student 
         </motion.h2>
         <motion.p
           className="text-lg text-gray-700 dark:text-gray-300 mb-6"
@@ -31,7 +31,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 1 }}
         >
-          I build fast, modern web apps with React, Vite, and Tailwind CSS.
+          I build modern website with design and security.
         </motion.p>
         <motion.div
           className="flex gap-6 mt-4"

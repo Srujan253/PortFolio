@@ -1,20 +1,22 @@
 import { motion } from 'framer-motion';
 
 const timeline = [
-  {
-    type: 'work',
-    title: 'Frontend Developer',
-    org: 'Tech Company',
-    date: '2023',
-    desc: 'Built responsive UIs with React and Tailwind CSS.'
+   {
+    type: 'Internship',
+    title: 'FullStack Developer',
+    org: 'Winsun Global Tech',
+    date: '2024',
+    desc: '4 Months Internship as a FullStack Developer, Worked on React.js and Node.js in the final years of polytechnic'
   },
   {
     type: 'edu',
     title: 'B.Tech in Computer Science',
-    org: 'University Name',
-    date: '2019 - 2023',
-    desc: 'Graduated with a focus on web development.'
+    org: 'NMAM Institute of Technology',
+    date: '2024 - 2027',
+    desc: 'Graduated with specialization in Cyber Security.'
   },
+ 
+  
 ];
 
 export default function Timeline() {
