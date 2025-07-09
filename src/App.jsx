@@ -7,7 +7,6 @@ import Footer from './components/Footer';
 import DarkModeToggle from './components/DarkModeToggle';
 import Contact from './components/Contact';
 import { Helmet } from 'react-helmet';
-import { Analytics } from "@vercel/analytics/next"
 
 export default function App() {
   return (
@@ -27,7 +26,7 @@ export default function App() {
           <Contact />
         </main>
         <Footer />
-        <Analytics/>
+       
       </div>
     </>
   );
