@@ -24,16 +24,7 @@ const skills = [
   //     { name: 'MongoDB', icon: <SiMongodb className="text-green-500" /> },
   //   ],
   // },
-  {
-    category: 'Others',
-    items: [
-      { name: 'Git', icon: <FaGitAlt className="text-orange-400" /> },
-      { name: 'Database', icon: <FaDatabase className="text-blue-400" /> },
-      { name: 'Node.js', icon: <FaNodeJs className="text-green-400" /> },
-
-    ],
-  },
-    {
+   {
     category: 'Languages',
     items: [
       { name: 'Python', icon: <SiPython className="text-orange-400" /> },
@@ -43,6 +34,16 @@ const skills = [
 
     ],
   },
+  {
+    category: 'Others',
+    items: [
+      { name: 'Git', icon: <FaGitAlt className="text-orange-400" /> },
+      { name: 'Database', icon: <FaDatabase className="text-blue-400" /> },
+      { name: 'Node.js', icon: <FaNodeJs className="text-green-400" /> },
+
+    ],
+  },
+   
 ];
 
 export default function Skills() {
