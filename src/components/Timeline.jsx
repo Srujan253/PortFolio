@@ -6,7 +6,7 @@ const timeline = [
     title: 'FullStack Developer',
     org: 'Winsun Global Tech',
     date: '2024',
-    desc: '4 Months Internship as a FullStack Developer, Worked on React.js and Node.js in the final years of polytechnic'
+    desc: '4 Months Internship as a FullStack Developer, Worked on React and Node.js in the final years of polytechnic'
   },
   {
     type: 'edu',
