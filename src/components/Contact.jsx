@@ -85,9 +85,7 @@ export default function Contact() {
               <FaEnvelope /> srujanhm135@gmail.com
             </a>
             <div className="flex gap-4 mt-2">
-              <a href="https://github.com/Srujan253" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-700 dark:text-gray-200 hover:text-cyan-400"><FaGithub /></a>
-              <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-700 dark:text-gray-200 hover:text-cyan-400"><FaLinkedin /></a>
-              <a href="https://instagram.com/srujan_kulal18" target="_blank" rel="noopener noreferrer" className="text-2xl text-gray-700 dark:text-gray-200 hover:text-cyan-400"><FaInstagram /></a>
+            
             </div>
           </div>
         </motion.div>
