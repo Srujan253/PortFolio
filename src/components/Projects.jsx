@@ -12,8 +12,8 @@ const projects = [
     github: '#',
   },
   {
-    title: 'MERN Blog',
-    description: 'A full-stack blog platform using the MERN stack.',
+    title: 'Tech Blog',
+    description: 'A full-stack tech blog platform using the MERN stack.',
     image: 'https://placehold.co/600x400/0ea5e9/fff?text=Blog',
     tech: [<FaReact key="react" />, <FaNodeJs key="node" />],
     demo: '#',
