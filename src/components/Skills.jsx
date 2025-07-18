@@ -1,56 +1,58 @@
-import { FaReact, FaNodeJs, FaGitAlt, FaDatabase,FaJava,FaCss3 } from 'react-icons/fa';
-import { SiTailwindcss, SiJavascript,  SiVite ,SiHtml5,SiPython,SiC} from 'react-icons/si';
-import { motion } from 'framer-motion';
+import {
+  FaReact,
+  FaNodeJs,
+  FaGitAlt,
+  FaDatabase,
+  FaJava,
+  FaCss3,
+} from "react-icons/fa";
+import {
+  SiTailwindcss,
+  SiJavascript,
+  SiVite,
+  SiHtml5,
+  SiPython,
+  SiC,
+} from "react-icons/si";
+import { motion } from "framer-motion";
 
 const skills = [
   {
-    category: 'Frontend',
+    category: "Frontend",
     items: [
-      { name: 'React', icon: <FaReact className="text-cyan-400" /> },
-      { name: 'Tailwind', icon: <SiTailwindcss className="text-cyan-300" /> },
-      { name: 'JavaScript', icon: <SiJavascript className="text-yellow-400" /> },
-      { name: 'Vite', icon: <SiVite className="text-purple-400" /> },
-      { name: 'HTML', icon: <SiHtml5 className="text-purple-400" /> },
-      { name: 'CSS', icon: <FaCss3 className="text-purple-400" /> },
-
-
-
-    ],
-  },
-  // {
-  //   category: 'Backend',
-  //   items: [
-  //     { name: 'Node.js', icon: <FaNodeJs className="text-green-400" /> },
-  //     { name: 'MongoDB', icon: <SiMongodb className="text-green-500" /> },
-  //   ],
-  // },
-   {
-    category: 'Languages',
-    items: [
-      { name: 'Python', icon: <SiPython className="text-orange-400" /> },
-      { name: 'java', icon: <FaJava className="text-blue-400" /> },
-      { name: 'C', icon: <SiC className="text-blue-400" /> },
-
-
+      { name: "React", icon: <FaReact className="text-cyan-400" />, level: "90%" },
+      { name: "Tailwind", icon: <SiTailwindcss className="text-cyan-300" />, level: "90%" },
+      { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" />, level: "85%" },
+      { name: "Vite", icon: <SiVite className="text-purple-400" />, level: "85%" },
+      { name: "HTML", icon: <SiHtml5 className="text-red-400" />, level: "90%" },
+      { name: "CSS", icon: <FaCss3 className="text-blue-400" />, level: "80%" },
     ],
   },
   {
-    category: 'Others',
+    category: "Languages",
     items: [
-      { name: 'Git', icon: <FaGitAlt className="text-orange-400" /> },
-      { name: 'Database', icon: <FaDatabase className="text-blue-400" /> },
-      { name: 'Node.js', icon: <FaNodeJs className="text-green-400" /> },
-
+      { name: "Python", icon: <SiPython className="text-orange-400" />, level: "85%" },
+      { name: "Java", icon: <FaJava className="text-blue-400" />, level: "80%" },
+      { name: "C", icon: <SiC className="text-gray-400" />, level: "75%" },
     ],
   },
-   
+  {
+    category: "Others",
+    items: [
+      { name: "Git", icon: <FaGitAlt className="text-orange-400" />, level: "80%" },
+      { name: "Database", icon: <FaDatabase className="text-indigo-400" />, level: "75%" },
+      { name: "Node.js", icon: <FaNodeJs className="text-green-500" />, level: "85%" },
+    ],
+  },
 ];
 
 export default function Skills() {
   return (
     <section id="skills" className="py-24">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-12 text-cyan-400">Skills</h2>
+        <h2 className="text-4xl font-bold text-center mb-12 text-cyan-400">
+          Skills
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {skills.map((group, i) => (
             <motion.div
@@ -61,12 +63,26 @@ export default function Skills() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.2, duration: 0.7 }}
             >
-              <h3 className="text-2xl font-semibold mb-4 text-cyan-300">{group.category}</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-cyan-300">
+                {group.category}
+              </h3>
               <div className="grid grid-cols-2 gap-6">
-                {group.items.map(skill => (
-                  <div key={skill.name} className="flex flex-col items-center gap-2">
-                    <span className="text-4xl">{skill.icon}</span>
-                    <span className="text-lg font-medium text-gray-700 dark:text-gray-200">{skill.name}</span>
+                {group.items.map((skill) => (
+                  <div key={skill.name} className="w-24 h-24 flip-card">
+                    <div className="flip-card-inner">
+                      {/* Front Side */}
+                      <div className="flip-card-front dark:bg-gray-800">
+                        <span className="text-4xl">{skill.icon}</span>
+                        <span className="text-sm font-medium text-gray-700 dark:text-gray-200 mt-2">
+                          {skill.name}
+                        </span>
+                      </div>
+
+                      {/* Back Side */}
+                      <div className="flip-card-back">
+                        {skill.level ?? "80%"}
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -76,4 +92,4 @@ export default function Skills() {
       </div>
     </section>
   );
-} 
+}

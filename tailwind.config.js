@@ -5,7 +5,12 @@ module.exports = {
     './src/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+       perspective: {
+      '1000': '1000px',
+      transform: ["group-hover"],
+    },
+    },
   },
   plugins: [],
 }; 

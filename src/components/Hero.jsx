@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import profile from './profile.jpg';
+import profile from '../photo/profile.jpg';
 // import profile1 from './profile1.jpg';
 export default function Hero() {
   return (
