@@ -1,6 +1,11 @@
 import { FaAward, FaFilePdf } from "react-icons/fa";
 import { SiCoursera, SiUdemy, SiFreecodecamp } from "react-icons/si";
 import { motion } from "framer-motion";
+// import typeclub from "../photo/typing.png"
+// import responsiveWebDesignCert from "../assets/certificates/responsive-web-design.pdf";
+// import metaFrontEndCert from "../assets/certificates/meta-front-end-developer.pdf";
+// import webDevBootcampCert from "../assets/certificates/web-development-bootcamp.pdf";
+import typespeed from "../certificates/typing.pdf";
 
 const certifications = [
   {
@@ -8,28 +13,28 @@ const certifications = [
     issuer: "freeCodeCamp",
     date: "Issued Aug 2023",
     Icon: SiFreecodecamp,
-    link: "#", // Replace with your certificate link
+    link: "",
   },
   {
     title: "Meta Front-End Developer",
     issuer: "Coursera",
     date: "Issued Dec 2023",
     Icon: SiCoursera,
-    link: "#", // Replace with your certificate link
+    link: "",
   },
   {
     title: "The Complete 2024 Web Development Bootcamp",
     issuer: "Udemy",
     date: "Issued Mar 2024",
     Icon: SiUdemy,
-    link: "#", // Replace with your certificate link
+    link: "",
   },
   {
-    title: "Advanced React Patterns",
+    title: "typing speed certificate",
     issuer: "Coursera",
-    date: "Issued May 2024",
+    date: "Issued june 202",
     Icon: SiCoursera,
-    link: "#", // Replace with your certificate link
+    link: typespeed,
   },
 ];
 
