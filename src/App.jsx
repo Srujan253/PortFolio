@@ -7,7 +7,8 @@ import Footer from './components/Footer';
 import DarkModeToggle from './components/DarkModeToggle';
 import Contact from './components/Contact';
 import { Helmet } from 'react-helmet';
-
+import certifications from './components/Certifications';
+import Certifications from './components/Certifications';
 export default function App() {
   return (
     <>
@@ -21,6 +22,7 @@ export default function App() {
         <main className="flex-1 flex flex-col gap-24 md:gap-32 pt-8 md:pt-16">
           <Hero />
           <Skills />
+          <Certifications/>
           <Projects />
           <Timeline />
           <Contact />
