@@ -20,9 +20,9 @@ const skills = [
   {
     category: "Frontend",
     items: [
-      { name: "React", icon: <FaReact className="text-cyan-400" />, level: "90%" },
-      { name: "Tailwind", icon: <SiTailwindcss className="text-cyan-300" />, level: "90%" },
-      { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" />, level: "85%" },
+      { name: "React", icon: <FaReact className="text-cyan-400" />, level: "80%" },
+      { name: "Tailwind", icon: <SiTailwindcss className="text-cyan-300" />, level: "80%" },
+      { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" />, level: "65%" },
       { name: "Vite", icon: <SiVite className="text-purple-400" />, level: "85%" },
       { name: "HTML", icon: <SiHtml5 className="text-red-400" />, level: "90%" },
       { name: "CSS", icon: <FaCss3 className="text-blue-400" />, level: "80%" },
@@ -39,9 +39,9 @@ const skills = [
   {
     category: "Others",
     items: [
-      { name: "Git", icon: <FaGitAlt className="text-orange-400" />, level: "80%" },
-      { name: "Database", icon: <FaDatabase className="text-indigo-400" />, level: "75%" },
-      { name: "Node.js", icon: <FaNodeJs className="text-green-500" />, level: "85%" },
+      { name: "Git", icon: <FaGitAlt className="text-orange-400" />, level: "50%" },
+      { name: "Database", icon: <FaDatabase className="text-indigo-400" />, level: "50%" },
+      { name: "Node.js", icon: <FaNodeJs className="text-green-500" />, level: "50%" },
     ],
   },
 ];

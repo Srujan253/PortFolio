@@ -47,23 +47,23 @@ const projects = [
     demo: "#",
     github: "#",
   },
-  {
-    title: "Dashboard App",
-    description: "A responsive dashboard with charts and authentication.",
-    image: "https://placehold.co/600x400/64748b/fff?text=Dashboard",
-    tech: [
-      { icon: <FaReact />, name: "React" },
-      { icon: <SiTailwindcss />, name: "Tailwind CSS" },
-      { icon: <FaNodeJs />, name: "Node.js" },
-      { icon: <SiExpress />, name: "Express.js" },
-      { icon: <SiMongodb />, name: "MongoDB" },
-      { icon: <SiSocketdotio />, name: "Socket.IO" },
-      { icon: <SiRender />, name: "Render" },
-      { icon: <SiVite />, name: "Vite" },
-    ],
-    demo: "#",
-    github: "#",
-  },
+  // {
+  //   title: "Dashboard App",
+  //   description: "A responsive dashboard with charts and authentication.",
+  //   image: "https://placehold.co/600x400/64748b/fff?text=Dashboard",
+  //   tech: [
+  //     { icon: <FaReact />, name: "React" },
+  //     { icon: <SiTailwindcss />, name: "Tailwind CSS" },
+  //     { icon: <FaNodeJs />, name: "Node.js" },
+  //     { icon: <SiExpress />, name: "Express.js" },
+  //     { icon: <SiMongodb />, name: "MongoDB" },
+  //     { icon: <SiSocketdotio />, name: "Socket.IO" },
+  //     { icon: <SiRender />, name: "Render" },
+  //     { icon: <SiVite />, name: "Vite" },
+  //   ],
+  //   demo: "#",
+  //   github: "#",
+  // },
 ];
 
 export default function Projects() {

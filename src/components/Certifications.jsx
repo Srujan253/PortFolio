@@ -1,33 +1,35 @@
 import { FaAward, FaFilePdf } from "react-icons/fa";
-import { SiCoursera, SiUdemy, SiFreecodecamp } from "react-icons/si";
+import { SiCoursera, SiUdemy, SiFreecodecamp,SiMicrosoftacademic } from "react-icons/si";
 import { motion } from "framer-motion";
 // import typeclub from "../photo/typing.png"
 // import responsiveWebDesignCert from "../assets/certificates/responsive-web-design.pdf";
 // import metaFrontEndCert from "../assets/certificates/meta-front-end-developer.pdf";
 // import webDevBootcampCert from "../assets/certificates/web-development-bootcamp.pdf";
 import typespeed from "../certificates/typing.pdf";
-
+import fullstack from "../certificates/full_stack__winsun.jpg";
+import json from "../certificates/JavsScriptDOMs.pdf";
+import security from "../certificates/SystemandUsableSecurity.pdf"
 const certifications = [
   {
-    title: "Responsive Web Design",
-    issuer: "freeCodeCamp",
-    date: "Issued Aug 2023",
+    title: "Full Stack Developer",
+    issuer: "Winsun Global Tech",
+    date: "Issued april 2024",
     Icon: SiFreecodecamp,
-    link: "",
+    link: fullstack,
   },
   {
-    title: "Meta Front-End Developer",
-    issuer: "Coursera",
+    title: "JSON DOMs Certificate",
+    issuer: "Microsoft Learn",
     date: "Issued Dec 2023",
-    Icon: SiCoursera,
-    link: "",
+    Icon: SiMicrosoftacademic,
+    link: json,
   },
   {
-    title: "The Complete 2024 Web Development Bootcamp",
-    issuer: "Udemy",
-    date: "Issued Mar 2024",
+    title: "System and Usable Security",
+    issuer: "NPTEL",
+    date: "Issued Mar 2025",
     Icon: SiUdemy,
-    link: "",
+    link: security,
   },
   {
     title: "typing speed certificate",
