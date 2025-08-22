@@ -27,7 +27,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 1 }}
           >
-            Hi, I'm Srujan H M
+            I'm Srujan H M
           </motion.h1>
           <motion.h2
             className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-100 mb-4"
