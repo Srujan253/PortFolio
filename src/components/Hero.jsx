@@ -35,7 +35,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 1 }}
           >
-Computer Science Student @ NMAM Institute of Technology | Web Developer (React, MERN) | Data Science & Machine Learning Enthusiast          </motion.h2>
+Web Developer (React, MERN) | Data Science & Machine Learning Enthusiast          </motion.h2>
           <motion.p
             className="text-lg text-gray-700 dark:text-gray-300 mb-6"
             initial={{ opacity: 0, y: 40 }}
