@@ -3,18 +3,13 @@ import { FaAward, FaFilePdf, FaMedal, FaCertificate } from "react-icons/fa";
 import { SiCoursera, SiUdemy, SiFreecodecamp, SiMicrosoftacademic } from "react-icons/si";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import typespeed from "../certificates/typing.pdf";
-import fullstack from "../certificates/full_stack__winsun.jpg";
-import json from "../certificates/JavsScriptDOMs.pdf";
-import security from "../certificates/SystemandUsableSecurity.pdf";
 
-// Dummy links for testing
-const dummyLinks = {
-  fullstack: "https://example.com/fullstack-certificate.pdf",
-  json: "https://example.com/json-doms-certificate.pdf",
-  security: "https://example.com/security-certificate.pdf",
-  typespeed: "https://example.com/typing-certificate.pdf"
-};
+const full_stack__winsun = '/certificates/full_stack__winsun.jpg';
+const JavsScriptDOMs = '/certificates/JavsScriptDOMs.pdf';
+const SystemandUsableSecurity = '/certificates/SystemandUsableSecurity.pdf';
+const typing = '/certificates/typing.pdf';
+
+
 
 const certifications = [
   {
@@ -22,7 +17,7 @@ const certifications = [
     issuer: "Winsun Global Tech",
     date: "Issued April 2024",
     Icon: SiFreecodecamp,
-    link: dummyLinks.fullstack,
+    link: full_stack__winsun,
     level: "Professional",
     category: "Development",
     featured: true,
@@ -34,7 +29,7 @@ const certifications = [
     issuer: "Microsoft Learn",
     date: "Issued Dec 2023",
     Icon: SiMicrosoftacademic,
-    link: dummyLinks.json,
+    link: JavsScriptDOMs,
     level: "Intermediate",
     category: "Programming",
     featured: false,
@@ -46,7 +41,7 @@ const certifications = [
     issuer: "NPTEL",
     date: "Issued Mar 2025",
     Icon: SiUdemy,
-    link: dummyLinks.security,
+    link: SystemandUsableSecurity,
     level: "Advanced",
     category: "Security",
     featured: false,
@@ -58,7 +53,7 @@ const certifications = [
     issuer: "Coursera",
     date: "Issued June 2024",
     Icon: SiCoursera,
-    link: dummyLinks.typespeed,
+    link: typing,
     level: "Certified",
     category: "Skills",
     featured: false,
@@ -213,29 +208,35 @@ const CertificationCard = ({ cert, index }) => {
           </div>
 
           {/* Action button */}
-          <motion.a
-            href={cert.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`mt-6 inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r ${cert.color} text-white rounded-xl font-semibold shadow-lg relative overflow-hidden group/btn`}
-            whileHover={{ 
-              scale: 1.02,
-              boxShadow: "0 10px 30px rgba(6, 182, 212, 0.4)"
-            }}
-            whileTap={{ scale: 0.98 }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <motion.div
-              className="absolute inset-0 bg-white/20"
-              initial={{ x: "-100%" }}
-              whileHover={{ x: "100%" }}
-              transition={{ duration: 0.5 }}
-            />
-            <span className="relative z-10 flex items-center gap-2">
-              <FaFilePdf />
-              View Certificate
-            </span>
-          </motion.a>
+<div
+  className={`mt-6 inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r ${cert.color} text-white rounded-xl font-semibold shadow-lg relative overflow-hidden group/btn cursor-pointer select-none`}
+  onClick={() => window.open(cert.link, '_blank', 'noopener,noreferrer')}
+  onAuxClick={(e) => {
+    e.stopPropagation();
+    if (e.button === 1) {
+      window.open(cert.link, '_blank', 'noopener,noreferrer');
+    }
+  }}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      window.open(cert.link, '_blank', 'noopener,noreferrer');
+    }
+  }}
+  role="button"
+  tabIndex={0}
+  aria-label={`View certificate: ${cert.title}`}
+>
+  <motion.div
+    className="absolute inset-0 bg-white/20"
+    initial={{ x: "-100%" }}
+    whileHover={{ x: "100%" }}
+    transition={{ duration: 0.5 }}
+  />
+  <span className="relative z-10 flex items-center gap-2">
+    <FaFilePdf />
+    View Certificate
+  </span>
+</div>
 
 
         </div>
