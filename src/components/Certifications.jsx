@@ -8,13 +8,21 @@ import fullstack from "../certificates/full_stack__winsun.jpg";
 import json from "../certificates/JavsScriptDOMs.pdf";
 import security from "../certificates/SystemandUsableSecurity.pdf";
 
+// Dummy links for testing
+const dummyLinks = {
+  fullstack: "https://example.com/fullstack-certificate.pdf",
+  json: "https://example.com/json-doms-certificate.pdf",
+  security: "https://example.com/security-certificate.pdf",
+  typespeed: "https://example.com/typing-certificate.pdf"
+};
+
 const certifications = [
   {
     title: "Full Stack Developer",
     issuer: "Winsun Global Tech",
     date: "Issued April 2024",
     Icon: SiFreecodecamp,
-    link: fullstack,
+    link: dummyLinks.fullstack,
     level: "Professional",
     category: "Development",
     featured: true,
@@ -26,7 +34,7 @@ const certifications = [
     issuer: "Microsoft Learn",
     date: "Issued Dec 2023",
     Icon: SiMicrosoftacademic,
-    link: json,
+    link: dummyLinks.json,
     level: "Intermediate",
     category: "Programming",
     featured: false,
@@ -38,7 +46,7 @@ const certifications = [
     issuer: "NPTEL",
     date: "Issued Mar 2025",
     Icon: SiUdemy,
-    link: security,
+    link: dummyLinks.security,
     level: "Advanced",
     category: "Security",
     featured: false,
@@ -50,7 +58,7 @@ const certifications = [
     issuer: "Coursera",
     date: "Issued June 2024",
     Icon: SiCoursera,
-    link: typespeed,
+    link: dummyLinks.typespeed,
     level: "Certified",
     category: "Skills",
     featured: false,
@@ -61,7 +69,6 @@ const certifications = [
 
 const CertificationCard = ({ cert, index }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isFlipped, setIsFlipped] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, threshold: 0.1 });
   const controls = useAnimation();
@@ -71,7 +78,6 @@ const CertificationCard = ({ cert, index }) => {
       controls.start({
         opacity: 1,
         y: 0,
-        rotateY: 0,
         transition: {
           delay: index * 0.15,
           duration: 0.8,
@@ -83,21 +89,16 @@ const CertificationCard = ({ cert, index }) => {
       controls.start({
         opacity: 0,
         y: 60,
-        rotateY: -30,
       });
     }
   }, [isInView, controls, index]);
 
-  const handleCardClick = () => {
-    setIsFlipped(!isFlipped);
-  };
-
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 60, rotateY: -30 }}
+      initial={{ opacity: 0, y: 60 }}
       animate={controls}
-      className="relative perspective-1000"
+      className="relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -127,16 +128,10 @@ const CertificationCard = ({ cert, index }) => {
       {/* Main card */}
       <motion.div
         className="relative glass rounded-3xl backdrop-blur-sm border border-cyan-400/20 overflow-hidden cursor-pointer h-full"
-        whileHover={{ 
+        whileHover={{
           y: -8,
           transition: { type: "spring", stiffness: 300 }
         }}
-        onClick={handleCardClick}
-        animate={{
-          rotateY: isFlipped ? 180 : 0,
-        }}
-        transition={{ duration: 0.6 }}
-        style={{ transformStyle: "preserve-3d" }}
       >
         {/* Animated border gradient */}
         <motion.div
@@ -154,8 +149,7 @@ const CertificationCard = ({ cert, index }) => {
 
         {/* Front face */}
         <div
-          className="absolute inset-0 p-6 flex flex-col backface-hidden"
-          style={{ backfaceVisibility: 'hidden' }}
+          className="p-6 flex flex-col"
         >
           {/* Header section */}
           <div className="flex items-start gap-4 mb-6">
@@ -243,64 +237,10 @@ const CertificationCard = ({ cert, index }) => {
             </span>
           </motion.a>
 
-          {/* Click hint */}
-          <motion.div
-            className="mt-3 text-center text-xs text-gray-500 dark:text-gray-400"
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            Click card to flip →
-          </motion.div>
+
         </div>
 
-        {/* Back face - Additional details */}
-        <div
-          className="absolute inset-0 p-6 flex flex-col justify-center items-center text-center"
-          style={{ 
-            backfaceVisibility: 'hidden',
-            transform: 'rotateY(180deg)'
-          }}
-        >
-          <motion.div
-            className="space-y-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isFlipped ? 1 : 0 }}
-            transition={{ delay: isFlipped ? 0.3 : 0, duration: 0.5 }}
-          >
-            <FaAward className={`text-6xl bg-gradient-to-r ${cert.color} bg-clip-text text-transparent mx-auto`} />
-            <h4 className="text-xl font-bold text-cyan-300">Achievement Unlocked!</h4>
-            <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-              <p><strong>Skill Level:</strong> {cert.level}</p>
-              <p><strong>Category:</strong> {cert.category}</p>
-              <p><strong>Verification:</strong> Authenticated ✓</p>
-            </div>
-            
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-4 mt-6">
-              <div className="text-center">
-                <div className={`text-2xl font-bold bg-gradient-to-r ${cert.color} bg-clip-text text-transparent`}>
-                  100%
-                </div>
-                <div className="text-xs text-gray-500">Completed</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-cyan-400">
-                  {new Date().getFullYear() - new Date(cert.date.split(' ')[2]).getFullYear()}y
-                </div>
-                <div className="text-xs text-gray-500">Experience</div>
-              </div>
-            </div>
 
-            <motion.button
-              onClick={() => setIsFlipped(false)}
-              className="mt-4 px-4 py-2 bg-cyan-500/20 text-cyan-300 rounded-lg text-sm font-medium hover:bg-cyan-500/30 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              ← Back to Details
-            </motion.button>
-          </motion.div>
-        </div>
 
         {/* Corner decoration */}
         <motion.div
