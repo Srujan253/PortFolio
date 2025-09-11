@@ -93,8 +93,8 @@ export default function Hero() {
       >
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Photo Section */}
-          <motion.div 
-            className="flex justify-center md:justify-start order-2 md:order-1"
+          <motion.div
+            className="flex justify-center md:justify-start order-1"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 1 }}
@@ -149,7 +149,7 @@ export default function Hero() {
           </motion.div>
 
           {/* Content Section */}
-          <div className="flex flex-col justify-center space-y-6 order-1 md:order-2 text-center md:text-left">
+          <div className="flex flex-col justify-center space-y-6 order-2 text-center md:text-left">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
