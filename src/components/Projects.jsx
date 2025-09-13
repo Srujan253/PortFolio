@@ -212,42 +212,45 @@ const ProjectCard = ({ project, index }) => {
               Tech Stack
             </motion.h4>
             <div className="flex flex-wrap gap-3">
-              {project.tech.map((tech, techIndex) => (
-                <motion.div
-                  key={techIndex}
-                  className="relative group/tech"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{
-                    delay: index * 0.2 + 0.5 + (techIndex * 0.1),
-                    type: "spring",
-                    stiffness: 200
-                  }}
-                  whileHover={{ 
-                    scale: 1.2,
-                    rotate: [0, -10, 10, 0],
-                    transition: { duration: 0.5 }
-                  }}
-                >
-                  <div className={`text-2xl ${tech.color} transition-all duration-300 cursor-pointer`}>
-                    {tech.icon}
-                  </div>
-                  
-                  {/* Tooltip */}
+              {project.tech.map((tech, techIndex) => {
+                const [showTooltip, setShowTooltip] = React.useState(false);
+                return (
                   <motion.div
-                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 text-xs text-white bg-gray-900 rounded-lg opacity-0 group-hover/tech:opacity-100 pointer-events-none z-30 whitespace-nowrap shadow-lg"
-                    initial={{ y: 10, opacity: 0 }}
-                    animate={{ 
-                      y: 0, 
-                      opacity: 1,
-                      transition: { duration: 0.2 }
+                    key={techIndex}
+                    className="relative"
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      delay: index * 0.2 + 0.5 + (techIndex * 0.1),
+                      type: "spring",
+                      stiffness: 200
                     }}
                   >
-                    {tech.name}
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900" />
+                    <div
+                      className={`text-2xl ${tech.color} transition-all duration-300 cursor-pointer`}
+                      onMouseEnter={() => setShowTooltip(true)}
+                      onMouseLeave={() => setShowTooltip(false)}
+                    >
+                      {tech.icon}
+                      {showTooltip && (
+                        <motion.div
+                          className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 text-xs text-white bg-gray-900 rounded-lg pointer-events-none z-30 whitespace-nowrap shadow-lg"
+                          initial={{ y: 10, opacity: 0 }}
+                          animate={{ 
+                            y: 0, 
+                            opacity: 1,
+                            transition: { duration: 0.2 }
+                          }}
+                          exit={{ y: 10, opacity: 0, transition: { duration: 0.2 } }}
+                        >
+                          {tech.name}
+                          <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900" />
+                        </motion.div>
+                      )}
+                    </div>
                   </motion.div>
-                </motion.div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
