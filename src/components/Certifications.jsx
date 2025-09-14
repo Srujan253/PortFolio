@@ -4,11 +4,11 @@ import { SiCoursera, SiUdemy, SiFreecodecamp, SiMicrosoftacademic } from "react-
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 
-const full_stack__winsun = '/certificates/full_stack__winsun.jpg';
-const JavsScriptDOMs = '/certificates/JavsScriptDOMs.pdf';
-const SystemandUsableSecurity = '/certificates/SystemandUsableSecurity.pdf';
-const typing = '/certificates/typing.pdf';
-const typing1 = '/certificates/typing_one.pdf';
+import fullStackCert from '../certificates/full_stack__winsun.jpg';
+import javscriptCert from '../certificates/JavsScriptDOMs.pdf';
+import securityCert from '../certificates/SystemandUsableSecurity.pdf';
+import typingCert from '../certificates/typing.pdf';
+import typingOneCert from '../certificates/typing_one.pdf';
 
 
 
@@ -19,7 +19,7 @@ const certifications = [
     issuer: "Winsun Global Tech",
     date: "Issued April 2024",
     Icon: SiFreecodecamp,
-    link: full_stack__winsun,
+    link: fullStackCert,
     level: "Professional",
     category: "Development",
     featured: true,
@@ -31,7 +31,7 @@ const certifications = [
     issuer: "Microsoft Learn",
     date: "Issued Dec 2023",
     Icon: SiMicrosoftacademic,
-    link: JavsScriptDOMs,
+    link: javscriptCert,
     level: "Intermediate",
     category: "Programming",
     featured: false,
@@ -43,7 +43,7 @@ const certifications = [
     issuer: "NPTEL",
     date: "Issued Mar 2025",
     Icon: SiUdemy,
-    link: SystemandUsableSecurity,
+    link: securityCert,
     level: "Advanced",
     category: "Security",
     featured: false,
@@ -55,7 +55,7 @@ const certifications = [
     issuer: "Coursera",
     date: "Issued June 2024",
     Icon: SiCoursera,
-    link: typing1,
+    link: typingOneCert,
     level: "Certified",
     category: "Skills",
     featured: false,
