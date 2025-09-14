@@ -8,6 +8,8 @@ const full_stack__winsun = '/certificates/full_stack__winsun.jpg';
 const JavsScriptDOMs = '/certificates/JavsScriptDOMs.pdf';
 const SystemandUsableSecurity = '/certificates/SystemandUsableSecurity.pdf';
 const typing = '/certificates/typing.pdf';
+const typing1 = '/certificates/typing_one.pdf';
+
 
 
 
@@ -53,7 +55,7 @@ const certifications = [
     issuer: "Coursera",
     date: "Issued June 2024",
     Icon: SiCoursera,
-    link: typing,
+    link: typing1,
     level: "Certified",
     category: "Skills",
     featured: false,
