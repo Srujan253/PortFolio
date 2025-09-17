@@ -13,8 +13,8 @@ export default function App() {
   return (
     <>
       <Helmet>
-        <title>Modern Portfolio</title>
-        <meta name="description" content="A modern, glassmorphic React + Vite + Tailwind portfolio" />
+        <title>Srujan's Portfolio</title>
+        <meta name="description" content="Srujan's Portfolio - A modern, glassmorphic React + Vite + Tailwind portfolio" />
       </Helmet>
       <div className="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-950 transition-colors duration-300">
         <Navbar />

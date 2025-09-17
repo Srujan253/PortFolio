@@ -1,7 +1,7 @@
 {
   "name": "Srujan's Portfolio",
   "short_name": "Portfolio",
-  "description": "Modern React + Vite + Tailwind Portfolio",
+  "description": "Srujan's Portfolio",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#1f2937",

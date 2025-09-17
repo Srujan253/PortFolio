@@ -1,2 +1,4 @@
-- [x] Add import for microsft_annovation.pdf in Certifications.jsx
-- [x] Replace the "JSON DOMs Certificate" entry in the certifications array with "Microsoft AI Innovation 2025" details
+- [x] Update package.json name to "srujans-portfolio"
+- [x] Update index.html description to "Srujan's Portfolio"
+- [x] Update public/manifest.json description to "Srujan's Portfolio"
+- [x] Update README.md title to "# Srujan's Portfolio"

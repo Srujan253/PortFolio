@@ -1,4 +1,4 @@
-# Modern React + Vite + Tailwind Portfolio Starter
+e# Srujan's Portfolio
 
 A cutting-edge developer portfolio built with React, Vite, and Tailwind CSS. Features:
 
