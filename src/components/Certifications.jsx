@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 
 import fullStackCert from '../certificates/full_stack__winsun.jpg';
 import javscriptCert from '../certificates/JavsScriptDOMs.pdf';
+import microsoftInnovationCert from '../certificates/microsft_annovation.pdf';
 import securityCert from '../certificates/SystemandUsableSecurity.pdf';
 import typingCert from '../certificates/typing.pdf';
 import typingOneCert from '../certificates/typing_one.pdf';
@@ -27,13 +28,13 @@ const certifications = [
     bgColor: "bg-green-500/10",
   },
   {
-    title: "JSON DOMs Certificate",
+    title: "Microsoft AI Innovation 2025",
     issuer: "Microsoft Learn",
-    date: "Issued Dec 2023",
+    date: "Issued Aug 2025",
     Icon: SiMicrosoftacademic,
-    link: javscriptCert,
+    link: microsoftInnovationCert,
     level: "Intermediate",
-    category: "Programming",
+    category: "AI & Cloud",
     featured: false,
     color: "from-blue-400 to-blue-600",
     bgColor: "bg-blue-500/10",

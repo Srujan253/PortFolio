@@ -1,10 +1,2 @@
-# PWA Conversion TODO
-
-- [x] Create public/manifest.json with app details and icons
-- [x] Create public/offline.html fallback page
-- [x] Create public/service-worker.js with caching logic
-- [x] Edit src/main.jsx to register service worker
-- [x] Edit index.html to add manifest link and theme-color
-- [x] Test offline functionality in Chrome DevTools
-- [x] Verify npm run build includes PWA files
-- [ ] Deploy and test on Netlify/Vercel
+- [x] Add import for microsft_annovation.pdf in Certifications.jsx
+- [x] Replace the "JSON DOMs Certificate" entry in the certifications array with "Microsoft AI Innovation 2025" details
