@@ -6,5 +6,5 @@
 - [x] Edit src/main.jsx to register service worker
 - [x] Edit index.html to add manifest link and theme-color
 - [x] Test offline functionality in Chrome DevTools
-- [ ] Verify npm run build includes PWA files
+- [x] Verify npm run build includes PWA files
 - [ ] Deploy and test on Netlify/Vercel
