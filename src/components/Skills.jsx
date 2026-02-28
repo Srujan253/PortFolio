@@ -95,22 +95,9 @@ const SkillCard = ({ skill, index, categoryIndex }) => {
         transition={{ duration: 0.3 }}
       />
       
-      {/* Main card */}
       <div className="relative w-28 h-28 sm:w-32 sm:h-32 bg-white/10 dark:bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-cyan-400/20 overflow-hidden">
-        {/* Animated border */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-400 opacity-0 group-hover:opacity-100"
-          animate={{
-            background: [
-              "linear-gradient(0deg, #06b6d4, #0891b2, #06b6d4)",
-              "linear-gradient(90deg, #06b6d4, #0891b2, #06b6d4)",
-              "linear-gradient(180deg, #06b6d4, #0891b2, #06b6d4)",
-              "linear-gradient(270deg, #06b6d4, #0891b2, #06b6d4)",
-              "linear-gradient(360deg, #06b6d4, #0891b2, #06b6d4)"
-            ]
-          }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-        />
+        {/* Static border highlight instead of continuous animation */}
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
         <div className="absolute inset-[2px] bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl" />
         
         {/* Content */}
@@ -240,32 +227,10 @@ export default function Skills() {
 
   return (
     <section id="skills" className="py-24 relative overflow-hidden">
-      {/* Background animated elements */}
+      {/* Background static elements instead of animated blur */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-20 left-10 w-32 h-32 bg-cyan-400/5 rounded-full blur-2xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute bottom-20 right-10 w-40 h-40 bg-cyan-500/5 rounded-full blur-2xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.6, 0.3, 0.6],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
+        <div className="absolute top-20 left-10 w-32 h-32 bg-cyan-400/10 rounded-full blur-2xl" />
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-cyan-500/10 rounded-full blur-2xl" />
       </div>
 
       <div className="container mx-auto px-6 relative">
@@ -276,19 +241,9 @@ export default function Skills() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <motion.h2
-            className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent"
-            animate={{
-              backgroundPosition: isInView ? ["0%", "100%", "0%"] : "0%",
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          >
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
             Skills & Technologies
-          </motion.h2>
+          </h2>
           <motion.p
             className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
