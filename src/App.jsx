@@ -9,6 +9,7 @@ import Contact from './components/Contact';
 import { Helmet } from 'react-helmet';
 import certifications from './components/Certifications';
 import Certifications from './components/Certifications';
+import { Analytics } from '@vercel/analytics/react';
 export default function App() {
   return (
     <>
@@ -30,6 +31,7 @@ export default function App() {
         <Footer />
        
       </div>
+      <Analytics />
     </>
   );
 } 
