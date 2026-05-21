@@ -14,9 +14,36 @@ import gupshup from "../photo/gupshup.png";
 
 const projects = [
   {
+    title: "Club MODX",
+    description: "Modular Discipline Exchange Platform. Built a full-stack club management platform enabling users to invite members, join communities, and collaborate via real-time chat with complete CRUD operations.",
+    image: "https://placehold.co/600x400/0f172a/06b6d4?text=Club+MODX",
+    tech: [
+      { icon: <FaReact />, name: "React", color: "text-cyan-400" },
+      { icon: <FaNodeJs />, name: "Node.js", color: "text-green-500" },
+      { icon: <SiTailwindcss />, name: "Tailwind CSS", color: "text-cyan-300" },
+      { icon: <SiMongodb />, name: "PostgreSQL", color: "text-blue-500" },
+    ],
+    demo: "https://modx-second-2.onrender.com",
+    github: "#",
+    featured: true,
+  },
+  {
+    title: "Privacy-Preserving ID Verification",
+    description: "Privacy-first identity verification web app generating cryptographically signed QR codes supporting offline (RSA signature) and online (JWT) verification modes.",
+    image: "https://placehold.co/600x400/0f172a/06b6d4?text=Privacy+ID+Verification",
+    tech: [
+      { icon: <FaReact />, name: "React", color: "text-cyan-400" },
+      { icon: <FaNodeJs />, name: "Node.js", color: "text-green-500" },
+      { icon: <SiExpress />, name: "Express.js", color: "text-gray-300" },
+      { icon: <SiTailwindcss />, name: "Tailwind CSS", color: "text-cyan-300" },
+    ],
+    demo: "#",
+    github: "#",
+    featured: false,
+  },
+  {
     title: "GupShup",
-    description:
-      "A modern chat application with real-time messaging and user authentication.",
+    description: "A secure, real-time chat platform using the MERN stack with Socket.io for instant, reliable messaging. Integrated AI-based message suggestions and chat moderation.",
     image: gupshup,
     tech: [
       { icon: <FaReact />, name: "React", color: "text-cyan-400" },
@@ -32,19 +59,31 @@ const projects = [
     featured: true,
   },
   {
-    title: "Tech Blog",
-    description: "A full-stack tech blog platform using the MERN stack.",
-    image: "https://placehold.co/600x400/0ea5e9/fff?text=Blog",
+    title: "ArchiCanvas",
+    description: "Modern digital art & architecture marketplace. Features role-based auth, advanced filtering, AI-powered descriptions, and highly animated UI components.",
+    image: "https://placehold.co/600x400/0f172a/06b6d4?text=ArchiCanvas",
     tech: [
       { icon: <FaReact />, name: "React", color: "text-cyan-400" },
       { icon: <SiTailwindcss />, name: "Tailwind CSS", color: "text-cyan-300" },
-      { icon: <FaNodeJs />, name: "Node.js", color: "text-green-500" },
       { icon: <SiVite />, name: "Vite", color: "text-purple-400" },
     ],
     demo: "#",
-    github: "#",
-    featured: false,
+    github: "https://github.com/Srujan253/ArchiCanvas_",
+    featured: true,
   },
+  {
+    title: "Clash Royale Portfolio",
+    description: "A highly creative, game-themed personal portfolio design inspired by the aesthetics and mechanics of Clash Royale.",
+    image: "https://placehold.co/600x400/0f172a/06b6d4?text=Clash+Royale+Portfolio",
+    tech: [
+      { icon: <FaReact />, name: "React", color: "text-cyan-400" },
+      { icon: <SiTailwindcss />, name: "Tailwind CSS", color: "text-cyan-300" },
+      { icon: <SiVite />, name: "Vite", color: "text-purple-400" },
+    ],
+    demo: "#",
+    github: "https://github.com/Srujan253/clash-royal-based-portfolio",
+    featured: false,
+  }
 ];
 
 const ProjectCard = ({ project, index }) => {

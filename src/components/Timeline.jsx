@@ -1,22 +1,34 @@
 import { motion } from 'framer-motion';
 
 const timeline = [
-   {
-    type: 'Internship',
-    title: 'FullStack Developer',
-    org: 'Winsun Global Tech',
-    date: '2024',
-    desc: '4 Months Internship as a FullStack Developer, Worked on React and Node.js in the final years of polytechnic'
+  {
+    type: 'work',
+    title: 'Full Stack Developer Intern',
+    org: 'Vill Design Co. Limited, Japan (Remote)',
+    date: 'Feb 2025 - Present',
+    desc: 'Developed Contest Scoring System & Reception Management System using MERN stack with Neon PostgreSQL, enabling real-time operations and dashboards.'
+  },
+  {
+    type: 'work',
+    title: 'Full Stack Developer Intern',
+    org: 'Winsun Global Tech, Bangalore',
+    date: 'Jan 2024 - Apr 2024',
+    desc: 'Designed MERN tech blogging platform with JWT authentication, RBAC, and built highly optimized RESTful APIs for improved load times.'
   },
   {
     type: 'edu',
-    title: 'B.Tech in Computer Science',
-    org: 'NMAM Institute of Technology',
-    date: '2024 - 2027',
-    desc: 'Graduated with specialization in Cyber Security.'
+    title: 'B.Tech in Cyber Security',
+    org: 'NMAM Institute of Technology, Nitte',
+    date: 'July 2024 - Ongoing',
+    desc: 'Currently pursuing Bachelor of Technology. CGPA: 8.55'
   },
- 
-  
+  {
+    type: 'edu',
+    title: 'Diploma in Full Stack Development',
+    org: 'SDM Polytechnic, Ujire',
+    date: 'June 2021 - June 2024',
+    desc: 'Graduated with high distinction. CGPA: 9.78'
+  }
 ];
 
 export default function Timeline() {
@@ -29,7 +41,7 @@ export default function Timeline() {
           <div className="space-y-12 relative z-10">
             {timeline.map((item, idx) => (
               <motion.div
-                key={item.title}
+                key={idx}
                 className={`glass rounded-xl p-8 flex flex-col md:flex-row items-center gap-6 shadow-lg ${idx % 2 === 0 ? 'md:ml-0 md:mr-auto' : 'md:mr-0 md:ml-auto'}`}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}

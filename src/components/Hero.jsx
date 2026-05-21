@@ -1,267 +1,236 @@
-import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import profile from '../photo/profile.jpg';
+import { motion, useMotionValue, useTransform, useSpring, useMotionTemplate, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { FaFilePdf, FaEnvelope, FaCode } from 'react-icons/fa';
 
 const TypingEffect = ({ texts, speed = 82, className = "", delay = 0, loopDelay = 3000 }) => {
   const [displayText, setDisplayText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [textIndex, setTextIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const startTimer = setTimeout(() => {
-      const typeText = (textIndex) => {
-        const text = texts[textIndex];
-        let i = 0;
-        const timer = setInterval(() => {
-          if (i < text.length) {
-            setDisplayText(prev => prev + text.charAt(i));
-            i++;
-          } else {
-            clearInterval(timer);
-            // Start next text after delay
-            setTimeout(() => {
-              setDisplayText('');
-              const nextIndex = (textIndex + 1) % texts.length;
-              setCurrentTextIndex(nextIndex);
-              typeText(nextIndex);
-            }, loopDelay);
-          }
+    let timer;
+    const currentText = texts[textIndex];
+
+    if (isDeleting) {
+      timer = setTimeout(() => {
+        setDisplayText(prev => prev.slice(0, -1));
+        if (displayText === '') {
+          setIsDeleting(false);
+          setTextIndex((prev) => (prev + 1) % texts.length);
+        }
+      }, speed / 2);
+    } else {
+      if (displayText.length === currentText.length) {
+        timer = setTimeout(() => setIsDeleting(true), loopDelay);
+      } else {
+        timer = setTimeout(() => {
+          setDisplayText(currentText.slice(0, displayText.length + 1));
         }, speed);
-      };
-      typeText(currentTextIndex);
-    }, delay);
+      }
+    }
 
-    return () => clearTimeout(startTimer);
-  }, [texts, speed, delay, loopDelay]);
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, textIndex, texts, speed, loopDelay]);
 
   useEffect(() => {
-    const cursorTimer = setInterval(() => {
-      setShowCursor(prev => !prev);
-    }, 500);
+    const cursorTimer = setInterval(() => setShowCursor(prev => !prev), 500);
     return () => clearInterval(cursorTimer);
   }, []);
 
   return (
     <span className={className}>
       {displayText}
-      {showCursor && <span className="text-cyan-400 animate-pulse">|</span>}
+      <span className={`text-cyan-400 transition-opacity duration-100 ${showCursor ? 'opacity-100' : 'opacity-0'}`}>|</span>
     </span>
   );
 };
 
 export default function Hero() {
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
+  const resumeLink = "https://res.cloudinary.com/duf8kshsz/image/upload/v1779219567/Srujan_H_M-Current_ppopvn.pdf";
+
+  // Global Mouse Tracking for Spotlight
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  const spotlightBackground = useMotionTemplate`radial-gradient(800px circle at ${mouseX}px ${mouseY}px, rgba(6,182,212,0.15), transparent 80%)`;
+
+  // 3D Tilt Logic for Profile Picture
+  const picRef = useRef(null);
+  const picX = useMotionValue(0);
+  const picY = useMotionValue(0);
+  const picXSpring = useSpring(picX, { stiffness: 150, damping: 15 });
+  const picYSpring = useSpring(picY, { stiffness: 150, damping: 15 });
+  const rotateX = useTransform(picYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
+  const rotateY = useTransform(picXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
+
+  const handlePicMouseMove = (e) => {
+    if (!picRef.current) return;
+    const rect = picRef.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const localX = e.clientX - rect.left;
+    const localY = e.clientY - rect.top;
+    picX.set(localX / width - 0.5);
+    picY.set(localY / height - 0.5);
+  };
+
+  const handlePicMouseLeave = () => {
+    picX.set(0);
+    picY.set(0);
+  };
+
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center px-4 py-20 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-20 left-10 w-20 h-20 bg-cyan-400/10 rounded-full blur-xl"
-          animate={{
-            x: [0, 30, 0],
-            y: [0, -30, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute bottom-20 right-10 w-32 h-32 bg-cyan-500/10 rounded-full blur-xl"
-          animate={{
-            x: [0, -40, 0],
-            y: [0, 40, 0],
-            scale: [1, 0.8, 1],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
+    <section id="hero" className="min-h-screen flex items-center justify-center px-4 py-20 relative overflow-hidden bg-[#050505]">
+      {/* Global Interactive Spotlight */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{ background: spotlightBackground }}
+      />
+      
+      {/* Background ambient glow */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-1/4 -left-10 w-96 h-96 bg-cyan-600/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 -right-10 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]" />
       </div>
 
       <motion.div
-        className="glass max-w-6xl w-full mx-auto p-8 md:p-12 rounded-3xl shadow-2xl backdrop-blur-sm"
-        initial={{ opacity: 0, y: 60, scale: 0.9 }}
+        className="glass max-w-7xl w-full mx-auto p-8 md:p-14 rounded-[2.5rem] shadow-2xl backdrop-blur-md border border-white/5 relative z-10"
+        initial={{ opacity: 0, y: 60, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ 
-          duration: 1.2,
-          ease: "easeOut"
-        }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
       >
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Photo Section */}
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          
+          {/* Photo Section with 3D Tilt */}
           <motion.div
-            className="flex justify-center md:justify-start order-1"
-            initial={{ opacity: 0, x: -50 }}
+            className="flex justify-center lg:justify-start order-1 lg:order-2"
+            initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 1 }}
+            style={{ perspective: "1000px" }}
           >
-            <div className="relative group">
+            <motion.div
+              ref={picRef}
+              style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+              onMouseMove={handlePicMouseMove}
+              onMouseLeave={handlePicMouseLeave}
+              className="relative group cursor-pointer"
+            >
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-cyan-600 rounded-full blur-md opacity-30 group-hover:opacity-50 transition-opacity duration-300"
-                animate={{
-                  rotate: [0, 360],
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
+                className="absolute inset-0 bg-gradient-to-tr from-cyan-400 to-blue-600 rounded-full blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500"
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               />
               <motion.img
-                src={profile}
+                src="https://res.cloudinary.com/duf8kshsz/image/upload/v1779219766/PLACEMENT_PIC2_ckncvk.jpg"
                 alt="Srujan H M"
-                className="relative w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full object-cover border-4 border-cyan-400/50 shadow-2xl group-hover:border-cyan-400 transition-all duration-300"
-                whileHover={{ 
-                  scale: 1.05,
-                  rotate: 2,
-                }}
-                transition={{ type: "spring", stiffness: 300 }}
+                className="relative w-56 h-56 md:w-72 md:h-72 lg:w-96 lg:h-96 rounded-full object-cover border-[6px] border-gray-900 shadow-[0_0_50px_rgba(6,182,212,0.3)] transition-all duration-300"
+                style={{ transform: "translateZ(50px)" }} // Pop out effect
               />
-              {/* Floating elements around photo */}
-              <motion.div
-                className="absolute -top-4 -right-4 w-8 h-8 bg-cyan-400 rounded-full opacity-80"
-                animate={{
-                  y: [0, -10, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-              <motion.div
-                className="absolute -bottom-6 -left-6 w-6 h-6 bg-cyan-300 rounded-full opacity-60"
-                animate={{
-                  y: [0, 10, 0],
-                  x: [0, 5, 0],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-            </div>
+              {/* Holographic glare */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 pointer-events-none mix-blend-overlay transition-opacity duration-500" />
+            </motion.div>
           </motion.div>
 
           {/* Content Section */}
-          <div className="flex flex-col justify-center space-y-6 order-2 text-center md:text-left">
+          <div className="flex flex-col justify-center space-y-8 order-2 lg:order-1 text-center lg:text-left">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
               <motion.span 
-                className="inline-block text-cyan-400 font-medium text-lg mb-2"
-                animate={{ opacity: [0.5, 1, 0.5] }}
+                className="inline-block px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold tracking-widest text-xs uppercase mb-6"
+                animate={{ boxShadow: ["0 0 0px rgba(6,182,212,0)", "0 0 20px rgba(6,182,212,0.3)", "0 0 0px rgba(6,182,212,0)"] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                Hello, I'm
+                Welcome to my universe
               </motion.span>
-              <motion.h1
-                className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 dark:text-white mb-3"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              > 
-                <span className="bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
-                  Srujan H M
-                </span>
-              </motion.h1>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 tracking-tight leading-tight"> 
+                I'm <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">Srujan</span>
+              </h1>
             </motion.div>
 
             <motion.h2
-              className="text-xl md:text-2xl lg:text-3xl font-semibold leading-relaxed"
+              className="text-2xl md:text-3xl font-semibold leading-relaxed h-12"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
             >
               <TypingEffect
-                texts={[" Web Developer (React, MERN)", " Data Science & ML Enthusiast"]}
-                speed={82}
-                className="text-gray-700 dark:text-gray-200"
+                texts={["Full Stack Developer", "AI & ML Enthusiast", "Creative Technologist"]}
+                speed={80}
+                className="text-gray-300"
                 delay={1000}
               />
             </motion.h2>
 
             <motion.p
-              className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-lg"
+              className="text-lg md:text-xl text-gray-400 leading-relaxed max-w-xl mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
             >
-              I build modern websites with elegant design, robust functionality, and top-tier security.
+              I engineer beautiful, highly interactive web applications combining robust backend architecture with cutting-edge frontend design.
             </motion.p>
 
+            {/* Action Grid */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 pt-4"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.8 }}
             >
+              {/* Resume Interactive Card */}
+              <motion.div
+                className="group relative glass rounded-2xl p-4 border border-cyan-500/20 cursor-pointer overflow-hidden flex items-center gap-4 bg-gray-900/50 hover:bg-gray-800/80 transition-colors shadow-lg sm:col-span-2"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setIsResumeOpen(true)}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md" />
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.5)]">
+                  <FaFilePdf className="text-white text-xl" />
+                </div>
+                <div className="flex-1 text-left">
+                  <h3 className="text-white font-bold text-lg tracking-wide">My Resume</h3>
+                  <p className="text-cyan-400 text-sm">Click to view or download</p>
+                </div>
+                <div className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center group-hover:border-cyan-400 group-hover:bg-cyan-400/20 transition-all">
+                  <span className="text-gray-400 group-hover:text-cyan-400 transform group-hover:translate-x-1 transition-all">→</span>
+                </div>
+              </motion.div>
+
               <motion.a
                 href="#projects"
-                className="group px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-bold shadow-lg relative overflow-hidden"
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 20px 40px rgba(6, 182, 212, 0.3)"
-                }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                className="flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-gray-800 text-white font-bold border border-gray-700 hover:border-cyan-500 hover:text-cyan-400 transition-all shadow-lg group"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <span className="relative z-10">View Projects</span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-cyan-500"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "0%" }}
-                  transition={{ duration: 0.3 }}
-                />
+                <FaCode className="group-hover:text-cyan-400" />
+                Projects
               </motion.a>
 
               <motion.a
                 href="#contact"
-                className="group px-8 py-4 rounded-xl bg-transparent border-2 border-cyan-400 text-cyan-400 font-bold shadow-lg hover:bg-cyan-400 hover:text-white transition-all duration-300 relative overflow-hidden"
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 20px 40px rgba(6, 182, 212, 0.2)"
-                }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                className="flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-gray-800 text-white font-bold border border-gray-700 hover:border-blue-500 hover:text-blue-400 transition-all shadow-lg group"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <span className="relative z-10">Contact Me</span>
+                <FaEnvelope className="group-hover:text-blue-400" />
+                Contact Me
               </motion.a>
-            </motion.div>
-
-            {/* Social indicators or scroll hint */}
-            <motion.div
-              className="flex items-center justify-center md:justify-start pt-6 space-x-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2, duration: 0.8 }}
-            >
-              <div className="flex space-x-2">
-                <motion.div 
-                  className="w-2 h-2 bg-cyan-400 rounded-full"
-                  animate={{ scale: [1, 1.5, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity, delay: 0 }}
-                />
-                <motion.div 
-                  className="w-2 h-2 bg-cyan-400 rounded-full"
-                  animate={{ scale: [1, 1.5, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
-                />
-                <motion.div 
-                  className="w-2 h-2 bg-cyan-400 rounded-full"
-                  animate={{ scale: [1, 1.5, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }}
-                />
-              </div>
-              <span className="text-sm text-gray-500 dark:text-gray-400">
-                Scroll to explore
-              </span>
             </motion.div>
           </div>
         </div>
@@ -269,23 +238,82 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5, duration: 0.8 }}
       >
         <motion.div
-          className="w-6 h-10 border-2 border-cyan-400 rounded-full flex justify-center"
-          animate={{ opacity: [1, 0.3, 1] }}
+          className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center backdrop-blur-sm bg-black/20"
+          animate={{ opacity: [1, 0.4, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
           <motion.div
-            className="w-1 h-3 bg-cyan-400 rounded-full mt-2"
+            className="w-1.5 h-3 bg-cyan-400 rounded-full mt-2 shadow-[0_0_10px_rgba(6,182,212,0.8)]"
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           />
         </motion.div>
       </motion.div>
+
+      {/* High-End Resume Modal */}
+      <AnimatePresence>
+        {isResumeOpen && (
+          <motion.div 
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsResumeOpen(false)}
+          >
+            <motion.div 
+              className="bg-gray-900/90 border border-cyan-400/30 rounded-[2rem] w-full max-w-5xl shadow-[0_0_100px_rgba(6,182,212,0.2)] overflow-hidden flex flex-col lg:flex-row h-[90vh] relative"
+              initial={{ scale: 0.95, y: 30, opacity: 0, rotateX: 10 }}
+              animate={{ scale: 1, y: 0, opacity: 1, rotateX: 0 }}
+              exit={{ scale: 0.95, y: 30, opacity: 0, rotateX: -10 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              {/* PDF Viewer Side */}
+              <div className="w-full lg:w-3/4 h-[60vh] lg:h-full bg-black/80 relative border-b lg:border-b-0 lg:border-r border-gray-800/50 flex items-center justify-center p-6">
+                <iframe 
+                  src={`${resumeLink}#toolbar=0`} 
+                  className="w-full h-full rounded-2xl bg-white shadow-2xl" 
+                  title="Srujan H M Resume"
+                />
+              </div>
+
+              {/* Info & Action Side */}
+              <div className="w-full lg:w-1/4 p-8 flex flex-col relative bg-gradient-to-b from-gray-900 to-black justify-center items-center text-center">
+                <button 
+                  className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:text-white hover:bg-red-500/80 transition-all z-10 shadow-lg"
+                  onClick={() => setIsResumeOpen(false)}
+                >
+                  ✕
+                </button>
+
+                <div className="w-20 h-20 rounded-3xl bg-cyan-500/10 flex items-center justify-center mb-6 shadow-inner border border-cyan-500/20">
+                  <FaFilePdf className="text-5xl text-cyan-400 drop-shadow-md" />
+                </div>
+                
+                <h3 className="text-2xl font-black text-white mb-2 tracking-tight">Curriculum Vitae</h3>
+                <p className="text-gray-400 text-sm mb-8">Srujan H M</p>
+                
+                <a
+                  href={resumeLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] transition-all hover:-translate-y-1"
+                >
+                  Download PDF
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </section>
   );
 }
