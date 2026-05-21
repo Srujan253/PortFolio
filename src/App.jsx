@@ -9,6 +9,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Certifications from './components/Certifications';
 import AIAssistant from './components/AIAssistant';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
         <Footer />
         <AIAssistant />
         <Analytics />
+        <SpeedInsights />
       </div>
     </HelmetProvider>
   );
