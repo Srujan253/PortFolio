@@ -50,20 +50,7 @@ export default function Hero() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const resumeLink = "https://res.cloudinary.com/duf8kshsz/image/upload/v1779219567/Srujan_H_M-Current_ppopvn.pdf";
 
-  // Global Mouse Tracking for Spotlight
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
-
-  const spotlightBackground = useMotionTemplate`radial-gradient(800px circle at ${mouseX}px ${mouseY}px, rgba(6,182,212,0.15), transparent 80%)`;
+  // Global Spotlight Removed to optimize rendering performance
 
   // 3D Tilt Logic for Profile Picture
   const picRef = useRef(null);
@@ -71,8 +58,8 @@ export default function Hero() {
   const picY = useMotionValue(0);
   const picXSpring = useSpring(picX, { stiffness: 150, damping: 15 });
   const picYSpring = useSpring(picY, { stiffness: 150, damping: 15 });
-  const rotateX = useTransform(picYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
-  const rotateY = useTransform(picXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
+  const rotateX = useTransform(picYSpring, [-0.5, 0.5], ["5deg", "-5deg"]); // Reduced from 15deg
+  const rotateY = useTransform(picXSpring, [-0.5, 0.5], ["-5deg", "5deg"]); // Reduced from 15deg
 
   const handlePicMouseMove = (e) => {
     if (!picRef.current) return;
@@ -92,11 +79,6 @@ export default function Hero() {
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center px-4 py-20 relative overflow-hidden bg-[#050505]">
-      {/* Global Interactive Spotlight */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{ background: spotlightBackground }}
-      />
       
       {/* Background ambient glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">

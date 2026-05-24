@@ -7,7 +7,6 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import Lenis from '@studio-freight/lenis';
 
 // Lazy load heavy components below the fold
 const About = lazy(() => import('./pages/About'));
@@ -23,25 +22,12 @@ export default function App() {
 
   // Artificial delay to ensure the loading screen is visible and animations prepare
   useEffect(() => {
-    // Initialize Lenis Smooth Scroll with default fast & smooth settings
-    const lenis = new Lenis({
-      lerp: 0.1, // How fast it catches up (0.1 is snappy but smooth)
-      smoothWheel: true,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
     const timer = setTimeout(() => {
       setIsAppLoading(false);
     }, 2200); // Wait 2.2 seconds for the sleek "Initializing System" animation
     
     return () => {
       clearTimeout(timer);
-      lenis.destroy();
     };
   }, []);
 
