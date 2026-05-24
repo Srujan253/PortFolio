@@ -58,3 +58,14 @@ body {
   background-color: #0e7490; /* Tailwind cyan-700 */
   color: white;
 }
+
+/* Fix browser autofill styling for dark mode */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: white !important;
+  transition: background-color 9999s ease-in-out 0s;
+}

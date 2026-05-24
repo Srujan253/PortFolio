@@ -73,18 +73,20 @@ export default function About() {
     }
   ];
 
-  const GameCard = ({ game }) => (
-    <div 
-      className={`relative group rounded-2xl overflow-hidden border ${game.borderColor} bg-black/40 ${game.glow} transition-all duration-300 flex flex-col cursor-pointer`}
+  const GameCard = ({ game, index }) => (
+    <motion.div 
+      variants={itemVariants}
+      className={`relative group rounded-2xl overflow-hidden border ${game.borderColor} bg-black/40 ${game.glow} transition-all duration-300 flex flex-col cursor-pointer shadow-lg`}
       onClick={() => setSelectedGame(game)}
+      whileHover={{ y: -5, scale: 1.02 }}
     >
       <div className="h-40 w-full overflow-hidden bg-gray-900 relative">
         <img 
           src={game.image} 
           alt={game.name} 
-          className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+          className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/40 to-transparent" />
       </div>
       <div className="p-4 flex flex-col flex-grow relative z-10 -mt-10">
         <h4 className="text-xl font-bold text-white mb-1 drop-shadow-md">{game.name}</h4>
@@ -92,7 +94,7 @@ export default function About() {
           {game.id}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 
   return (
@@ -157,32 +159,32 @@ export default function About() {
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
         >
-          <div className="flex items-center justify-center gap-3 mb-8">
+          <motion.div variants={itemVariants} className="flex items-center justify-center gap-3 mb-8">
             <FaGamepad className="text-3xl text-purple-400" />
             <h3 className="text-3xl font-bold text-white text-center">Gaming Profile</h3>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <div className="flex items-center gap-2 mb-4">
+              <motion.div variants={itemVariants} className="flex items-center gap-2 mb-4">
                 <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
                 <h4 className="text-xl font-bold text-gray-200 uppercase tracking-widest text-sm">Competitive</h4>
-              </div>
+              </motion.div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {competitiveGames.map(game => (
-                  <GameCard key={game.name} game={game} />
+                {competitiveGames.map((game, idx) => (
+                  <GameCard key={game.name} game={game} index={idx} />
                 ))}
               </div>
             </div>
 
             <div className="lg:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
+              <motion.div variants={itemVariants} className="flex items-center gap-2 mb-4">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 <h4 className="text-xl font-bold text-gray-200 uppercase tracking-widest text-sm">Fun</h4>
-              </div>
+              </motion.div>
               <div className="grid grid-cols-1 gap-4">
-                {funGames.map(game => (
-                  <GameCard key={game.name} game={game} />
+                {funGames.map((game, idx) => (
+                  <GameCard key={game.name} game={game} index={idx + 4} />
                 ))}
               </div>
             </div>
