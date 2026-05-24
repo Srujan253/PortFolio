@@ -2,100 +2,100 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaMapMarkerAlt, FaGraduationCap, FaExternalLinkAlt, FaGamepad, FaTimes } from 'react-icons/fa';
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 100, damping: 12 }
+  }
+};
+
+const competitiveGames = [
+  {
+    name: 'Free Fire',
+    id: '2431261289',
+    image: 'https://res.cloudinary.com/duf8kshsz/image/upload/v1779608629/WhatsApp_Image_2026-05-24_at_1.10.11_PM_mczw2t.jpg',
+    link: 'https://freefireinfo.in/',
+    borderColor: 'border-orange-500/30 hover:border-orange-500/60',
+    glow: 'group-hover:shadow-[0_0_20px_rgba(249,115,22,0.3)]',
+    experience: "A battle royale survivor at heart. Pushing ranks, hitting headshots, and constantly improving my tactical gameplay."
+  },
+  {
+    name: 'Clash Royale',
+    id: '#20UPRUCGJ2',
+    image: 'https://res.cloudinary.com/duf8kshsz/image/upload/v1779608629/WhatsApp_Image_2026-05-24_at_1.08.12_PM_lfuyh3.jpg',
+    link: 'https://royaleapi.com/player/20UPRUCGJ2',
+    borderColor: 'border-blue-500/30 hover:border-blue-500/60',
+    glow: 'group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]',
+    experience: "Mastering elixir management and precise card placements. Building meta-defying decks to climb the ladder."
+  },
+  {
+    name: 'Chess',
+    id: 'Srujan_H_M',
+    image: 'https://res.cloudinary.com/duf8kshsz/image/upload/v1779608629/WhatsApp_Image_2026-05-24_at_1.12.24_PM_q80irf.jpg',
+    link: 'https://www.chess.com/member/Srujan_H_M',
+    borderColor: 'border-gray-400/30 hover:border-gray-400/60',
+    glow: 'group-hover:shadow-[0_0_20px_rgba(156,163,175,0.3)]',
+    experience: "Calculating lines and dominating the board. I enjoy rapid games and deep strategic mid-game maneuvers."
+  },
+  {
+    name: 'Clash of Clans',
+    id: 'Pending ID...',
+    image: 'https://via.placeholder.com/300x400/111827/FFFFFF?text=Screenshot+Pending',
+    link: null,
+    borderColor: 'border-yellow-500/30 hover:border-yellow-500/60',
+    glow: 'group-hover:shadow-[0_0_20px_rgba(234,179,8,0.3)]',
+    experience: "Building an impenetrable base and coordinating massive clan wars. Every star matters!"
+  }
+];
+
+const funGames = [
+  {
+    name: 'Shadow Fight',
+    id: 'Played Offline',
+    image: 'https://via.placeholder.com/300x400/111827/a855f7?text=Shadow+Fight',
+    link: null,
+    borderColor: 'border-purple-500/30 hover:border-purple-500/60',
+    glow: 'group-hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]',
+    experience: "Enjoying the art of combat. Testing different weapons, mastering timing, and enjoying the fluid animations."
+  }
+];
+
+const GameCard = ({ game, onSelect }) => (
+  <motion.div 
+    variants={itemVariants}
+    className={`relative group rounded-2xl overflow-hidden border ${game.borderColor} bg-black/40 ${game.glow} transition-all duration-300 flex flex-col cursor-pointer shadow-lg`}
+    onClick={() => onSelect(game)}
+    whileHover={{ y: -5, scale: 1.02 }}
+  >
+    <div className="h-40 w-full overflow-hidden bg-gray-900 relative">
+      <img 
+        src={game.image} 
+        alt={game.name} 
+        className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/40 to-transparent" />
+    </div>
+    <div className="p-4 flex flex-col flex-grow relative z-10 -mt-10">
+      <h4 className="text-xl font-bold text-white mb-1 drop-shadow-md">{game.name}</h4>
+      <div className="inline-block bg-gray-800/80 border border-white/10 px-3 py-1 rounded-full text-sm text-cyan-400 font-mono w-fit backdrop-blur-sm">
+        {game.id}
+      </div>
+    </div>
+  </motion.div>
+);
+
 export default function About() {
   const [selectedGame, setSelectedGame] = useState(null);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { type: "spring", stiffness: 100, damping: 12 }
-    }
-  };
-
-  const competitiveGames = [
-    {
-      name: 'Free Fire',
-      id: '2431261289',
-      image: 'https://res.cloudinary.com/duf8kshsz/image/upload/v1779608629/WhatsApp_Image_2026-05-24_at_1.10.11_PM_mczw2t.jpg',
-      link: 'https://freefireinfo.in/', // Generic tracker as Free Fire doesn't have an official public profile URL format
-      borderColor: 'border-orange-500/30 hover:border-orange-500/60',
-      glow: 'group-hover:shadow-[0_0_20px_rgba(249,115,22,0.3)]',
-      experience: "A battle royale survivor at heart. Pushing ranks, hitting headshots, and constantly improving my tactical gameplay."
-    },
-    {
-      name: 'Clash Royale',
-      id: '#20UPRUCGJ2',
-      image: 'https://res.cloudinary.com/duf8kshsz/image/upload/v1779608629/WhatsApp_Image_2026-05-24_at_1.08.12_PM_lfuyh3.jpg',
-      link: 'https://royaleapi.com/player/20UPRUCGJ2',
-      borderColor: 'border-blue-500/30 hover:border-blue-500/60',
-      glow: 'group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]',
-      experience: "Mastering elixir management and precise card placements. Building meta-defying decks to climb the ladder."
-    },
-    {
-      name: 'Chess',
-      id: 'Srujan_H_M',
-      image: 'https://res.cloudinary.com/duf8kshsz/image/upload/v1779608629/WhatsApp_Image_2026-05-24_at_1.12.24_PM_q80irf.jpg',
-      link: 'https://www.chess.com/member/Srujan_H_M',
-      borderColor: 'border-gray-400/30 hover:border-gray-400/60',
-      glow: 'group-hover:shadow-[0_0_20px_rgba(156,163,175,0.3)]',
-      experience: "Calculating lines and dominating the board. I enjoy rapid games and deep strategic mid-game maneuvers."
-    },
-    {
-      name: 'Clash of Clans',
-      id: 'Pending ID...',
-      image: 'https://via.placeholder.com/300x400/111827/FFFFFF?text=Screenshot+Pending',
-      link: null,
-      borderColor: 'border-yellow-500/30 hover:border-yellow-500/60',
-      glow: 'group-hover:shadow-[0_0_20px_rgba(234,179,8,0.3)]',
-      experience: "Building an impenetrable base and coordinating massive clan wars. Every star matters!"
-    }
-  ];
-
-  const funGames = [
-    {
-      name: 'Shadow Fight',
-      id: 'Played Offline',
-      image: 'https://via.placeholder.com/300x400/111827/a855f7?text=Shadow+Fight',
-      link: null,
-      borderColor: 'border-purple-500/30 hover:border-purple-500/60',
-      glow: 'group-hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]',
-      experience: "Enjoying the art of combat. Testing different weapons, mastering timing, and enjoying the fluid animations."
-    }
-  ];
-
-  const GameCard = ({ game, index }) => (
-    <motion.div 
-      variants={itemVariants}
-      className={`relative group rounded-2xl overflow-hidden border ${game.borderColor} bg-black/40 ${game.glow} transition-all duration-300 flex flex-col cursor-pointer shadow-lg`}
-      onClick={() => setSelectedGame(game)}
-      whileHover={{ y: -5, scale: 1.02 }}
-    >
-      <div className="h-40 w-full overflow-hidden bg-gray-900 relative">
-        <img 
-          src={game.image} 
-          alt={game.name} 
-          className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/40 to-transparent" />
-      </div>
-      <div className="p-4 flex flex-col flex-grow relative z-10 -mt-10">
-        <h4 className="text-xl font-bold text-white mb-1 drop-shadow-md">{game.name}</h4>
-        <div className="inline-block bg-gray-800/80 border border-white/10 px-3 py-1 rounded-full text-sm text-cyan-400 font-mono w-fit backdrop-blur-sm">
-          {game.id}
-        </div>
-      </div>
-    </motion.div>
-  );
 
   return (
     <section id="about" className="py-20 relative z-10">
@@ -171,8 +171,8 @@ export default function About() {
                 <h4 className="text-xl font-bold text-gray-200 uppercase tracking-widest text-sm">Competitive</h4>
               </motion.div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {competitiveGames.map((game, idx) => (
-                  <GameCard key={game.name} game={game} index={idx} />
+                {competitiveGames.map((game) => (
+                  <GameCard key={game.name} game={game} onSelect={setSelectedGame} />
                 ))}
               </div>
             </div>
@@ -183,8 +183,8 @@ export default function About() {
                 <h4 className="text-xl font-bold text-gray-200 uppercase tracking-widest text-sm">Fun</h4>
               </motion.div>
               <div className="grid grid-cols-1 gap-4">
-                {funGames.map((game, idx) => (
-                  <GameCard key={game.name} game={game} index={idx + 4} />
+                {funGames.map((game) => (
+                  <GameCard key={game.name} game={game} onSelect={setSelectedGame} />
                 ))}
               </div>
             </div>
