@@ -36,10 +36,11 @@ export default function About() {
       name: 'Clash Royale',
       id: '#20UPRUCGJ2',
       image: 'https://res.cloudinary.com/duf8kshsz/image/upload/v1779608629/WhatsApp_Image_2026-05-24_at_1.08.12_PM_lfuyh3.jpg',
-      link: 'https://royaleapi.com/player/20UPRUCGJ2',
+      link: 'https://clash-royal-portfolio.vercel.app/',
       borderColor: 'border-blue-500/30 hover:border-blue-500/60',
       glow: 'group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]',
-      experience: "Mastering elixir management and precise card placements. Building meta-defying decks to climb the ladder."
+      experience: "Mastering elixir management and precise card placements. I even built an entire secondary portfolio based on this game just for fun! Check it out.",
+      customButtonText: "View CR Portfolio"
     },
     {
       name: 'Chess',
@@ -244,7 +245,7 @@ export default function About() {
                     rel="noopener noreferrer"
                     className={`flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r ${selectedGame.color || 'from-cyan-500/20 to-blue-500/20'} hover:opacity-80 text-white rounded-xl border border-white/10 transition-all font-bold text-lg`}
                   >
-                    View Stats / Profile <FaExternalLinkAlt className="text-sm" />
+                    {selectedGame.customButtonText || "View Stats / Profile"} <FaExternalLinkAlt className="text-sm" />
                   </a>
                 ) : (
                   <button 
