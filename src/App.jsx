@@ -23,14 +23,10 @@ export default function App() {
 
   // Artificial delay to ensure the loading screen is visible and animations prepare
   useEffect(() => {
-    // Initialize Lenis Smooth Scroll
+    // Initialize Lenis Smooth Scroll with default fast & smooth settings
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      smoothTouch: false,
+      lerp: 0.1, // How fast it catches up (0.1 is snappy but smooth)
+      smoothWheel: true,
     });
 
     function raf(time) {
