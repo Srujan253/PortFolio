@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaEnvelope, FaPaperPlane, FaHackerrank, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaPaperPlane, FaHackerrank, FaCheckCircle, FaExclamationCircle, FaGamepad } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
 import emailjs from 'emailjs-com';
 
@@ -107,6 +107,18 @@ export default function Contact() {
                   <p className="text-gray-500 text-sm font-bold uppercase tracking-wider mb-1">Direct Email</p>
                   <a href="mailto:srujanhm135@gmail.com" className="text-white text-lg font-medium hover:text-cyan-400 transition-colors">
                     srujanhm135@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-6 border-t border-white/10 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center border border-purple-500/30 group-hover:scale-110 transition-transform">
+                  <FaGamepad className="text-purple-400 text-xl" />
+                </div>
+                <div>
+                  <p className="text-gray-500 text-sm font-bold uppercase tracking-wider mb-1">Secondary Portfolio</p>
+                  <a href="https://clash-royal-portfolio.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-white text-lg font-medium hover:text-purple-400 transition-colors">
+                    Clash Royale Theme (Fun)
                   </a>
                 </div>
               </div>
