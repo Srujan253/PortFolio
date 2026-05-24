@@ -90,7 +90,7 @@ function SkillNode({ word, position, setSelectedSkill }) {
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
           onClick={(e) => { e.stopPropagation(); setSelectedSkill(word); }}
-          style={{ transform: hovered ? 'scale(2.1)' : 'scale(1.6)' }}
+          style={{ transform: hovered ? 'scale(2.415)' : 'scale(1.84)' }}
         >
           <div 
             className={`text-4xl md:text-5xl transition-all duration-300 ${hovered ? 'drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] scale-110' : 'opacity-90'}`}
