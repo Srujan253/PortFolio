@@ -1,8 +1,10 @@
 import React, { useRef, useState, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Text, OrbitControls, Billboard, Sphere } from '@react-three/drei';
+import { Html, OrbitControls, Billboard, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { FaCode, FaDatabase, FaServer, FaBrain, FaReact, FaNodeJs, FaPython, FaJava, FaDocker, FaLinux, FaGithub, FaAws, FaChartBar } from 'react-icons/fa';
+import { SiJavascript, SiHtml5, SiCss3, SiExpress, SiMongodb, SiMysql, SiPostgresql, SiTailwindcss, SiVite, SiFramer, SiSocketdotio, SiPandas, SiNumpy, SiScikitlearn, SiPostman } from 'react-icons/si';
 
 // Categorized Skills
 const skillCategories = {
@@ -22,6 +24,27 @@ const skillCategories = {
   ]
 };
 
+// Icon Mapping
+const skillIcons = {
+  "JavaScript": SiJavascript, "React.js": FaReact, "Node.js": FaNodeJs, "Express.js": SiExpress,
+  "HTML5": SiHtml5, "CSS3": SiCss3, "REST APIs": FaServer, "MongoDB": SiMongodb, "MySQL": SiMysql,
+  "PostgreSQL": SiPostgresql, "Neon": FaDatabase, "Tailwind CSS": SiTailwindcss, "Vite": SiVite,
+  "Framer Motion": SiFramer, "Socket.IO": SiSocketdotio,
+  "Python": FaPython, "Pandas": SiPandas, "NumPy": SiNumpy, "Matplotlib": FaChartBar,
+  "Scikit-learn": SiScikitlearn, "Data Structures": FaCode, "Algorithms": FaCode,
+  "Java": FaJava, "Git": FaGithub, "GitHub": FaGithub, "AWS": FaAws, "VSCode": FaCode,
+  "AI Agents": FaBrain, "Docker": FaDocker, "Postman": SiPostman, "Linux": FaLinux
+};
+
+// Brand Colors
+const skillColors = {
+  "JavaScript": "#F7DF1E", "React.js": "#61DAFB", "Node.js": "#339939", "Express.js": "#FFFFFF",
+  "HTML5": "#E34F26", "CSS3": "#1572B6", "MongoDB": "#47A248", "MySQL": "#4479A1",
+  "PostgreSQL": "#336791", "Tailwind CSS": "#06B6D4", "Vite": "#646CFF",
+  "Python": "#3776AB", "Java": "#007396", "Git": "#F05032", "GitHub": "#FFFFFF",
+  "AWS": "#FF9900", "Docker": "#2496ED", "Linux": "#FCC624", "Postman": "#FF6C37"
+};
+
 // Hardcoded details for the modal
 const skillDetails = {
   "React.js": { level: "95%", desc: "Advanced mastery. Core UI framework used across all frontend projects including this interactive portfolio." },
@@ -39,62 +62,47 @@ const skillDetails = {
 
 function SkillNode({ word, position, setSelectedSkill }) {
   const groupRef = useRef();
-  const textRef = useRef();
-  const sphereRef = useRef();
   const [hovered, setHovered] = useState(false);
   const { camera } = useThree();
 
   const basePosition = useMemo(() => new THREE.Vector3(...position), [position]);
-  const color = useMemo(() => new THREE.Color(), []);
   const randomPhase = useMemo(() => Math.random() * Math.PI * 2, []);
+  
+  const Icon = skillIcons[word] || FaCode;
+  const brandColor = skillColors[word] || '#22d3ee';
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     const dist = camera.position.length();
-    const zoomFactor = Math.max(0, 35 - dist) * 0.5;
+    const zoomFactor = Math.max(0, 45 - dist) * 0.5;
     const pulse = Math.sin(t * 2 + randomPhase) * 1.5;
     
-    const targetScale = hovered ? 1.5 : 1;
-    groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
-
     const dir = basePosition.clone().normalize();
     const targetPos = basePosition.clone().add(dir.multiplyScalar(zoomFactor + pulse + (hovered ? 3 : 0)));
     groupRef.current.position.lerp(targetPos, 0.1);
-
-    if (textRef.current) {
-      textRef.current.material.color.lerp(color.set(hovered ? '#ffffff' : '#22d3ee'), 0.1);
-    }
-    if (sphereRef.current) {
-      sphereRef.current.material.color.lerp(color.set(hovered ? '#ffffff' : '#06b6d4'), 0.1);
-      sphereRef.current.material.emissiveIntensity = hovered ? 2.5 : 0.8;
-    }
   });
 
   return (
     <group ref={groupRef} position={position}>
-      <Billboard>
-        <Text 
-          ref={textRef}
-          fontSize={hovered ? 2.2 : 1.8} 
-          letterSpacing={-0.05} 
-          lineHeight={1} 
-          position={[0, 1.5, 0]}
-          onPointerOver={(e) => { e.stopPropagation(); setHovered(true); document.body.style.cursor = 'pointer'; }}
-          onPointerOut={() => { setHovered(false); document.body.style.cursor = 'auto'; }}
+      <Html center transform sprite zIndexRange={[100, 0]}>
+        <div 
+          className="flex flex-col items-center justify-center cursor-pointer transition-transform duration-300"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
           onClick={(e) => { e.stopPropagation(); setSelectedSkill(word); }}
+          style={{ transform: hovered ? 'scale(2.1)' : 'scale(1.6)' }}
         >
-          {word}
-        </Text>
-        <Sphere ref={sphereRef} args={[hovered ? 0.6 : 0.4, 16, 16]}>
-          <meshStandardMaterial 
-            color="#06b6d4" 
-            emissive="#22d3ee"
-            emissiveIntensity={0.8}
-            roughness={0.1}
-            metalness={0.9}
-          />
-        </Sphere>
-      </Billboard>
+          <div 
+            className={`text-4xl md:text-5xl transition-all duration-300 ${hovered ? 'drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] scale-110' : 'opacity-90'}`}
+            style={{ color: brandColor }}
+          >
+            <Icon />
+          </div>
+          <div className="mt-2 px-2 py-1 bg-gray-900/70 border border-white/10 rounded-md text-white text-xs font-semibold whitespace-nowrap backdrop-blur-sm">
+            {word}
+          </div>
+        </div>
+      </Html>
     </group>
   );
 }
@@ -128,7 +136,7 @@ function Scene({ setSelectedSkill, skillList }) {
   });
   return (
     <group ref={group}>
-      <Cloud radius={16} setSelectedSkill={setSelectedSkill} skillList={skillList} />
+      <Cloud radius={22} setSelectedSkill={setSelectedSkill} skillList={skillList} />
     </group>
   );
 }
@@ -141,9 +149,10 @@ export default function Skills() {
 
   const skillData = selectedSkill ? (skillDetails[selectedSkill] || skillDetails["default"]) : null;
   const currentSkills = skillCategories[activeTab];
+  const ActiveIcon = selectedSkill ? skillIcons[selectedSkill] : null;
 
   return (
-    <section id="skills" className="py-24 relative overflow-hidden bg-gradient-to-b from-transparent to-gray-900/50">
+    <section id="skills" className="pt-10 pb-24 relative overflow-hidden bg-gradient-to-b from-transparent to-gray-900/50">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none" />
       
       <div className="container mx-auto px-6 relative z-10 text-center">
@@ -180,8 +189,8 @@ export default function Skills() {
         </motion.div>
         
         {/* 3D Canvas */}
-        <div className="w-[320px] h-[320px] sm:w-[450px] sm:h-[450px] mx-auto cursor-grab active:cursor-grabbing border-4 border-cyan-400/20 rounded-full glass shadow-[0_0_80px_rgba(6,182,212,0.15)] relative overflow-hidden bg-black/40 transition-opacity duration-500">
-          <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 35], fov: 60 }}>
+        <div className="w-full max-w-4xl h-[400px] sm:h-[600px] mx-auto cursor-grab active:cursor-grabbing border border-cyan-400/20 rounded-[3rem] glass shadow-[0_0_80px_rgba(6,182,212,0.1)] relative overflow-hidden bg-black/40 transition-opacity duration-500">
+          <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 45], fov: 60 }}>
             <fog attach="fog" args={['#0f172a', 20, 60]} />
             <ambientLight intensity={0.4} />
             <pointLight position={[10, 10, 10]} intensity={1} color="#22d3ee" />
@@ -227,7 +236,10 @@ export default function Skills() {
                 ✕
               </button>
               
-              <h3 className="text-3xl font-bold text-white mb-2">{selectedSkill}</h3>
+              <h3 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                {ActiveIcon && <ActiveIcon className="text-cyan-400 text-4xl drop-shadow-[0_0_10px_rgba(6,182,212,0.8)]" />}
+                {selectedSkill}
+              </h3>
               
               <div className="mb-6">
                 <div className="flex justify-between text-sm mb-1 text-cyan-400 font-semibold">
