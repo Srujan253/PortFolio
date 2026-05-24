@@ -160,7 +160,7 @@ export default function Projects() {
             <motion.div
               key={project.id}
               layoutId={`card-${project.id}`}
-              className={`group relative glass rounded-[2rem] overflow-hidden cursor-pointer border border-white/10 hover:border-cyan-500/50 transition-colors bg-gray-900/40 ${project.bentoClass}`}
+              className={`group relative glass gpu-accelerated rounded-[2rem] overflow-hidden cursor-pointer border border-white/10 hover:border-cyan-500/50 transition-colors bg-gray-900/40 ${project.bentoClass}`}
               onClick={() => setSelectedProject(project)}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}

@@ -42,7 +42,7 @@ export default function Timeline() {
             {timeline.map((item, idx) => (
               <motion.div
                 key={idx}
-                className={`glass rounded-xl p-8 flex flex-col md:flex-row items-center gap-6 shadow-lg ${idx % 2 === 0 ? 'md:ml-0 md:mr-auto' : 'md:mr-0 md:ml-auto'}`}
+                className={`glass gpu-accelerated rounded-xl p-8 flex flex-col md:flex-row items-center gap-6 shadow-lg ${idx % 2 === 0 ? 'md:ml-0 md:mr-auto' : 'md:mr-0 md:ml-auto'}`}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

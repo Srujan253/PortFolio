@@ -71,7 +71,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col justify-center glass p-10 rounded-[2.5rem] border border-white/5 bg-gray-900/30 relative overflow-hidden shadow-2xl"
+            className="flex flex-col justify-center glass gpu-accelerated p-10 rounded-[2.5rem] border border-white/5 bg-gray-900/30 relative overflow-hidden shadow-2xl"
           >
             {/* Ambient inner glow */}
             <div className="absolute -top-24 -left-24 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none" />
@@ -131,7 +131,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="glass p-10 rounded-[2.5rem] border border-gray-800 bg-gray-900/60 backdrop-blur-xl relative shadow-2xl flex flex-col justify-center"
+            className="glass gpu-accelerated p-10 rounded-[2.5rem] border border-gray-800 bg-gray-900/60 backdrop-blur-xl relative shadow-2xl flex flex-col justify-center"
           >
             <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
               <FaPaperPlane className="text-cyan-500" /> Send a Transmission

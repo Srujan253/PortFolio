@@ -189,7 +189,7 @@ export default function Skills() {
         </motion.div>
         
         {/* 3D Canvas */}
-        <div className="w-full max-w-4xl h-[400px] sm:h-[600px] mx-auto cursor-grab active:cursor-grabbing border border-cyan-400/20 rounded-[3rem] glass shadow-[0_0_80px_rgba(6,182,212,0.1)] relative overflow-hidden bg-black/40 transition-opacity duration-500">
+        <div className="w-full max-w-4xl h-[400px] sm:h-[600px] mx-auto cursor-grab active:cursor-grabbing border border-cyan-400/20 rounded-[3rem] glass shadow-[0_0_80px_rgba(6,182,212,0.1)] relative overflow-hidden bg-black/40 transition-opacity duration-500 gpu-accelerated">
           <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 45], fov: 60 }}>
             <fog attach="fog" args={['#0f172a', 20, 60]} />
             <ambientLight intensity={0.4} />

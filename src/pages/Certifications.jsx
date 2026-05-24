@@ -152,7 +152,7 @@ const FastCard = ({ item, index, setSelectedItem }) => {
       className="relative group cursor-pointer h-full"
       onClick={() => setSelectedItem(item)}
     >
-      <div className="glass rounded-3xl p-6 backdrop-blur-sm border border-gray-800/80 hover:border-cyan-400/40 transition-all duration-300 h-full flex flex-col relative overflow-hidden bg-gray-900/40 hover:bg-gray-800/60 shadow-xl">
+      <div className="glass gpu-accelerated rounded-3xl p-6 backdrop-blur-sm border border-gray-800/80 hover:border-cyan-400/40 transition-all duration-300 h-full flex flex-col relative overflow-hidden bg-gray-900/40 hover:bg-gray-800/60 shadow-xl">
         
         {/* Animated border gradient placeholder */}
         <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
@@ -223,13 +223,19 @@ export default function Certifications() {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-12">
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-4xl sm:text-6xl font-black mb-6 text-white tracking-tight">
             Hall of <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Fame</span>
           </h2>
           
           {/* Futuristic Tab Switcher */}
-          <div className="inline-flex bg-gray-900/80 backdrop-blur-md p-1.5 rounded-full border border-gray-800 shadow-xl relative">
+          <div className="inline-flex bg-gray-900/80 backdrop-blur-md p-1.5 rounded-full border border-gray-800 shadow-xl relative gpu-accelerated">
             <div 
               className={`absolute inset-y-1.5 w-1/2 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full transition-transform duration-300 ease-out ${activeTab === "certifications" ? "translate-x-0" : "translate-x-full"}`} 
               style={{ width: 'calc(50% - 6px)' }}
@@ -247,7 +253,7 @@ export default function Certifications() {
               ACHIEVEMENTS
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Optimized Grid Layout */}
         <AnimatePresence mode="wait">

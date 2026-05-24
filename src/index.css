@@ -20,6 +20,13 @@ body {
 /* Glassmorphism utility */
 .glass {
   @apply backdrop-blur-md bg-white/10 dark:bg-gray-900/40 border border-white/20 dark:border-gray-700/40 shadow-lg;
+}
+
+/* GPU Hardware Acceleration for heavy animations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 } 
 /* Flip Card Styling */
 .flip-card {
