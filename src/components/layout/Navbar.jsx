@@ -1,128 +1,110 @@
-import { useState } from 'react';
-import { FaGithub, FaLinkedin, FaInstagram, FaBars, FaTimes } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Home, User, Code2, Briefcase, Clock, Mail } from 'lucide-react';
 
-// Navigation links
-const navLinks = [
-  { name: 'Home', href: '#hero' },
-  { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Timeline', href: '#timeline' },
-  { name: 'Contact', href: '#contact' },
+const navItems = [
+  { id: 'hero', icon: Home, label: 'Home' },
+  { id: 'about', icon: User, label: 'About' },
+  { id: 'skills', icon: Code2, label: 'Skills' },
+  { id: 'projects', icon: Briefcase, label: 'Projects' },
+  { id: 'timeline', icon: Clock, label: 'Timeline' },
+  { id: 'contact', icon: Mail, label: 'Contact' },
 ];
 
 export default function Navbar() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  // Toggle dark mode
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.classList.toggle('dark');
+  // Intersection Observer to update active nav item based on scroll position
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.5 } // Trigger when section is 50% visible
+    );
+
+    navItems.forEach((item) => {
+      const section = document.getElementById(item.id);
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleClick = (e, id) => {
+    e.preventDefault();
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-black py-4 px-6 flex items-center justify-between shadow-lg transition-all duration-300">
-      
-      {/* Logo */}
-      <a href="#hero" className="text-2xl font-extrabold tracking-tight text-cyan-400">
-        MyPortfolio
-      </a>
-
-      {/* Desktop Nav Links */}
-      <div className="hidden md:flex gap-8">
-        {navLinks.map(link => (
-          <a 
-            key={link.name} 
-            href={link.href} 
-            className="text-lg font-semibold text-gray-800 dark:text-gray-100 hover:text-cyan-400 transition-colors duration-200"
-          >
-            {link.name}
-          </a>
-        ))}
-      </div>
-
-      {/* Desktop Social Icons */}
-      <div className="hidden md:flex gap-4">
-        <a href="https://github.com/Srujan253" target="_blank" rel="noopener noreferrer" 
-           className="text-2xl text-gray-700 dark:text-gray-200 hover:text-cyan-400 transition-colors duration-200">
-          <FaGithub />
-        </a>
-        <a href="https://linkedin.com/in/srujan-h-m-a51940321" target="_blank" rel="noopener noreferrer" 
-           className="text-2xl text-gray-700 dark:text-gray-200 hover:text-cyan-400 transition-colors duration-200">
-          <FaLinkedin />
-        </a>
-        <a href="https://instagram.com/srujan_kulal18" target="_blank" rel="noopener noreferrer" 
-           className="text-2xl text-gray-700 dark:text-gray-200 hover:text-cyan-400 transition-colors duration-200">
-          <FaInstagram />
-        </a>
-      </div>
-
-      {/* Dark mode toggle button */}
-      {/* <button 
-        onClick={toggleDarkMode} 
-        className="hidden md:block px-3 py-1 rounded-md bg-cyan-400 text-white hover:bg-cyan-500 transition-colors"
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100]">
+      <motion.nav 
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30, delay: 0.5 }}
+        className="flex items-center gap-2 md:gap-4 px-4 py-3 bg-gray-950/80 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_0_40px_rgba(6,182,212,0.15)]"
       >
-        {darkMode ? "Light" : "Dark"}
-      </button> */}
+        {navItems.map((item, index) => {
+          const isActive = activeSection === item.id;
+          const isHovered = hoveredIndex === index;
+          const Icon = item.icon;
 
-      {/* Hamburger Icon (Mobile) */}
-      <button
-        className="md:hidden text-3xl text-gray-200 focus:outline-none z-50"
-        onClick={() => setSidebarOpen(true)}
-        aria-label="Open menu"
-      >
-        <FaBars />
-      </button>
-
-      {/* Sidebar Overlay */}
-      {sidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-40 z-40" 
-          onClick={() => setSidebarOpen(false)}
-        ></div>
-      )}
-
-      {/* Sidebar Menu */}
-      <div
-        className={`fixed top-0 right-0 h-full w-64 rounded-3xl shadow-2xl bg-black z-50 transform ${sidebarOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 md:hidden flex flex-col`}
-      >
-        <button
-          className="self-end m-4 text-3xl text-white focus:outline-none"
-          onClick={() => setSidebarOpen(false)}
-          aria-label="Close menu"
-        >
-          <FaTimes />
-        </button>
-
-        <div className="flex flex-col items-center gap-6 mt-8 px-6">
-          {navLinks.map(link => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-lg font-semibold text-white hover:text-cyan-400 transition-colors duration-200"
-              onClick={() => setSidebarOpen(false)}
+          return (
+            <motion.a
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={(e) => handleClick(e, item.id)}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="relative group flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full transition-colors z-10"
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {link.name}
-            </a>
-          ))}
-        </div>
+              {/* Active Background Pill */}
+              {isActive && (
+                <motion.div
+                  layoutId="activeNavIndicator"
+                  className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 rounded-full z-0"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
 
-        <div className="flex gap-6 justify-center mt-10 px-6">
-          <a href="https://github.com/Srujan253" target="_blank" rel="noopener noreferrer" 
-             className="text-2xl text-white hover:text-cyan-400 transition-colors duration-200">
-            <FaGithub />
-          </a>
-          <a href="https://linkedin.com/in/srujan-h-m-a51940321" target="_blank" rel="noopener noreferrer" 
-             className="text-2xl text-white hover:text-cyan-400 transition-colors duration-200">
-            <FaLinkedin />
-          </a>
-          <a href="https://instagram.com/srujan_kulal18" target="_blank" rel="noopener noreferrer" 
-             className="text-2xl text-white hover:text-cyan-400 transition-colors duration-200">
-            <FaInstagram />
-          </a>
-        </div>
-      </div>
-    </nav>
+              {/* Icon */}
+              <Icon 
+                strokeWidth={isActive ? 2.5 : 2}
+                className={`relative z-10 w-5 h-5 md:w-6 md:h-6 transition-all duration-300 ${
+                  isActive ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]' : 'text-gray-400 group-hover:text-white'
+                }`} 
+              />
+
+              {/* Tooltip (Only visible on hover) */}
+              <AnimatePresence>
+                {isHovered && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 5, scale: 0.8 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute -top-12 px-3 py-1.5 bg-gray-900 border border-white/10 text-white text-xs font-bold rounded-lg whitespace-nowrap shadow-xl z-20 pointer-events-none"
+                  >
+                    {item.label}
+                    {/* Tooltip arrow */}
+                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-900 border-b border-r border-white/10 rotate-45" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.a>
+          );
+        })}
+      </motion.nav>
+    </div>
   );
 }

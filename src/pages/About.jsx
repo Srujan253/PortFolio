@@ -145,8 +145,8 @@ export default function About() {
             <div className="w-16 h-16 rounded-full bg-cyan-500/20 flex items-center justify-center mb-4 relative z-10">
               <FaMapMarkerAlt className="text-3xl text-cyan-400 drop-shadow-[0_0_15px_rgba(6,182,212,0.8)]" />
             </div>
-            <h3 className="text-xl font-bold text-white mb-2 relative z-10">Base of Operations</h3>
-            <p className="text-gray-400 relative z-10">Earth</p>
+            <h3 className="text-xl font-bold text-white mb-2 relative z-10">Location</h3>
+            <p className="text-gray-400 relative z-10">Nitte, Karnataka</p>
             <p className="text-sm text-cyan-500/80 mt-2 font-mono relative z-10">Available for remote work</p>
           </motion.div>
         </motion.div>
