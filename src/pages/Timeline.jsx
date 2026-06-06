@@ -9,18 +9,18 @@ const timeline = [
     desc: 'Developed Contest Scoring System & Reception Management System using MERN stack with Neon PostgreSQL, enabling real-time operations and dashboards.'
   },
   {
-    type: 'work',
-    title: 'Full Stack Developer Intern',
-    org: 'Winsun Global Tech, Bangalore',
-    date: 'Jan 2024 - Apr 2024',
-    desc: 'Designed MERN tech blogging platform with JWT authentication, RBAC, and built highly optimized RESTful APIs for improved load times.'
-  },
-  {
     type: 'edu',
     title: 'B.Tech in Cyber Security',
     org: 'NMAM Institute of Technology, Nitte',
     date: 'July 2024 - Ongoing',
     desc: 'Currently pursuing Bachelor of Technology. CGPA: 8.55'
+  },
+  {
+    type: 'work',
+    title: 'Full Stack Developer Intern',
+    org: 'Winsun Global Tech, Nagarbhavi, Bangalore',
+    date: 'Jan 2024 - Apr 2024',
+    desc: 'Designed MERN tech blogging platform with JWT authentication, RBAC, and built highly optimized RESTful APIs for improved load times.'
   },
   {
     type: 'edu',
