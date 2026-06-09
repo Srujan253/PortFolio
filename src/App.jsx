@@ -19,11 +19,14 @@ const AIAssistant = lazy(() => import('./components/ui/AIAssistant'));
 
 export default function App() {
   const [isAppLoading, setIsAppLoading] = useState(true);
+  const [isHeroLoaded, setIsHeroLoaded] = useState(false);
 
   // Artificial delay to ensure the loading screen is visible and animations prepare
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsAppLoading(false);
+      // Delay mounting heavy components until Hero animation finishes to prevent lag
+      setTimeout(() => setIsHeroLoaded(true), 1200);
     }, 2200); // Wait 2.2 seconds for the sleek "Initializing System" animation
     
     return () => {
@@ -53,18 +56,20 @@ export default function App() {
               <Navbar />
               <Hero />
               
-              <Suspense fallback={<div className="h-screen w-full bg-gray-950 flex items-center justify-center"><div className="w-8 h-8 rounded-full border-t-2 border-cyan-500 animate-spin" /></div>}>
-                <main className="flex-1 flex flex-col gap-24 md:gap-32 pt-8 md:pt-16 overflow-hidden">
-                  <About />
-                  <Skills />
-                  <Certifications />
-                  <Projects />
-                  <Timeline />
-                  <Contact />
-                </main>
-                <Footer />
-                <AIAssistant />
-              </Suspense>
+              {isHeroLoaded && (
+                <Suspense fallback={<div className="h-screen w-full bg-gray-950 flex items-center justify-center"><div className="w-8 h-8 rounded-full border-t-2 border-cyan-500 animate-spin" /></div>}>
+                  <main className="flex-1 flex flex-col gap-24 md:gap-32 pt-8 md:pt-16 overflow-hidden">
+                    <About />
+                    <Skills />
+                    <Certifications />
+                    <Projects />
+                    <Timeline />
+                    <Contact />
+                  </main>
+                  <Footer />
+                  <AIAssistant />
+                </Suspense>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
