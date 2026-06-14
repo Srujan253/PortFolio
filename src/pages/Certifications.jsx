@@ -279,6 +279,7 @@ const FastCard = ({ item, index, setSelectedItem }) => {
              <FaFilePdf className="text-white text-xs" />
            </div>
         </div>
+        </div>
       </motion.div>
     </div>
   );
