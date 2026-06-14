@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaAward, FaFilePdf, FaMedal, FaCertificate, FaTrophy, FaCode, FaExternalLinkAlt } from "react-icons/fa";
 import { SiCoursera, SiUdemy, SiFreecodecamp, SiMicrosoftacademic } from "react-icons/si";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 const BlurText = ({ text, className }) => {
   const words = text.split(" ");
@@ -188,18 +188,51 @@ const achievements = [
   }
 ];
 
-// Optimized Card without heavy 3D math
+// Optimized Card with Performant Local 3D Tilt
 const FastCard = ({ item, index, setSelectedItem }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 20 });
+  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 20 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05, duration: 0.4 }}
-      whileHover={{ y: -8, scale: 1.02 }}
-      className="relative group cursor-pointer h-full"
-      onClick={() => setSelectedItem(item)}
-    >
-      <div className="glass gpu-accelerated rounded-3xl p-6 backdrop-blur-sm border border-gray-800/80 hover:border-cyan-400/40 transition-all duration-300 h-full flex flex-col relative overflow-hidden bg-gray-900/40 hover:bg-gray-800/60 shadow-xl">
+    <div className="perspective-[1000px] h-full">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: index * 0.05, duration: 0.4 }}
+        whileHover={{ scale: 1.02, zIndex: 10 }}
+        className="relative group cursor-pointer h-full"
+        onClick={() => setSelectedItem(item)}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      >
+        <div 
+          className="glass gpu-accelerated rounded-3xl p-6 backdrop-blur-sm border border-gray-800/80 hover:border-cyan-400/40 transition-colors duration-300 h-full flex flex-col relative overflow-hidden bg-gray-900/40 hover:bg-gray-800/60 shadow-xl"
+          style={{ transform: "translateZ(30px)" }}
+        >
         
         {/* Animated border gradient placeholder */}
         <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
@@ -246,8 +279,8 @@ const FastCard = ({ item, index, setSelectedItem }) => {
              <FaFilePdf className="text-white text-xs" />
            </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 };
 
