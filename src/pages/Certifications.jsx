@@ -3,6 +3,53 @@ import { FaAward, FaFilePdf, FaMedal, FaCertificate, FaTrophy, FaCode, FaExterna
 import { SiCoursera, SiUdemy, SiFreecodecamp, SiMicrosoftacademic } from "react-icons/si";
 import { motion, AnimatePresence } from "framer-motion";
 
+const BlurText = ({ text, className }) => {
+  const words = text.split(" ");
+  
+  const container = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.05, delayChildren: 0.2 },
+    },
+  };
+
+  const child = {
+    visible: {
+      opacity: 1,
+      filter: "blur(0px)",
+      y: 0,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100,
+      },
+    },
+    hidden: {
+      opacity: 0,
+      filter: "blur(10px)",
+      y: 10,
+    },
+  };
+
+  return (
+    <motion.div
+      style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem", justifyContent: "center" }}
+      variants={container}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      className={className}
+    >
+      {words.map((word, index) => (
+        <motion.span variants={child} key={index}>
+          {word}
+        </motion.span>
+      ))}
+    </motion.div>
+  );
+};
+
 const certifications = [
   {
     title: "Full Stack Developer",
@@ -230,9 +277,13 @@ export default function Certifications() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl sm:text-6xl font-black mb-6 text-white tracking-tight">
+          <h2 className="text-4xl sm:text-6xl font-black mb-4 text-white tracking-tight">
             Hall of <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Fame</span>
           </h2>
+          <BlurText 
+            text="A showcase of my professional certifications, continuous learning journey, and competitive hackathon wins."
+            className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-8 font-medium"
+          />
           
           {/* Futuristic Tab Switcher */}
           <div className="inline-flex bg-gray-900/80 backdrop-blur-md p-1.5 rounded-full border border-gray-800 shadow-xl relative gpu-accelerated">
