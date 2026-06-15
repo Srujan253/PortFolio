@@ -11,8 +11,11 @@
     "@google/genai": "^2.5.0",
     "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.18.0",
+    "@splinetool/react-spline": "^4.1.0",
+    "@splinetool/runtime": "^1.12.97",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^2.0.0",
+    "clsx": "^2.1.1",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^11.0.0",
     "lucide-react": "^1.17.0",
@@ -20,6 +23,7 @@
     "react-dom": "^18.2.0",
     "react-helmet-async": "^3.0.0",
     "react-icons": "^4.10.1",
+    "tailwind-merge": "^3.6.0",
     "three": "^0.183.1"
   },
   "devDependencies": {

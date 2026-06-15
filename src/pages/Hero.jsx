@@ -1,6 +1,9 @@
 import { motion, useMotionValue, useTransform, useSpring, useMotionTemplate, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { FaFilePdf, FaEnvelope, FaCode } from 'react-icons/fa';
+import { SplineScene } from "@/components/ui/splite";
+import { Spotlight } from "@/components/ui/spotlight";
+import { InteractiveSpotlight } from "@/components/ui/interactive-spotlight";
 
 const TypingEffect = ({ texts, speed = 82, className = "", delay = 0, loopDelay = 3000 }) => {
   const [displayText, setDisplayText] = useState('');
@@ -86,6 +89,11 @@ export default function Hero() {
         <div className="absolute bottom-1/4 -right-10 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]" />
       </div>
 
+      <Spotlight
+        className="-top-40 left-0 md:left-60 md:-top-20"
+        fill="white"
+      />
+
       <motion.div
         className="glass max-w-7xl w-full mx-auto p-8 md:p-14 rounded-[2.5rem] shadow-2xl backdrop-blur-md border border-white/5 relative z-10"
         initial={{ opacity: 0, y: 60, scale: 0.95 }}
@@ -96,12 +104,14 @@ export default function Hero() {
           
           {/* Photo Section with 3D Tilt */}
           <motion.div
-            className="flex justify-center lg:justify-start order-1 lg:order-2"
+            className="flex justify-center lg:justify-start order-1 lg:order-2 w-full h-[300px] md:h-[400px] lg:h-[600px] relative pointer-events-auto"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 1 }}
             style={{ perspective: "1000px" }}
           >
+            <InteractiveSpotlight />
+            {/*
             <motion.div
               ref={picRef}
               style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
@@ -120,9 +130,15 @@ export default function Hero() {
                 className="relative w-56 h-56 md:w-72 md:h-72 lg:w-96 lg:h-96 rounded-full object-cover border-[6px] border-gray-900 shadow-[0_0_50px_rgba(6,182,212,0.3)] transition-all duration-300"
                 style={{ transform: "translateZ(50px)" }} // Pop out effect
               />
-              {/* Holographic glare */}
+              {/* Holographic glare * /}
               <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 pointer-events-none mix-blend-overlay transition-opacity duration-500" />
             </motion.div>
+            */}
+
+            <SplineScene 
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              className="w-full h-full"
+            />
           </motion.div>
 
           {/* Content Section */}

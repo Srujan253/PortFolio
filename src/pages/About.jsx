@@ -161,43 +161,126 @@ export default function About() {
           <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full" />
         </motion.div>
 
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-        >
-          {/* Main Bio - Spans 2 columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+          
+          {/* Left Column: Profile & Stats */}
           <motion.div 
-            variants={itemVariants}
-            className="md:col-span-2 glass rounded-3xl p-8 border border-white/10 bg-gray-900/40 hover:bg-gray-800/60 transition-colors duration-500 relative overflow-hidden group"
+            className="lg:col-span-4 flex flex-col gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
           >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] -mr-32 -mt-32 transition-transform duration-700 group-hover:scale-150" />
-            <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-              <FaGraduationCap className="text-cyan-400" />
-              My Journey
-            </h3>
-            <BlurText 
-              text="I am a passionate Full Stack Developer who thrives on turning complex problems into elegant, user-centric solutions. With a strong foundation in modern web technologies and an eye for design, I don't just write code—I build digital experiences. I am constantly exploring new frameworks, optimizing performance, and pushing the boundaries of what's possible on the web."
-              className="text-gray-300 leading-relaxed text-lg relative z-10"
-            />
+            {/* Profile Photo Bento */}
+            <motion.div variants={itemVariants} className="glass rounded-[2rem] p-8 border border-white/10 bg-gray-900/40 hover:bg-gray-800/60 transition-colors flex flex-col items-center relative overflow-hidden group shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-600/10 opacity-50 group-hover:opacity-100 transition-opacity" />
+              <div className="relative w-40 h-40 mb-6">
+                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-400 to-blue-600 rounded-full blur-xl opacity-40 animate-pulse" />
+                <img 
+                  src="https://res.cloudinary.com/duf8kshsz/image/upload/v1779219766/PLACEMENT_PIC2_ckncvk.jpg" 
+                  alt="Srujan"
+                  className="w-full h-full rounded-full object-cover border-4 border-gray-800 relative z-10 shadow-2xl"
+                />
+              </div>
+              <h3 className="text-2xl font-black text-white tracking-widest uppercase mb-6 z-10 drop-shadow-md">Srujan</h3>
+              
+              <div className="w-full flex flex-col gap-3 z-10">
+                <div className="flex justify-between items-center bg-gray-950/80 px-5 py-3.5 rounded-xl border border-white/5 shadow-inner">
+                  <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">Score</span>
+                  <span className="text-cyan-400 font-black">CGPA 8.55</span>
+                </div>
+                <div className="flex justify-between items-center bg-gray-950/80 px-5 py-3.5 rounded-xl border border-white/5 shadow-inner">
+                  <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">Year</span>
+                  <span className="text-cyan-400 font-black">3rd Year</span>
+                </div>
+                <div className="flex justify-between items-center bg-gray-950/80 px-5 py-3.5 rounded-xl border border-white/5 shadow-inner">
+                  <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">College</span>
+                  <span className="text-cyan-400 font-black">NMAMIT</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Info Bento */}
+            <motion.div variants={itemVariants} className="glass rounded-[2rem] p-6 border border-white/10 bg-gray-900/40 hover:bg-gray-800/60 transition-colors flex flex-col gap-4 shadow-xl">
+               <div className="flex items-center gap-4 bg-gray-950/80 px-5 py-4 rounded-xl border border-white/5 shadow-inner">
+                 <FaMapMarkerAlt className="text-cyan-400 text-xl" />
+                 <span className="text-gray-300 font-medium tracking-wide">Karnataka, India</span>
+               </div>
+               <div className="flex items-center gap-4 bg-gray-950/80 px-5 py-4 rounded-xl border border-white/5 shadow-inner">
+                 <FaGraduationCap className="text-blue-400 text-xl" />
+                 <span className="text-gray-300 font-medium tracking-wide">Born 20-10-2005</span>
+               </div>
+            </motion.div>
           </motion.div>
 
-          {/* Location / Base */}
+          {/* Right Column: Overview & Education */}
           <motion.div 
-            variants={itemVariants}
-            className="glass rounded-3xl p-8 border border-white/10 bg-gray-900/40 hover:bg-gray-800/60 transition-colors duration-500 flex flex-col justify-center items-center text-center relative overflow-hidden"
+            className="lg:col-span-8 flex flex-col gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
           >
-             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_transparent_0%,_#fff_100%)] bg-[length:20px_20px]" style={{backgroundImage: 'radial-gradient(circle, #06b6d4 1px, transparent 1px)'}} />
-            <div className="w-16 h-16 rounded-full bg-cyan-500/20 flex items-center justify-center mb-4 relative z-10">
-              <FaMapMarkerAlt className="text-3xl text-cyan-400 drop-shadow-[0_0_15px_rgba(6,182,212,0.8)]" />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2 relative z-10">Location</h3>
-            <p className="text-gray-400 relative z-10">Nitte, Karnataka</p>
-            <p className="text-sm text-cyan-500/80 mt-2 font-mono relative z-10">Available for remote work</p>
+            {/* Overview Bento */}
+            <motion.div variants={itemVariants} className="glass rounded-[2rem] p-8 md:p-10 border border-white/10 bg-gray-900/40 hover:bg-gray-800/60 transition-colors relative overflow-hidden group shadow-xl">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] -mr-32 -mt-32 transition-transform duration-700 group-hover:scale-150" />
+              <h3 className="text-3xl font-black text-cyan-400 mb-6 drop-shadow-md">Overview</h3>
+              <BlurText 
+                text="I am an aspiring cybersecurity professional and full-stack developer, currently pursuing my B.Tech at NMAMIT. With a diploma in Full Stack Web Development and an ongoing internship at Vill Design Co. Ltd. (Japan), I build secure, high-performance applications that bridge elegant UIs with robust APIs. My goal is to craft digital experiences that are solid and performant."
+                className="text-gray-300 leading-relaxed text-[1.1rem] relative z-10 mb-8 font-medium"
+              />
+              
+              {/* Languages */}
+              <div className="flex flex-wrap gap-3 z-10 relative mt-4">
+                <span className="bg-gray-950/80 border border-white/5 px-5 py-2.5 rounded-full text-sm shadow-inner"><span className="text-gray-400">English</span> <span className="text-cyan-400 font-bold ml-2">Fluent</span></span>
+                <span className="bg-gray-950/80 border border-white/5 px-5 py-2.5 rounded-full text-sm shadow-inner"><span className="text-gray-400">Kannada</span> <span className="text-cyan-400 font-bold ml-2">Native</span></span>
+                <span className="bg-gray-950/80 border border-white/5 px-5 py-2.5 rounded-full text-sm shadow-inner"><span className="text-gray-400">Hindi</span> <span className="text-cyan-400 font-bold ml-2">Proficient</span></span>
+                <span className="bg-gray-950/80 border border-white/5 px-5 py-2.5 rounded-full text-sm shadow-inner"><span className="text-gray-400">Japanese</span> <span className="text-blue-400 font-bold ml-2">Beginner</span></span>
+              </div>
+            </motion.div>
+
+            {/* Education Title */}
+            <motion.div variants={itemVariants} className="flex items-center gap-4 mt-2 mb-2 pl-2">
+              <div className="w-2 h-8 bg-gradient-to-b from-cyan-400 to-blue-600 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
+              <h3 className="text-2xl font-black text-white tracking-wide drop-shadow-md">Education</h3>
+            </motion.div>
+
+            {/* Education Bento 1 */}
+            <motion.div variants={itemVariants} className="glass rounded-[2rem] p-6 border border-white/10 bg-gray-900/40 hover:bg-gray-800/60 transition-colors flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 shadow-lg group">
+              <div className="flex items-center gap-6">
+                <div className="w-16 h-16 rounded-full border border-cyan-500/30 flex items-center justify-center bg-cyan-500/10 shadow-[0_0_15px_rgba(6,182,212,0.2)] group-hover:scale-110 transition-transform">
+                  <span className="text-2xl drop-shadow-md">👑</span>
+                </div>
+                <div>
+                  <h4 className="text-xl font-black text-white mb-1 group-hover:text-cyan-300 transition-colors">B.Tech Cybersecurity</h4>
+                  <p className="text-gray-400 font-medium">NMAMIT, Nitte</p>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3 w-full sm:w-auto">
+                <span className="bg-gray-950/80 border border-white/5 px-5 py-2.5 rounded-xl text-sm font-bold text-gray-300 text-center shadow-inner">2024–Ongoing</span>
+                <span className="bg-cyan-500/10 border border-cyan-500/20 px-5 py-2.5 rounded-xl text-sm font-black text-cyan-400 text-center shadow-[0_0_10px_rgba(6,182,212,0.1)]">8.55 CGPA</span>
+              </div>
+            </motion.div>
+
+            {/* Education Bento 2 */}
+            <motion.div variants={itemVariants} className="glass rounded-[2rem] p-6 border border-white/10 bg-gray-900/40 hover:bg-gray-800/60 transition-colors flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 shadow-lg group">
+              <div className="flex items-center gap-6">
+                <div className="w-16 h-16 rounded-full border border-blue-500/30 flex items-center justify-center bg-blue-500/10 shadow-[0_0_15px_rgba(59,130,246,0.2)] group-hover:scale-110 transition-transform">
+                  <span className="text-2xl drop-shadow-md">🏆</span>
+                </div>
+                <div>
+                  <h4 className="text-xl font-black text-white mb-1 group-hover:text-blue-300 transition-colors">Diploma Full Stack Dev</h4>
+                  <p className="text-gray-400 font-medium">SDM Polytechnic, Ujire</p>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3 w-full sm:w-auto">
+                <span className="bg-gray-950/80 border border-white/5 px-5 py-2.5 rounded-xl text-sm font-bold text-gray-300 text-center shadow-inner">Ended 2024</span>
+                <span className="bg-blue-500/10 border border-blue-500/20 px-5 py-2.5 rounded-xl text-sm font-black text-blue-400 text-center shadow-[0_0_10px_rgba(59,130,246,0.1)]">9.78 CGPA</span>
+              </div>
+            </motion.div>
+
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* Gaming Profiles Section */}
         <motion.div
