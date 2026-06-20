@@ -33,7 +33,7 @@ export default function Contact() {
     { name: "GitHub", icon: <FaGithub />, url: "https://github.com/Srujan253", color: "hover:bg-gray-800 hover:border-gray-500", iconColor: "text-white" },
     { name: "LinkedIn", icon: <FaLinkedin />, url: "https://www.linkedin.com/in/srujan-h-m-a51940321/", color: "hover:bg-blue-900/40 hover:border-blue-500", iconColor: "text-blue-500" },
     { name: "LeetCode", icon: <SiLeetcode />, url: "https://leetcode.com/u/SrujanHM/", color: "hover:bg-yellow-900/40 hover:border-yellow-500", iconColor: "text-yellow-500" },
-    { name: "HackerRank", icon: <FaHackerrank />, url: "https://www.hackerrank.com/profile/srujanhm135", color: "hover:bg-green-900/40 hover:border-green-500", iconColor: "text-green-500" },
+    { name: "HackerRank", icon: <FaHackerrank />, url: "https://www.hackerrank.com/profile/NNM24CB506", color: "hover:bg-green-900/40 hover:border-green-500", iconColor: "text-green-500" },
   ];
 
   return (
