@@ -187,7 +187,7 @@ export default function About() {
               <div className="w-full flex flex-col gap-3 z-10">
                 <div className="flex justify-between items-center bg-gray-950/80 px-5 py-3.5 rounded-xl border border-white/5 shadow-inner">
                   <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">Score</span>
-                  <span className="text-cyan-400 font-black">CGPA 8.55</span>
+                  <span className="text-cyan-400 font-black">CGPA 8.83</span>
                 </div>
                 <div className="flex justify-between items-center bg-gray-950/80 px-5 py-3.5 rounded-xl border border-white/5 shadow-inner">
                   <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">Year</span>
@@ -258,7 +258,7 @@ export default function About() {
               </div>
               <div className="flex flex-col gap-3 w-full sm:w-auto">
                 <span className="bg-gray-950/80 border border-white/5 px-5 py-2.5 rounded-xl text-sm font-bold text-gray-300 text-center shadow-inner">2024–Ongoing</span>
-                <span className="bg-cyan-500/10 border border-cyan-500/20 px-5 py-2.5 rounded-xl text-sm font-black text-cyan-400 text-center shadow-[0_0_10px_rgba(6,182,212,0.1)]">8.55 CGPA</span>
+                <span className="bg-cyan-500/10 border border-cyan-500/20 px-5 py-2.5 rounded-xl text-sm font-black text-cyan-400 text-center shadow-[0_0_10px_rgba(6,182,212,0.1)]">8.83 CGPA</span>
               </div>
             </motion.div>
 
