@@ -35,7 +35,7 @@ const projects = [
     ],
     challenge:
       "Handling concurrent real-time connections efficiently while ensuring strict data isolation between different clubs.",
-    image: "https://placehold.co/800x500/0f172a/06b6d4?text=Club+MODX",
+    image: "https://res.cloudinary.com/duf8kshsz/image/upload/v1782494743/Screenshot_2026-06-26_224315_pvmxmj.png",
     tech: [
       { icon: <FaReact />, name: "React", color: "text-cyan-400" },
       { icon: <FaNodeJs />, name: "Node.js", color: "text-green-500" },
@@ -60,7 +60,7 @@ const projects = [
     ],
     challenge:
       "Optimizing MongoDB queries for loading chat history instantly without causing lag during rapid message bursts.",
-    image: "https://placehold.co/800x500/0f172a/06b6d4?text=GupShup",
+    image: "https://res.cloudinary.com/duf8kshsz/image/upload/v1782494705/Screenshot_2026-06-26_224634_ydevrm.png",
     tech: [
       { icon: <FaReact />, name: "React", color: "text-cyan-400" },
       { icon: <SiTailwindcss />, name: "Tailwind CSS", color: "text-cyan-300" },
@@ -139,7 +139,7 @@ const projects = [
     challenge:
       "Replicating complex game mechanics and animations strictly using web technologies and CSS.",
     image:
-      "https://placehold.co/800x500/0f172a/06b6d4?text=Clash+Royale+Portfolio",
+      "https://res.cloudinary.com/duf8kshsz/image/upload/v1782494622/Screenshot_2026-06-26_224441_sypry0.png",
     tech: [
       { icon: <FaReact />, name: "React", color: "text-cyan-400" },
       { icon: <SiTailwindcss />, name: "Tailwind CSS", color: "text-cyan-300" },
