@@ -45,6 +45,27 @@ const skillColors = {
   "AWS": "#FF9900", "Docker": "#2496ED", "Linux": "#FCC624", "Postman": "#FF6C37"
 };
 
+// Semantic Connections (Graph Edges)
+const skillConnections = {
+  "React.js": ["Node.js", "Express.js", "Tailwind CSS", "Vite", "Framer Motion", "JavaScript", "HTML5", "CSS3", "REST APIs"],
+  "Node.js": ["Express.js", "MongoDB", "MySQL", "PostgreSQL", "Neon", "Socket.IO", "React.js", "REST APIs", "JavaScript"],
+  "Python": ["Pandas", "NumPy", "Matplotlib", "Scikit-learn"],
+  "Java": ["Data Structures", "Algorithms", "Git", "MySQL"],
+  "Docker": ["AWS", "Linux", "Node.js", "PostgreSQL", "MongoDB"],
+  "Git": ["GitHub", "VSCode"],
+  "MongoDB": ["Node.js", "Express.js", "React.js", "REST APIs"],
+  "PostgreSQL": ["Node.js", "Express.js", "React.js", "Neon"],
+  "JavaScript": ["React.js", "Node.js", "HTML5", "CSS3", "Express.js", "Vite"],
+  "Tailwind CSS": ["React.js", "HTML5", "CSS3", "Vite"],
+  "AI Agents": ["Python", "Node.js", "REST APIs"]
+};
+
+const areConnected = (w1, w2) => {
+  if (skillConnections[w1]?.includes(w2)) return true;
+  if (skillConnections[w2]?.includes(w1)) return true;
+  return false;
+};
+
 // Hardcoded details for the modal
 const skillDetails = {
   "React.js": { level: "95%", desc: "Advanced mastery. Core UI framework used across all frontend projects including this interactive portfolio." },
@@ -60,16 +81,73 @@ const skillDetails = {
   "default": { level: "75%", desc: "Solid fundamental understanding and practical project experience." }
 };
 
-function SkillNode({ word, position, setSelectedSkill }) {
+function ConstellationLines({ edges, positionsRef, hoveredSkill }) {
+  const lineRef = useRef();
+  const geometryRef = useRef();
+
+  const segPositions = useMemo(() => new Float32Array(edges.length * 6), [edges]);
+  const colors = useMemo(() => new Float32Array(edges.length * 6), [edges]);
+
+  useFrame(() => {
+    if (!geometryRef.current || !lineRef.current) return;
+    const positions = positionsRef.current;
+    
+    for(let k = 0; k < edges.length; k++) {
+      const { i, j, w1, w2, semantic } = edges[k];
+      
+      segPositions[k*6 + 0] = positions[i*3 + 0];
+      segPositions[k*6 + 1] = positions[i*3 + 1];
+      segPositions[k*6 + 2] = positions[i*3 + 2];
+      
+      segPositions[k*6 + 3] = positions[j*3 + 0];
+      segPositions[k*6 + 4] = positions[j*3 + 1];
+      segPositions[k*6 + 5] = positions[j*3 + 2];
+
+      let isHighlighted = false;
+      if (hoveredSkill) {
+         if ((hoveredSkill === w1 || hoveredSkill === w2) && semantic) {
+             isHighlighted = true;
+         }
+      }
+      
+      const intensity = isHighlighted ? 1.0 : (semantic ? 0.3 : 0.05);
+      const r = isHighlighted ? 0.13 : 1.0; 
+      const g = isHighlighted ? 0.83 : 1.0; 
+      const b = isHighlighted ? 0.93 : 1.0; 
+      
+      colors[k*6 + 0] = r * intensity;
+      colors[k*6 + 1] = g * intensity;
+      colors[k*6 + 2] = b * intensity;
+      colors[k*6 + 3] = r * intensity;
+      colors[k*6 + 4] = g * intensity;
+      colors[k*6 + 5] = b * intensity;
+    }
+    
+    geometryRef.current.attributes.position.needsUpdate = true;
+    geometryRef.current.attributes.color.needsUpdate = true;
+  });
+
+  return (
+    <lineSegments ref={lineRef}>
+      <bufferGeometry ref={geometryRef}>
+        <bufferAttribute attach="attributes-position" args={[segPositions, 3]} />
+        <bufferAttribute attach="attributes-color" args={[colors, 3]} />
+      </bufferGeometry>
+      <lineBasicMaterial vertexColors transparent opacity={0.8} depthWrite={false} blending={THREE.AdditiveBlending} />
+    </lineSegments>
+  );
+}
+
+function SkillNode({ word, basePos, index, positionsRef, hoveredSkill, setHoveredSkill, setSelectedSkill }) {
   const groupRef = useRef();
-  const [hovered, setHovered] = useState(false);
   const { camera } = useThree();
 
-  const basePosition = useMemo(() => new THREE.Vector3(...position), [position]);
+  const basePosition = useMemo(() => new THREE.Vector3(...basePos), [basePos]);
   const randomPhase = useMemo(() => Math.random() * Math.PI * 2, []);
   
   const Icon = skillIcons[word] || FaCode;
   const brandColor = skillColors[word] || '#22d3ee';
+  const isHovered = hoveredSkill === word;
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
@@ -78,22 +156,28 @@ function SkillNode({ word, position, setSelectedSkill }) {
     const pulse = Math.sin(t * 2 + randomPhase) * 1.5;
     
     const dir = basePosition.clone().normalize();
-    const targetPos = basePosition.clone().add(dir.multiplyScalar(zoomFactor + pulse + (hovered ? 3 : 0)));
+    const targetPos = basePosition.clone().add(dir.multiplyScalar(zoomFactor + pulse + (isHovered ? 4 : 0)));
+    
     groupRef.current.position.lerp(targetPos, 0.1);
+    
+    // Write current position to the shared buffer for lines
+    positionsRef.current[index * 3 + 0] = groupRef.current.position.x;
+    positionsRef.current[index * 3 + 1] = groupRef.current.position.y;
+    positionsRef.current[index * 3 + 2] = groupRef.current.position.z;
   });
 
   return (
-    <group ref={groupRef} position={position}>
+    <group ref={groupRef} position={basePos}>
       <Html center transform sprite zIndexRange={[100, 0]}>
         <div 
           className="flex flex-col items-center justify-center cursor-pointer transition-transform duration-300"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
+          onMouseEnter={() => setHoveredSkill(word)}
+          onMouseLeave={() => setHoveredSkill(null)}
           onClick={(e) => { e.stopPropagation(); setSelectedSkill(word); }}
-          style={{ transform: hovered ? 'scale(2.415)' : 'scale(1.84)' }}
+          style={{ transform: isHovered ? 'scale(2.415)' : 'scale(1.84)' }}
         >
           <div 
-            className={`text-4xl md:text-5xl transition-all duration-300 ${hovered ? 'drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] scale-110' : 'opacity-90'}`}
+            className={`text-4xl md:text-5xl transition-all duration-300 ${isHovered ? 'drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] scale-110' : 'opacity-90'}`}
             style={{ color: brandColor }}
           >
             <Icon />
@@ -108,6 +192,8 @@ function SkillNode({ word, position, setSelectedSkill }) {
 }
 
 function Cloud({ radius = 18, setSelectedSkill, skillList }) {
+  const [hoveredSkill, setHoveredSkill] = useState(null);
+
   const nodes = useMemo(() => {
     const temp = [];
     const phi = Math.PI * (3 - Math.sqrt(5)); 
@@ -122,9 +208,47 @@ function Cloud({ radius = 18, setSelectedSkill, skillList }) {
     return temp;
   }, [radius, skillList]);
 
-  return nodes.map((node, i) => (
-    <SkillNode key={node.word} position={node.position} word={node.word} setSelectedSkill={setSelectedSkill} />
-  ));
+  // Create a shared buffer for positions
+  const positionsRef = useRef(new Float32Array(nodes.length * 3));
+
+  // Determine edges
+  const edges = useMemo(() => {
+    const pairs = [];
+    for(let i=0; i<nodes.length; i++) {
+      const w1 = nodes[i].word;
+      const pos1 = new THREE.Vector3(...nodes[i].position);
+      for(let j=i+1; j<nodes.length; j++) {
+        const w2 = nodes[j].word;
+        const pos2 = new THREE.Vector3(...nodes[j].position);
+        const dist = pos1.distanceTo(pos2);
+        
+        const semantic = areConnected(w1, w2);
+        // Connect if explicitly related, or if close enough (dist < 22)
+        if (semantic || dist < 22) {
+           pairs.push({ i, j, semantic, w1, w2 });
+        }
+      }
+    }
+    return pairs;
+  }, [nodes]);
+
+  return (
+    <>
+      {nodes.map((node, i) => (
+        <SkillNode 
+          key={node.word} 
+          word={node.word}
+          basePos={node.position}
+          index={i}
+          positionsRef={positionsRef}
+          hoveredSkill={hoveredSkill}
+          setHoveredSkill={setHoveredSkill}
+          setSelectedSkill={setSelectedSkill} 
+        />
+      ))}
+      <ConstellationLines edges={edges} positionsRef={positionsRef} hoveredSkill={hoveredSkill} />
+    </>
+  );
 }
 
 function Scene({ setSelectedSkill, skillList }) {
