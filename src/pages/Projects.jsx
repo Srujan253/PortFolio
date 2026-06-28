@@ -74,6 +74,30 @@ const projects = [
     bentoClass: "md:col-span-2 md:row-span-2",
   },
   {
+    id: "sinchana-portfolio",
+    title: "Sinchana Portfolio",
+    shortDescription: "3D Interactive Portfolio built with React and Three.js.",
+    fullDescription:
+      "A modern, highly interactive portfolio web application built with React, Vite, and 3D graphics. Powered by three.js and cobe for stunning visual elements, featuring fluid animations via framer-motion and smooth scrolling mechanics integrated via lenis.",
+    features: [
+      "Immersive 3D Experiences",
+      "Fluid Animations",
+      "Smooth Scrolling",
+      "Fast Development",
+    ],
+    challenge:
+      "Integrating Three.js and Cobe 3D globes alongside Framer Motion animations while maintaining 60fps performance.",
+    image: "https://res.cloudinary.com/duf8kshsz/image/upload/v1782494695/Screenshot_2026-06-26_224531_nfhabj.png",
+    tech: [
+      { icon: <FaReact />, name: "React", color: "text-cyan-400" },
+      { icon: <SiTailwindcss />, name: "Tailwind CSS", color: "text-cyan-300" },
+      { icon: <SiVite />, name: "Vite", color: "text-purple-400" },
+    ],
+    demo: "https://sinchana-frd.vercel.app",
+    github: "https://github.com/Srujan253/portfolio-frd.git",
+    bentoClass: "md:col-span-2 md:row-span-1",
+  },
+  {
     id: "privacy-id",
     title: "Privacy-Preserving ID",
     shortDescription:
@@ -101,30 +125,6 @@ const projects = [
     bentoClass: "md:col-span-2 md:row-span-1",
   },
   {
-    id: "archicanvas",
-    title: "ArchiCanvas",
-    shortDescription: "Modern digital art & architecture marketplace.",
-    fullDescription:
-      "A sleek marketplace designed for architects and digital artists. Features include role-based authentication, advanced artwork filtering, AI-powered descriptions, and highly animated UI components for a premium browsing experience.",
-    features: [
-      "Role-Based Auth",
-      "Advanced Search & Filtering",
-      "AI Descriptions",
-      "Animated UI",
-    ],
-    challenge:
-      "Designing a highly complex animated UI that performs smoothly at 60fps across all devices.",
-    image: "https://placehold.co/800x500/0f172a/06b6d4?text=ArchiCanvas",
-    tech: [
-      { icon: <FaReact />, name: "React", color: "text-cyan-400" },
-      { icon: <SiTailwindcss />, name: "Tailwind CSS", color: "text-cyan-300" },
-      { icon: <SiVite />, name: "Vite", color: "text-purple-400" },
-    ],
-    demo: "#",
-    github: "https://github.com/Srujan253/ArchiCanvas_",
-    bentoClass: "md:col-span-1 md:row-span-1",
-  },
-  {
     id: "clash-portfolio",
     title: "Clash Royale Portfolio",
     shortDescription: "Game-themed personal portfolio design.",
@@ -147,9 +147,32 @@ const projects = [
     ],
     demo: "https://clash-royal-portfolio.vercel.app/",
     github: "#",
-    bentoClass: "md:col-span-1 md:row-span-1",
+    bentoClass: "md:col-span-2 md:row-span-1",
   },
-  
+  {
+    id: "archicanvas",
+    title: "ArchiCanvas",
+    shortDescription: "Modern digital art & architecture marketplace.",
+    fullDescription:
+      "A sleek marketplace designed for architects and digital artists. Features include role-based authentication, advanced artwork filtering, AI-powered descriptions, and highly animated UI components for a premium browsing experience.",
+    features: [
+      "Role-Based Auth",
+      "Advanced Search & Filtering",
+      "AI Descriptions",
+      "Animated UI",
+    ],
+    challenge:
+      "Designing a highly complex animated UI that performs smoothly at 60fps across all devices.",
+    image: "https://placehold.co/800x500/0f172a/06b6d4?text=ArchiCanvas",
+    tech: [
+      { icon: <FaReact />, name: "React", color: "text-cyan-400" },
+      { icon: <SiTailwindcss />, name: "Tailwind CSS", color: "text-cyan-300" },
+      { icon: <SiVite />, name: "Vite", color: "text-purple-400" },
+    ],
+    demo: "#",
+    github: "https://github.com/Srujan253/ArchiCanvas_",
+    bentoClass: "md:col-span-2 md:row-span-1",
+  },
 ];
 
 export default function Projects() {
