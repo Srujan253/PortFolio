@@ -251,6 +251,7 @@ export default function Projects() {
                 <img
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
                   className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/60 to-transparent" />
@@ -342,6 +343,7 @@ export default function Projects() {
                   <img
                     src={selectedProject.image}
                     alt={selectedProject.title}
+                    loading="lazy"
                     className="w-full object-cover"
                   />
                 </motion.div>

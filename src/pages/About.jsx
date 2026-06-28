@@ -128,6 +128,7 @@ const GameCard = ({ game, onSelect }) => (
       <img 
         src={game.image} 
         alt={game.name} 
+        loading="lazy"
         className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/40 to-transparent" />
@@ -179,6 +180,7 @@ export default function About() {
                 <img 
                   src="https://res.cloudinary.com/duf8kshsz/image/upload/v1779219766/PLACEMENT_PIC2_ckncvk.jpg" 
                   alt="Srujan"
+                  loading="lazy"
                   className="w-full h-full rounded-full object-cover border-4 border-gray-800 relative z-10 shadow-2xl"
                 />
               </div>

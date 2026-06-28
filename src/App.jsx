@@ -21,17 +21,12 @@ export default function App() {
   const [isAppLoading, setIsAppLoading] = useState(true);
   const [isHeroLoaded, setIsHeroLoaded] = useState(false);
 
-  // Artificial delay to ensure the loading screen is visible and animations prepare
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsAppLoading(false);
-      // Delay mounting heavy components until Hero animation finishes to prevent lag
-      setTimeout(() => setIsHeroLoaded(true), 1200);
-    }, 2200); // Wait 2.2 seconds for the sleek "Initializing System" animation
-    
-    return () => {
-      clearTimeout(timer);
-    };
+    // Instantly remove app loading state since index.html handles the CSS loader
+    setIsAppLoading(false);
+    // Give the Hero a brief moment to render before mounting the heavy Suspense components
+    const timer = setTimeout(() => setIsHeroLoaded(true), 100);
+    return () => clearTimeout(timer);
   }, []);
 
   return (

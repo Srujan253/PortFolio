@@ -11,4 +11,16 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          three: ['three'],
+          reactThree: ['@react-three/fiber', '@react-three/drei'],
+          framer: ['framer-motion'],
+          spline: ['@splinetool/react-spline', '@splinetool/runtime']
+        }
+      }
+    }
+  }
 }); 
