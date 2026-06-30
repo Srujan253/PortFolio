@@ -37,10 +37,11 @@ export default function App() {
         <meta name="keywords" content="Srujan HM, Srujan HM Portfolio, NMAMIT student, Full Stack Developer, React Developer, Node.js, Cybersecurity, Srujan H M" />
         <meta name="author" content="Srujan H M" />
         <meta property="og:title" content="Srujan H M | Full Stack Developer" />
+        <meta property="og:site_name" content="Srujan H M" />
         <meta property="og:description" content="Portfolio of Srujan H M, an NMAMIT student specializing in Full Stack Web Development and Cybersecurity." />
         <meta property="og:image" content="https://res.cloudinary.com/duf8kshsz/image/upload/v1779219766/PLACEMENT_PIC2_ckncvk.jpg" />
-        <meta property="og:url" content="https://srujanhm.vercel.app/" />
-        <link rel="canonical" href="https://srujanhm.vercel.app/" />
+        <meta property="og:url" content="https://srujanhm.dev/" />
+        <link rel="canonical" href="https://srujanhm.dev/" />
       </Helmet>
       
       <div className="min-h-screen flex flex-col bg-gray-950 transition-colors duration-300 selection:bg-cyan-500/30 selection:text-cyan-200">
