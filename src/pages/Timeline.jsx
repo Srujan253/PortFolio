@@ -206,8 +206,8 @@ const FishVoyageTimeline = () => {
             transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
             className="w-16 h-16 bg-gray-900 border-2 border-cyan-400 rounded-full flex items-center justify-center text-cyan-400 shadow-[0_0_30px_rgba(34,211,238,0.5)] z-30 relative"
           >
-            {/* The Fish icon swimming right - explicitly flipped with inline style to avoid motion override */}
-            <div style={{ transform: 'scaleX(-1)' }} className="flex items-center justify-center">
+            {/* The Fish icon - pointing left as requested */}
+            <div className="flex items-center justify-center">
               <Fish className="w-8 h-8" />
             </div>
             {/* Bubbles behind the fish */}
