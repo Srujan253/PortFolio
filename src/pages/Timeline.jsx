@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence, useSpring } from 'framer-motion';
 import { Briefcase, GraduationCap, Code, Trophy, BookOpen, Star, Calendar, MapPin, Fish, X } from 'lucide-react';
 
 const timeline = [
@@ -173,13 +173,20 @@ const FishVoyageTimeline = () => {
     offset: ["start start", "end end"]
   });
 
+  // Apply a spring physics to the scroll progress for buttery smooth traversal
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 70,
+    damping: 20,
+    restDelta: 0.001
+  });
+
   // 4 items = 300vw movement required.
-  const trackX = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
+  const trackX = useTransform(smoothProgress, [0, 1], ["0%", "-75%"]);
   // Line grows perfectly underneath the fish
-  const lineWidth = useTransform(scrollYProgress, [0, 1], ["0%", "75%"]);
+  const lineWidth = useTransform(smoothProgress, [0, 1], ["0%", "75%"]);
 
   return (
-    <section ref={targetRef} className="relative h-[500vh] hidden lg:block bg-gray-950">
+    <section ref={targetRef} className="relative h-[500vh] hidden lg:block bg-gray-950 gpu-accelerated">
       
       {/* Modals are rendered outside the scrolling context */}
       <AnimatePresence>
@@ -188,7 +195,7 @@ const FishVoyageTimeline = () => {
         )}
       </AnimatePresence>
 
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center gpu-accelerated">
         
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.05),transparent_50%)] pointer-events-none" />
 
@@ -199,8 +206,10 @@ const FishVoyageTimeline = () => {
             transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
             className="w-16 h-16 bg-gray-900 border-2 border-cyan-400 rounded-full flex items-center justify-center text-cyan-400 shadow-[0_0_30px_rgba(34,211,238,0.5)] z-30 relative"
           >
-            {/* The Fish icon swimming right */}
-            <Fish className="w-8 h-8 -scale-x-100" />
+            {/* The Fish icon swimming right - explicitly flipped with inline style to avoid motion override */}
+            <div style={{ transform: 'scaleX(-1)' }} className="flex items-center justify-center">
+              <Fish className="w-8 h-8" />
+            </div>
             {/* Bubbles behind the fish */}
             <motion.div animate={{ opacity: [0, 1, 0], scale: [0.5, 1, 1.5], x: -20, y: -10 }} transition={{ repeat: Infinity, duration: 2 }} className="absolute left-0 top-2 w-2 h-2 rounded-full bg-cyan-400/50" />
             <motion.div animate={{ opacity: [0, 1, 0], scale: [0.5, 1.2, 1.5], x: -30, y: 10 }} transition={{ repeat: Infinity, duration: 2.5, delay: 0.5 }} className="absolute left-0 bottom-4 w-1.5 h-1.5 rounded-full bg-cyan-400/50" />
@@ -208,7 +217,7 @@ const FishVoyageTimeline = () => {
         </div>
 
         {/* The Moving Track */}
-        <motion.div style={{ x: trackX }} className="w-[400vw] h-full relative flex items-center">
+        <motion.div style={{ x: trackX }} className="w-[400vw] h-full relative flex items-center gpu-accelerated">
           
           {/* Dashed Base Line */}
           <div className="absolute top-1/2 left-[50vw] w-[300vw] h-1 border-t-2 border-dashed border-gray-800 z-10" />
