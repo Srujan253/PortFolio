@@ -105,7 +105,7 @@ const VoyageTimeline = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.05),transparent_50%)] pointer-events-none" />
 
         {/* The Traveling Rocket (Fixed in center of screen!) */}
-        <div className="absolute left-1/2 bottom-[15vh] -translate-x-1/2 translate-y-1/2 z-30">
+        <div className="absolute left-1/2 top-[15vh] -translate-x-1/2 -translate-y-1/2 z-30">
           <motion.div 
             animate={{ y: [-5, 5, -5] }}
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
@@ -121,21 +121,21 @@ const VoyageTimeline = () => {
         <motion.div style={{ x: trackX }} className="w-[400vw] h-full relative flex items-center">
           
           {/* Dashed Base Line (From center of item 1 to center of item 4) */}
-          <div className="absolute bottom-[15vh] left-[50vw] w-[300vw] h-1 border-t-2 border-dashed border-gray-800 z-10" />
+          <div className="absolute top-[15vh] left-[50vw] w-[300vw] h-1 border-t-2 border-dashed border-gray-800 z-10" />
           
           {/* Solid Glowing Progress Line */}
           <motion.div 
             style={{ width: lineWidth }}
-            className="absolute bottom-[15vh] left-[50vw] h-1 bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.8)] z-20 origin-left" 
+            className="absolute top-[15vh] left-[50vw] h-1 bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.8)] z-20 origin-left" 
           />
 
           {/* The 4 Destination Nodes */}
           {timeline.map((item, idx) => {
             return (
-              <div key={item.id} className="w-[100vw] h-full relative flex flex-col items-center justify-center pt-10 pb-[25vh]">
+              <div key={item.id} className="w-[100vw] h-full relative flex flex-col items-center justify-center pt-[20vh] pb-10">
                 
                 {/* Visual Waypoint on the Line */}
-                <div className="absolute bottom-[15vh] left-1/2 -translate-x-1/2 translate-y-1/2 w-8 h-8 rounded-full bg-gray-950 border-4 border-gray-800 z-10 flex items-center justify-center">
+                <div className="absolute top-[15vh] left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-gray-950 border-4 border-gray-800 z-10 flex items-center justify-center">
                   <div className="w-2 h-2 rounded-full bg-gray-600" />
                 </div>
 
@@ -145,7 +145,7 @@ const VoyageTimeline = () => {
                   whileInView={{ opacity: 1, scale: 1, y: 0 }}
                   viewport={{ margin: "-10% -40% -10% -40%" }} // Only animate when crossing the center 20% of the screen
                   transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
-                  className="w-[85vw] max-w-6xl h-[65vh] glass rounded-3xl border border-white/10 shadow-2xl p-8 lg:p-12 overflow-y-auto custom-scrollbar flex gap-8 z-20"
+                  className="w-[85vw] max-w-6xl h-[65vh] max-h-[700px] glass rounded-3xl border border-white/10 shadow-2xl p-8 lg:p-12 overflow-y-auto custom-scrollbar flex gap-8 z-20 mt-[5vh]"
                 >
                   {/* Left Column: Header & Image */}
                   <div className="w-1/3 flex flex-col gap-6 border-r border-white/5 pr-8 shrink-0">

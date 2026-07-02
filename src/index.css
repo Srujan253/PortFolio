@@ -10,6 +10,7 @@ body {
   font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   background: #f3f4f6;
   color: #18181b;
+  overflow-x: hidden;
 }
 
 .dark body {
