@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Briefcase, GraduationCap, Code, Trophy, BookOpen, Star, Calendar, MapPin, ChevronRight } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Briefcase, GraduationCap, Code, Trophy, BookOpen, Star, Calendar, MapPin, Rocket } from 'lucide-react';
 
 const timeline = [
   {
@@ -76,30 +76,154 @@ const DetailSection = ({ icon: Icon, title, items }) => {
   );
 };
 
-export default function Timeline() {
-  const [activeItem, setActiveItem] = useState(0);
-  const activeData = timeline[activeItem];
+// ========================================================================
+//  DESKTOP VOYAGE TIMELINE (Scroll-Driven Journey)
+// ========================================================================
+const VoyageTimeline = () => {
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end end"]
+  });
+
+  // Track moves left. Since we have 4 items, we need 3 "jumps".
+  // Total track width is 400vw. We want to move left by exactly 300vw.
+  // 300vw out of 400vw total width is -75%.
+  const trackX = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
+
+  // The solid progress line grows from 0% to 75% of the total track width.
+  // This perfectly keeps the tip of the line fixed at 50vw on the screen.
+  const lineWidth = useTransform(scrollYProgress, [0, 1], ["0%", "75%"]);
 
   return (
-    <section id="timeline" className="py-24 bg-gray-950 relative">
-      <div className="container mx-auto px-6 mb-12">
-        <h2 className="text-4xl font-bold text-center text-cyan-400 mb-4">Journey & Milestones</h2>
-        <p className="text-gray-500 text-center max-w-2xl mx-auto hidden md:block">
-          Select a waypoint on the roadmap below to explore my experiences, technical learnings, and major achievements.
-        </p>
+    <section ref={targetRef} className="relative h-[500vh] hidden lg:block bg-gray-950">
+      
+      {/* Sticky Viewport */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center">
+        
+        {/* Background Gradients */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.05),transparent_50%)] pointer-events-none" />
+
+        {/* The Traveling Rocket (Fixed in center of screen!) */}
+        <div className="absolute left-1/2 bottom-[15vh] -translate-x-1/2 translate-y-1/2 z-30">
+          <motion.div 
+            animate={{ y: [-5, 5, -5] }}
+            transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+            className="w-16 h-16 bg-gray-900 border-2 border-cyan-400 rounded-full flex items-center justify-center text-cyan-400 shadow-[0_0_30px_rgba(34,211,238,0.5)] z-30 relative"
+          >
+            <Rocket className="w-8 h-8 rotate-45 translate-x-0.5 -translate-y-0.5" />
+            <div className="absolute -left-2 top-1/2 w-4 h-1 bg-cyan-400/50 rounded-full blur-[2px]" />
+            <div className="absolute -bottom-2 left-1/2 h-4 w-1 bg-cyan-400/50 rounded-full blur-[2px]" />
+          </motion.div>
+        </div>
+
+        {/* The Moving Track */}
+        <motion.div style={{ x: trackX }} className="w-[400vw] h-full relative flex items-center">
+          
+          {/* Dashed Base Line (From center of item 1 to center of item 4) */}
+          <div className="absolute bottom-[15vh] left-[50vw] w-[300vw] h-1 border-t-2 border-dashed border-gray-800 z-10" />
+          
+          {/* Solid Glowing Progress Line */}
+          <motion.div 
+            style={{ width: lineWidth }}
+            className="absolute bottom-[15vh] left-[50vw] h-1 bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.8)] z-20 origin-left" 
+          />
+
+          {/* The 4 Destination Nodes */}
+          {timeline.map((item, idx) => {
+            return (
+              <div key={item.id} className="w-[100vw] h-full relative flex flex-col items-center justify-center pt-10 pb-[25vh]">
+                
+                {/* Visual Waypoint on the Line */}
+                <div className="absolute bottom-[15vh] left-1/2 -translate-x-1/2 translate-y-1/2 w-8 h-8 rounded-full bg-gray-950 border-4 border-gray-800 z-10 flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-gray-600" />
+                </div>
+
+                {/* The Magic Content Card */}
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ margin: "-10% -40% -10% -40%" }} // Only animate when crossing the center 20% of the screen
+                  transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
+                  className="w-[85vw] max-w-6xl h-[65vh] glass rounded-3xl border border-white/10 shadow-2xl p-8 lg:p-12 overflow-y-auto custom-scrollbar flex gap-8 z-20"
+                >
+                  {/* Left Column: Header & Image */}
+                  <div className="w-1/3 flex flex-col gap-6 border-r border-white/5 pr-8 shrink-0">
+                    <div className="inline-flex items-center gap-2 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider w-fit">
+                      {item.type === 'work' ? <Briefcase className="w-4 h-4"/> : <GraduationCap className="w-4 h-4"/>}
+                      {item.type === 'work' ? 'Experience' : 'Education'}
+                    </div>
+
+                    <h2 className="text-4xl font-bold text-white leading-tight">{item.title}</h2>
+                    <h3 className="text-2xl text-cyan-400 font-medium">{item.org}</h3>
+                    
+                    <div className="flex flex-col gap-3 text-sm text-gray-400 mb-4">
+                      <div className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-xl border border-white/5 w-fit">
+                        <Calendar className="w-4 h-4 text-cyan-500" />
+                        {item.date}
+                      </div>
+                      <div className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-xl border border-white/5 w-fit">
+                        <MapPin className="w-4 h-4 text-cyan-500" />
+                        {item.location}
+                      </div>
+                    </div>
+
+                    <div className="w-full flex-1 min-h-[150px] bg-gray-900/80 rounded-2xl border border-white/5 flex flex-col items-center justify-center text-gray-600 shadow-inner overflow-hidden relative group">
+                      {item.image ? (
+                        <img src={item.image} alt={item.org} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                      ) : (
+                        <>
+                          <Star className="w-8 h-8 mb-2 opacity-20" />
+                          <span className="text-xs tracking-widest uppercase font-semibold text-center px-4">Destination Photo</span>
+                        </>
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 to-transparent pointer-events-none" />
+                    </div>
+                  </div>
+
+                  {/* Right Column: Rich Details */}
+                  <div className="w-2/3 flex flex-col justify-start">
+                    <div className="space-y-4 pb-6">
+                      <DetailSection icon={Code} title="What I Made" items={item.made} />
+                      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/5 to-transparent my-6" />
+                      <DetailSection icon={BookOpen} title="What I Learned" items={item.learned} />
+                      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/5 to-transparent my-6" />
+                      <DetailSection icon={Trophy} title="Achievements" items={item.achievements} />
+                    </div>
+                  </div>
+                </motion.div>
+
+              </div>
+            );
+          })}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+
+// ========================================================================
+//  MAIN EXPORT
+// ========================================================================
+export default function Timeline() {
+  return (
+    <section id="timeline" className="bg-gray-950 relative">
+      <div className="pt-24 container mx-auto px-6 mb-16 lg:mb-0">
+        <h2 className="text-4xl font-bold text-center mb-12 text-cyan-400 lg:hidden">Journey & Milestones</h2>
       </div>
 
       {/* MOBILE FALLBACK (Vertical Stack, < 1024px) */}
-      <div className="lg:hidden container mx-auto px-4 space-y-8">
+      <div className="lg:hidden container mx-auto px-4 space-y-8 pb-24">
         {timeline.map((item, idx) => (
           <motion.div 
             key={item.id}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            className="glass rounded-2xl p-6 border border-white/5 relative overflow-hidden"
+            className="glass rounded-2xl p-6 border border-white/5"
           >
-            <div className="flex items-center gap-4 mb-4 relative z-10">
+            <div className="flex items-center gap-4 mb-4">
               <div className="w-12 h-12 rounded-xl bg-cyan-950/50 flex items-center justify-center border border-cyan-500/20 text-cyan-400 shrink-0">
                 {item.type === 'work' ? <Briefcase /> : <GraduationCap />}
               </div>
@@ -110,7 +234,7 @@ export default function Timeline() {
               </div>
             </div>
             
-            <div className="space-y-4 mt-6 border-t border-white/5 pt-6 relative z-10">
+            <div className="space-y-4 mt-6 border-t border-white/5 pt-6">
               <DetailSection icon={Code} title="What I Made" items={item.made} />
               <DetailSection icon={BookOpen} title="What I Learned" items={item.learned} />
               <DetailSection icon={Trophy} title="Achievements" items={item.achievements} />
@@ -119,113 +243,9 @@ export default function Timeline() {
         ))}
       </div>
 
-      {/* DESKTOP INTERACTIVE ROADMAP (>= 1024px) */}
-      <div className="hidden lg:flex max-w-7xl mx-auto px-8 gap-12 items-start min-h-[600px]">
-        
-        {/* LEFT PANE: The Roadmap */}
-        <div className="w-1/3 relative py-8 pl-4">
-          {/* Connecting Line */}
-          <div className="absolute left-10 top-12 bottom-12 w-0.5 bg-gray-800" />
-          
-          <div className="space-y-12 relative z-10">
-            {timeline.map((item, idx) => {
-              const isActive = activeItem === idx;
-              return (
-                <div 
-                  key={item.id}
-                  onClick={() => setActiveItem(idx)}
-                  className={`relative flex items-center gap-6 cursor-pointer group transition-all duration-300 ${isActive ? 'scale-105' : 'hover:translate-x-2'}`}
-                >
-                  {/* Glowing Node */}
-                  <div className="relative flex items-center justify-center shrink-0">
-                    <div className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-500 z-10 ${isActive ? 'bg-cyan-950 border-cyan-400 text-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.4)]' : 'bg-gray-900 border-gray-700 text-gray-500 group-hover:border-cyan-700 group-hover:text-cyan-600'}`}>
-                      {item.type === 'work' ? <Briefcase className="w-5 h-5" /> : <GraduationCap className="w-5 h-5" />}
-                    </div>
-                    {/* Active Ping Animation */}
-                    {isActive && (
-                      <div className="absolute inset-0 rounded-full bg-cyan-400 opacity-20 animate-ping" />
-                    )}
-                  </div>
-                  
-                  {/* Node Label */}
-                  <div className="flex-1">
-                    <div className={`text-sm font-bold tracking-widest mb-1 transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-600 group-hover:text-gray-400'}`}>
-                      {item.date.split(' - ')[0]} {/* Just show starting year/month on roadmap */}
-                    </div>
-                    <h3 className={`text-lg font-bold leading-tight transition-colors ${isActive ? 'text-white' : 'text-gray-500 group-hover:text-gray-300'}`}>
-                      {item.org}
-                    </h3>
-                  </div>
+      {/* DESKTOP VOYAGE TIMELINE */}
+      <VoyageTimeline />
 
-                  {/* Active Indicator Arrow */}
-                  <div className={`transition-all duration-300 ${isActive ? 'opacity-100 translate-x-0 text-cyan-400' : 'opacity-0 -translate-x-4 text-transparent'}`}>
-                    <ChevronRight />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* RIGHT PANE: Magic Content Reveal */}
-        <div className="w-2/3 relative h-[700px]">
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={activeItem}
-              initial={{ opacity: 0, x: 40, filter: 'blur(8px)' }}
-              animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, x: -40, filter: 'blur(8px)' }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className="absolute inset-0 glass rounded-3xl border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] p-10 overflow-y-auto custom-scrollbar"
-            >
-              <div className="flex flex-col xl:flex-row gap-8 mb-8 border-b border-white/5 pb-8">
-                {/* Photo Placeholder */}
-                <div className="w-full xl:w-56 h-56 bg-gray-900/80 rounded-2xl border border-white/5 flex flex-col items-center justify-center text-gray-600 shadow-inner shrink-0 overflow-hidden relative group">
-                  {activeData.image ? (
-                    <img src={activeData.image} alt={activeData.org} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  ) : (
-                    <>
-                      <Star className="w-10 h-10 mb-2 opacity-20" />
-                      <span className="text-xs tracking-widest uppercase font-semibold text-center px-4">Photo Placeholder</span>
-                    </>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 to-transparent pointer-events-none" />
-                </div>
-                
-                {/* Headers */}
-                <div className="flex-1 flex flex-col justify-center">
-                  <div className="inline-flex items-center gap-2 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 w-fit">
-                    {activeData.type === 'work' ? 'Professional Experience' : 'Education'}
-                  </div>
-                  <h2 className="text-3xl font-bold text-white mb-2 leading-tight">{activeData.title}</h2>
-                  <h3 className="text-xl text-gray-400 font-medium mb-5">{activeData.org}</h3>
-                  
-                  <div className="flex flex-wrap gap-3 text-sm text-gray-400">
-                    <div className="flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-xl border border-white/5">
-                      <Calendar className="w-4 h-4 text-cyan-500" />
-                      {activeData.date}
-                    </div>
-                    <div className="flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-xl border border-white/5">
-                      <MapPin className="w-4 h-4 text-cyan-500" />
-                      {activeData.location}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Rich Content Details */}
-              <div className="space-y-2 pb-4">
-                <DetailSection icon={Code} title="What I Made" items={activeData.made} />
-                <div className="h-px w-full bg-gradient-to-r from-transparent via-white/5 to-transparent my-6" />
-                <DetailSection icon={BookOpen} title="What I Learned" items={activeData.learned} />
-                <div className="h-px w-full bg-gradient-to-r from-transparent via-white/5 to-transparent my-6" />
-                <DetailSection icon={Trophy} title="Achievements" items={activeData.achievements} />
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-      </div>
     </section>
   );
 }
