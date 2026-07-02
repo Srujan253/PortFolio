@@ -79,6 +79,8 @@ const DetailSection = ({ icon: Icon, title, items }) => {
 // ========================================================================
 //  RICH DATA MODAL
 // ========================================================================
+import { createPortal } from 'react-dom';
+
 const RichDataModal = ({ item, onClose }) => {
   // Prevent body scroll when modal is open
   useEffect(() => {
@@ -88,12 +90,12 @@ const RichDataModal = ({ item, onClose }) => {
     };
   }, []);
 
-  return (
+  return createPortal(
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/60 backdrop-blur-md"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8 bg-black/60 backdrop-blur-md"
       onClick={onClose}
     >
       <motion.div 
@@ -157,7 +159,8 @@ const RichDataModal = ({ item, onClose }) => {
           </div>
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   );
 };
 
