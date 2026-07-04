@@ -176,7 +176,7 @@ export default function About() {
             <motion.div variants={itemVariants} className="glass rounded-[2rem] p-8 border border-white/10 bg-gray-900/40 hover:bg-gray-800/60 transition-colors flex flex-col items-center relative overflow-hidden group shadow-xl">
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-600/10 opacity-50 group-hover:opacity-100 transition-opacity" />
               <div className="relative w-40 h-40 mb-6">
-                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-400 to-blue-600 rounded-full blur-xl opacity-40 animate-pulse" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-cyan-400 to-blue-600 rounded-full blur-xl opacity-40 animate-pulse gpu-accelerated" />
                 <img 
                   src="https://res.cloudinary.com/duf8kshsz/image/upload/v1779219766/PLACEMENT_PIC2_ckncvk.jpg" 
                   alt="Srujan"
@@ -225,7 +225,7 @@ export default function About() {
           >
             {/* Overview Bento */}
             <motion.div variants={itemVariants} className="glass rounded-[2rem] p-8 md:p-10 border border-white/10 bg-gray-900/40 hover:bg-gray-800/60 transition-colors relative overflow-hidden group shadow-xl">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] -mr-32 -mt-32 transition-transform duration-700 group-hover:scale-150" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] -mr-32 -mt-32 transition-transform duration-700 group-hover:scale-150 gpu-accelerated" />
               <h3 className="text-3xl font-black text-cyan-400 mb-6 drop-shadow-md">Overview</h3>
               <BlurText 
                 text="I am an aspiring cybersecurity professional and full-stack developer, currently pursuing my B.Tech at NMAMIT. With a diploma in Full Stack Web Development and an ongoing internship at Vill Design Co. Ltd. (Japan), I build secure, high-performance applications that bridge elegant UIs with robust APIs. My goal is to craft digital experiences that are solid and performant."

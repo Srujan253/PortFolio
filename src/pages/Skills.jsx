@@ -277,7 +277,7 @@ export default function Skills() {
 
   return (
     <section id="skills" className="pt-10 pb-24 relative overflow-hidden bg-gradient-to-b from-transparent to-gray-900/50">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none gpu-accelerated" />
       
       <div className="container mx-auto px-6 relative z-10 text-center">
         <motion.div
