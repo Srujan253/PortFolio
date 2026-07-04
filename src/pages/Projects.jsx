@@ -513,11 +513,18 @@ export default function Projects() {
     <section id="projects" ref={containerRef} className="py-32 relative bg-gray-950">
       
       {/* Title */}
-      <div className="max-w-[100rem] mx-auto px-6 md:px-16 lg:px-24 mb-24">
-         <h2 className="text-xs text-gray-500 uppercase tracking-[0.3em] font-bold mb-4">Selected Works</h2>
-         <h3 className="text-4xl md:text-7xl font-light text-white tracking-tight">
-           Crafting digital <br/><span className="font-black italic">experiences.</span>
-         </h3>
+      <div className="text-center mb-16 md:mb-24 px-6">
+        <h2 className="text-4xl md:text-6xl font-black mb-4 text-white tracking-tight">
+          Featured{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+            Projects
+          </span>
+        </h2>
+        <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+          A curated selection of my latest work. Click on any project to dive
+          into the detailed case study.
+        </p>
+        <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mt-6 rounded-full" />
       </div>
 
       <div className="max-w-[100rem] mx-auto px-6 md:px-16 lg:px-24 relative flex">
