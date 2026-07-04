@@ -155,8 +155,8 @@ export default function Hero() {
               >
                 Welcome to my universe
               </motion.span>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 tracking-tight leading-tight"> 
-                I'm <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">Srujan</span>
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 mb-6 tracking-tighter leading-tight drop-shadow-sm">
+                Srujan H M
               </h1>
             </motion.div>
 

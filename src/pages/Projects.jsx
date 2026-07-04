@@ -514,7 +514,7 @@ export default function Projects() {
       
       {/* Title */}
       <div className="text-center mb-16 md:mb-24 px-6">
-        <h2 className="text-4xl md:text-6xl font-black mb-4 text-white tracking-tight">
+        <h2 className="text-4xl md:text-6xl font-display font-black mb-4 text-white tracking-tighter">
           Featured{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
             Projects
