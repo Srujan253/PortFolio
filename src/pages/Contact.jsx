@@ -55,8 +55,8 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-black mb-4 text-white tracking-tight">
-            Initiate <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Contact</span>
+          <h2 className="text-4xl md:text-6xl font-display font-black text-white mb-6 tracking-tighter">
+            Let's <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Connect</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg">
             Whether it's a project proposal, an architecture discussion, or just a friendly hello—my inbox is always open.

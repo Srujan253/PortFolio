@@ -307,8 +307,10 @@ const ChevronRight = ({ className }) => (
 export default function Timeline() {
   return (
     <section id="timeline" className="bg-gray-950 relative">
-      <div className="pt-24 container mx-auto px-6 mb-16 lg:mb-0">
-        <h2 className="text-4xl font-display font-black text-center mb-12 tracking-tighter text-cyan-400 lg:hidden">Journey & Milestones</h2>
+      <div className="pt-24 container mx-auto px-6 mb-16 lg:mb-24">
+        <h2 className="text-4xl md:text-6xl font-display font-black text-center mb-12 tracking-tighter text-white">
+          Journey & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Milestones</span>
+        </h2>
       </div>
 
       {/* MOBILE FALLBACK (Vertical Stack, < 1024px) */}

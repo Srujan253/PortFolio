@@ -311,8 +311,8 @@ export default function Certifications() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl sm:text-6xl font-black mb-4 text-white tracking-tight">
-            Hall of <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Fame</span>
+          <h2 className="text-4xl md:text-5xl font-display font-black text-white mb-4 tracking-tighter">
+            Global <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Recognitions</span>
           </h2>
           <BlurText 
             text="A showcase of my professional certifications, continuous learning journey, and competitive hackathon wins."

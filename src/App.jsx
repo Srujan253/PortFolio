@@ -63,7 +63,7 @@ export default function App() {
                 
                 {isHeroLoaded && (
                   <Suspense fallback={<div className="h-screen w-full bg-gray-950 flex items-center justify-center"><div className="w-8 h-8 rounded-full border-t-2 border-cyan-500 animate-spin" /></div>}>
-                    <main className="flex-1 flex flex-col gap-24 md:gap-32 pt-8 md:pt-16">
+                    <main className="flex-1 flex flex-col gap-16 md:gap-20 pt-8 md:pt-16">
                       <About />
                       <Skills />
                       <Certifications />
