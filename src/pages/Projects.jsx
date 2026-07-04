@@ -575,27 +575,29 @@ export default function Projects() {
       <AnimatePresence>
         {hoveredProject && !activeProject && (
           <motion.div
-            layoutId={`project-image-${hoveredProject.id}`}
             style={{ 
               x: cursorX, 
               y: cursorY, 
               rotate: smoothTilt,
             }}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-0 left-0 w-[400px] aspect-[4/3] rounded-xl overflow-hidden pointer-events-none z-50 shadow-2xl hidden md:block"
-            // We offset using margin so the cursor is near the center of the image
-            style={{ margin: '-150px 0 0 -200px' }} 
+            className="fixed top-0 left-0 pointer-events-none z-50 -ml-[200px] -mt-[150px] hidden md:block"
           >
-            <img 
-              src={hoveredProject.image} 
-              alt={hoveredProject.title} 
-              className="w-full h-full object-cover"
-            />
-            {/* Dark overlay to make it look premium */}
-            <div className="absolute inset-0 bg-gray-900/10 mix-blend-overlay" />
+            <motion.div
+              layoutId={`project-image-${hoveredProject.id}`}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="w-[400px] aspect-[4/3] rounded-xl overflow-hidden shadow-2xl relative"
+            >
+              <img 
+                src={hoveredProject.image} 
+                alt={hoveredProject.title} 
+                className="w-full h-full object-cover"
+              />
+              {/* Dark overlay to make it look premium */}
+              <div className="absolute inset-0 bg-gray-900/10 mix-blend-overlay" />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
