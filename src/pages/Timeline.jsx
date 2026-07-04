@@ -308,7 +308,7 @@ export default function Timeline() {
   return (
     <section id="timeline" className="bg-gray-950 relative">
       <div className="pt-24 container mx-auto px-6 mb-16 lg:mb-0">
-        <h2 className="text-4xl font-bold text-center mb-12 text-cyan-400 lg:hidden">Journey & Milestones</h2>
+        <h2 className="text-4xl font-display font-black text-center mb-12 tracking-tighter text-cyan-400 lg:hidden">Journey & Milestones</h2>
       </div>
 
       {/* MOBILE FALLBACK (Vertical Stack, < 1024px) */}

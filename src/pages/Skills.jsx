@@ -287,8 +287,8 @@ export default function Skills() {
           transition={{ duration: 0.8 }}
           className="mb-8"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
-            Skill Core
+          <h2 className="text-4xl md:text-6xl font-display font-black mb-4 text-white tracking-tighter">
+            Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Arsenal</span>
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
             Click any skill to view details. Scroll inside the globe to zoom and expand particles!

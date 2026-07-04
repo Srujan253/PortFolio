@@ -156,8 +156,8 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
-            About <span className="text-cyan-400">Me</span>
+          <h2 className="text-4xl md:text-5xl font-display font-black text-white mb-6 tracking-tighter">
+            Who is <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Srujan?</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full" />
         </motion.div>

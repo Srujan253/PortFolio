@@ -249,6 +249,7 @@ const ProjectDetailOverlay = ({ project, onClose, nextProject, prevProject }) =>
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
       className="fixed inset-0 z-[9999] bg-gray-950 overflow-y-auto custom-scrollbar"
+      data-lenis-prevent="true"
     >
       {/* Navbar/Close button */}
       <div className="fixed top-0 left-0 w-full p-6 md:p-10 flex justify-between items-center z-50 pointer-events-none">
@@ -290,7 +291,7 @@ const ProjectDetailOverlay = ({ project, onClose, nextProject, prevProject }) =>
             transition={{ delay: 0.3, duration: 0.8 }}
             className="max-w-4xl"
           >
-            <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter mb-6">{project.title}</h1>
+            <h1 className="text-5xl md:text-8xl font-display font-black text-white tracking-tighter mb-6">{project.title}</h1>
             <p className="text-xl md:text-3xl text-gray-300 font-light leading-relaxed">{project.shortDescription}</p>
           </motion.div>
         </div>
