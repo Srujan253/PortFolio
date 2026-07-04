@@ -19,7 +19,7 @@ import {
   SiPostgresql,
 } from "react-icons/si";
 import { motion, AnimatePresence, useInView, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
-import { ArrowRight, ArrowLeft, X, ExternalLink, Github, Code2, Database, LayoutTemplate, Layers } from "lucide-react";
+import { ArrowRight, ArrowLeft, X, ExternalLink, Code2, Database, LayoutTemplate, Layers } from "lucide-react";
 import { createPortal } from "react-dom";
 
 // ==========================================
@@ -415,7 +415,7 @@ const ProjectDetailOverlay = ({ project, onClose, nextProject, prevProject }) =>
               {project.github !== "#" ? (
                 <a href={project.github} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-gray-400 hover:text-white transition-colors group">
                   <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                    <Github className="w-5 h-5" />
+                    <FaGithub className="w-5 h-5" />
                   </div>
                   <div>
                     <div className="font-medium">View Source</div>
