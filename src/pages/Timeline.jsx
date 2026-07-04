@@ -176,10 +176,21 @@ const FishVoyageTimeline = () => {
     offset: ["start start", "end end"]
   });
 
-  // Apply a spring physics to the scroll progress for buttery smooth traversal
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 70,
+  // Snap the continuous scroll progress to discrete destinations
+  const snappedProgress = useTransform(scrollYProgress, (latest) => {
+    // We have 4 items, so 3 intervals: 0, 0.333, 0.666, 1
+    const totalSteps = timeline.length - 1; 
+    const stepSize = 1 / totalSteps;
+    // Round to the nearest station
+    const currentStep = Math.round(latest / stepSize);
+    return currentStep * stepSize;
+  });
+
+  // Apply heavy spring physics so it glides smoothly between destinations
+  const smoothProgress = useSpring(snappedProgress, {
+    stiffness: 80,
     damping: 20,
+    mass: 1,
     restDelta: 0.001
   });
 
