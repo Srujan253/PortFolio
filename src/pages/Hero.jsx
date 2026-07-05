@@ -1,11 +1,13 @@
-import { motion, useMotionValue, useTransform, useSpring, useMotionTemplate, AnimatePresence } from 'framer-motion';
-import { useState, useEffect, useRef } from 'react';
+import { motion, useMotionValue, useTransform, useSpring, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { FaFilePdf, FaEnvelope, FaCode } from 'react-icons/fa';
-import { SplineScene } from "@/components/ui/splite";
 import { Spotlight } from "@/components/ui/spotlight";
 import { InteractiveSpotlight } from "@/components/ui/interactive-spotlight";
 
+const SplineScene = lazy(() => import("@/components/ui/splite").then(module => ({ default: module.SplineScene })));
+
 const TypingEffect = ({ texts, speed = 82, className = "", delay = 0, loopDelay = 3000 }) => {
+// ... keeping typing effect intact ...
   const [displayText, setDisplayText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
   const [textIndex, setTextIndex] = useState(0);
@@ -53,16 +55,14 @@ export default function Hero() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const resumeLink = "https://res.cloudinary.com/duf8kshsz/image/upload/v1779219567/Srujan_H_M-Current_ppopvn.pdf";
 
-  // Global Spotlight Removed to optimize rendering performance
-
-  // 3D Tilt Logic for Profile Picture
+  // 3D Tilt Logic for Profile Picture (currently hidden, but kept for future use)
   const picRef = useRef(null);
   const picX = useMotionValue(0);
   const picY = useMotionValue(0);
   const picXSpring = useSpring(picX, { stiffness: 150, damping: 15 });
   const picYSpring = useSpring(picY, { stiffness: 150, damping: 15 });
-  const rotateX = useTransform(picYSpring, [-0.5, 0.5], ["5deg", "-5deg"]); // Reduced from 15deg
-  const rotateY = useTransform(picXSpring, [-0.5, 0.5], ["-5deg", "5deg"]); // Reduced from 15deg
+  const rotateX = useTransform(picYSpring, [-0.5, 0.5], ["5deg", "-5deg"]); 
+  const rotateY = useTransform(picXSpring, [-0.5, 0.5], ["-5deg", "5deg"]); 
 
   const handlePicMouseMove = (e) => {
     if (!picRef.current) return;
@@ -85,8 +85,8 @@ export default function Hero() {
       
       {/* Background ambient glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-1/4 -left-10 w-96 h-96 bg-cyan-600/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 -right-10 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/4 -left-10 w-96 h-96 bg-cyan-600/10 rounded-full blur-[120px] gpu-accelerated" />
+        <div className="absolute bottom-1/4 -right-10 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] gpu-accelerated" />
       </div>
 
       <Spotlight
@@ -102,7 +102,7 @@ export default function Hero() {
       >
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           
-          {/* Photo Section with 3D Tilt */}
+          {/* Photo Section with Spline */}
           <motion.div
             className="flex justify-center lg:justify-start order-1 lg:order-2 w-full h-[300px] md:h-[400px] lg:h-[600px] relative pointer-events-auto"
             initial={{ opacity: 0, x: 50 }}
@@ -111,34 +111,18 @@ export default function Hero() {
             style={{ perspective: "1000px" }}
           >
             <InteractiveSpotlight />
-            {/*
-            <motion.div
-              ref={picRef}
-              style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-              onMouseMove={handlePicMouseMove}
-              onMouseLeave={handlePicMouseLeave}
-              className="relative group cursor-pointer"
-            >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-tr from-cyan-400 to-blue-600 rounded-full blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500"
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            
+            <Suspense fallback={
+              <div className="w-full h-full flex flex-col items-center justify-center text-cyan-400">
+                <div className="w-10 h-10 border-t-2 border-cyan-400 border-r-2 rounded-full animate-spin mb-4" />
+                <span className="font-display tracking-widest uppercase text-sm">Loading Neural Engine...</span>
+              </div>
+            }>
+              <SplineScene 
+                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                className="w-full h-full"
               />
-              <motion.img
-                src="https://res.cloudinary.com/duf8kshsz/image/upload/v1779219766/PLACEMENT_PIC2_ckncvk.jpg"
-                alt="Srujan H M"
-                className="relative w-56 h-56 md:w-72 md:h-72 lg:w-96 lg:h-96 rounded-full object-cover border-[6px] border-gray-900 shadow-[0_0_50px_rgba(6,182,212,0.3)] transition-all duration-300"
-                style={{ transform: "translateZ(50px)" }} // Pop out effect
-              />
-              {/* Holographic glare * /}
-              <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 pointer-events-none mix-blend-overlay transition-opacity duration-500" />
-            </motion.div>
-            */}
-
-            <SplineScene 
-              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              className="w-full h-full"
-            />
+            </Suspense>
           </motion.div>
 
           {/* Content Section */}
