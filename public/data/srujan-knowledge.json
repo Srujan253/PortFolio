@@ -1,0 +1,115 @@
+{
+  "personal_info": {
+    "name": "Srujan H M",
+    "location": "Thirthahalli thaluk, Shivamogga district, Karnataka, India (Pincode: 577415)",
+    "family": {
+      "father": "Manjunath",
+      "mother": "Sumitra",
+      "sister": "Srusthi M"
+    }
+  },
+  "education": [
+    {
+      "institution": "NMAM Institute of Technology",
+      "degree": "B.Tech in Cyber Security",
+      "cgpa": 8.83,
+      "status": "Currently Pursuing"
+    },
+    {
+      "institution": "SDM Polytechnic Ujire",
+      "degree": "Diploma in Full Stack Web Development",
+      "cgpa": 9.78,
+      "status": "Completed"
+    },
+    {
+      "institution": "State Board (SSLC)",
+      "percentage": 92.48,
+      "status": "Completed"
+    }
+  ],
+  "skills_timeline": {
+    "june_2025": "Started learning typing and Python. Developed first project: GupShup.",
+    "november_2025": "Learned Python in depth using Coddy.",
+    "june_2026": "Started solving LeetCode.",
+    "general": "Learned full MERN stack during Diploma. Learned DSA in C during 2nd year of engineering. Explored Data Science using Code with Harry and built interactive websites to help others."
+  },
+  "gaming_experience": {
+    "free_fire": {
+      "started": 2020,
+      "achievements": "Participated in CS esport cup and won twice.",
+      "og_squad": ["ashik", "sharath", "akash", "nikil"],
+      "tournament_squad": ["sudarshan", "vikas", "shashank"],
+      "current_squad": ["sushanth", "sakshath", "sk_thilak_raj"],
+      "guild_name": "Team Malnad",
+      "role": "Flexible team player, knows how to turn situations in our favor.",
+      "favorites": {
+        "character": "Adam",
+        "skill": "Wukong"
+      }
+    },
+    "clash_royale": {
+      "started": 2026,
+      "achievements": "Reached 7000 trophies in 5 months.",
+      "mentors": ["nageshwar bhandary", "vinuth m poojary"],
+      "favorites": {
+        "troop": "Mega Knight"
+      },
+      "thoughts": "Addictive but fair play since you don't need money."
+    },
+    "clash_of_clans": {
+      "started": 2023,
+      "town_hall": 12,
+      "favorites": {
+        "troop": "P.E.K.K.A"
+      },
+      "thoughts": "Very interesting when playing with friends, comparing townhalls. Saved over 4000 diamonds, bought hero skins."
+    }
+  },
+  "projects": [
+    {
+      "name": "GupShup",
+      "description": "Real-time chat application. Built while watching a tutorial but extended with Cloudinary, Socket.io, and hosting. Very special as it was the first project."
+    },
+    {
+      "name": "ModXX",
+      "description": "Digital version of a multi-disciplinary exchange club founded by friend Sakshath. Built with Abhishek H G.",
+      "features": [
+        "Recommendation system",
+        "CRUD operations on projects",
+        "Task assignment and analysis",
+        "Admin-controlled centralized real-time chatting",
+        "Admin announcement system",
+        "Certificate printing after project completion",
+        "Profile rating and resume support",
+        "Research publication support",
+        "Public and private profiles/projects to maintain privacy"
+      ]
+    },
+    {
+      "name": "Clash Royale Portfolio",
+      "description": "Clash Royale themed portfolio made for fun. First Next.js project."
+    },
+    {
+      "name": "Friend's Portfolio",
+      "description": "Interactive and premium aesthetic portfolio for friend Sinchana S. Learned scroll effects and storytelling."
+    }
+  ],
+  "achievements": [
+    {
+      "name": "Bit N Build",
+      "result": "Special Recognition (unofficially 3rd place)"
+    },
+    {
+      "name": "Christ University National Hackathon",
+      "result": "Finalist",
+      "team_name": "ERROR 404",
+      "teammates": ["Abhishek H G", "Prashanth M", "Adhitya Kashyap"]
+    },
+    {
+      "name": "Cybersiege National CTF (Alvas Institute of Technology)",
+      "result": "2nd Runner Up",
+      "team_name": "Bounty Hunters",
+      "teammates": ["SK Thilak Raj", "Nageshwar Bhandary", "Spoorthi"]
+    }
+  ]
+}

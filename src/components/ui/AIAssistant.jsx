@@ -2,15 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaRobot, FaTimes, FaPaperPlane, FaUser } from 'react-icons/fa';
 
-const SYSTEM_PROMPT = `
+const BASE_SYSTEM_PROMPT = `
 You are Srujan's Personal AI Agent, embedded directly into his premium portfolio website. Your job is to act as his representative, hyping up his skills, projects, and achievements to potential recruiters, clients, or visitors. 
-
-Key Information about Srujan:
-- He is a Full Stack Developer (React, MERN) and AI & ML Enthusiast.
-- He builds modern, highly interactive, and secure web applications.
-- Key Projects: Club MODX, Privacy-Preserving ID Verification, GupShup, ArchiCanvas.
-- Key Skills: React, Node.js, Python, PostgreSQL, Tailwind CSS, etc.
-- Achievements: Cybersiege National CTF (2nd Runner Up), Bit N Build Hackathon, etc.
 
 Your Personality:
 - Professional, yet highly futuristic, engaging, and slightly witty. 
@@ -18,19 +11,30 @@ Your Personality:
 - Always be incredibly positive about Srujan's abilities.
 
 SUPERPOWER (Navigation):
-If the user asks to see a specific part of the portfolio (e.g., "Show me his projects", "Where is his resume?", "How do I contact him?"), you MUST append a specific navigation command to the very end of your response.
+If the user asks to see a specific part of the portfolio, append a specific navigation command to the very end of your response.
 Available commands: [NAVIGATE:hero], [NAVIGATE:skills], [NAVIGATE:certifications], [NAVIGATE:projects], [NAVIGATE:timeline], [NAVIGATE:contact].
-Example response: "I'd love to show you his amazing projects! Scrolling you there now. [NAVIGATE:projects]"
+
+STRICT PERSONAL QUESTION RULE:
+If the user asks deeply personal questions that are NOT covered in the provided knowledge base (e.g. what makes him great, personal secrets, etc.), you MUST reply with a variation of: "I just know this much about him, I don't know much yet. That's a bit too personal! Ask him directly via the contact section."
 `;
 
 export default function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'model', text: "Hello! I'm Srujan's personal AI assistant. Ask me anything about his skills, projects, or where to find his resume!" }
+    { role: 'model', text: "Hello! I'm Srujan's personal AI assistant. Ask me anything about his skills, projects, or gaming achievements!" }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [knowledgeBase, setKnowledgeBase] = useState(null);
   const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    // Fetch Srujan's detailed knowledge base on mount
+    fetch('/data/srujan-knowledge.json')
+      .then(res => res.json())
+      .then(data => setKnowledgeBase(data))
+      .catch(err => console.error("Failed to load knowledge base:", err));
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -50,20 +54,18 @@ export default function AIAssistant() {
     setIsLoading(true);
 
     try {
-      // Build conversation history for Gemini API
-      const contents = [
-        {
-          role: 'user',
-          parts: [{ text: SYSTEM_PROMPT }]
-        },
-        {
-          role: 'model',
-          parts: [{ text: "Understood. I am Srujan's AI assistant." }]
-        },
-        ...messages.map(msg => ({
-          role: msg.role === 'model' ? 'model' : 'user',
-          parts: [{ text: msg.text }]
-        })),
+      // Build dynamic system prompt containing the JSON knowledge base
+      const dynamicSystemPrompt = BASE_SYSTEM_PROMPT + "\n\nKNOWLEDGE BASE:\n" + JSON.stringify(knowledgeBase, null, 2);
+
+      // We strictly skip the initial greeting (index 0) because Gemini API strictly requires 
+      // the history to start with a 'user' message and perfectly alternate.
+      const historyMessages = messages.slice(1).map(msg => ({
+        role: msg.role === 'model' ? 'model' : 'user',
+        parts: [{ text: msg.text }]
+      }));
+
+      const formattedMessages = [
+        ...historyMessages,
         {
           role: 'user',
           parts: [{ text: userMessage }]
@@ -78,7 +80,10 @@ export default function AIAssistant() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          contents: contents,
+          system_instruction: {
+            parts: [{ text: dynamicSystemPrompt }]
+          },
+          contents: formattedMessages,
           generationConfig: {
             temperature: 0.7,
             maxOutputTokens: 500,
@@ -112,10 +117,10 @@ export default function AIAssistant() {
             if (el) {
               el.scrollIntoView({ behavior: 'smooth' });
             }
-          }, 1000); // Wait 1 second before scrolling so user can read briefly
+          }, 1000);
         }
       } else {
-        throw new Error("No response from AI");
+        throw new Error(data.error ? data.error.message : "No response from AI");
       }
     } catch (error) {
       console.error("AI Assistant Error:", error);
