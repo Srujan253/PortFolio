@@ -48,6 +48,12 @@ A cutting-edge developer portfolio built with React, Vite, and Tailwind CSS. Fea
 - Push to GitHub and connect to [Vercel](https://vercel.com/) or [Netlify](https://netlify.com/)
 - Or use GitHub Pages
 
+## License
+This repository is licensed under a custom **All Rights Reserved** license.
+
+- Reuse, copying, modification, and redistribution are not allowed without prior written permission.
+- Any approved use must include clear credit to **Srujan** and a link to this repository.
+
 ---
 
 **Built with ❤️ using React, Vite, and Tailwind CSS.** 
