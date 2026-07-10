@@ -112,6 +112,33 @@ const projects = [
   //   bentoClass: "md:col-span-2 md:row-span-1",
   // },
   {
+    id: "star-x-portfolio",
+    title: "Star X Portfolio",
+    shortDescription: "High-performance cinematic portfolio for Star X Creations.",
+    fullDescription:
+      "Built a high-performance portfolio using Next.js, TypeScript, Tailwind CSS, GSAP, Framer Motion, Lenis, and Shadcn/UI featuring cinematic UI, smooth scrolling, interactive animations, custom transitions, and responsive design. Created for my friend Thilak (star_x_creations) who has 8.6k followers on Instagram.",
+    features: [
+      "Cinematic UI & Transitions",
+      "GSAP & Framer Motion Animations",
+      "Next.js Image Optimization",
+      "GPU-Accelerated 60FPS Rendering",
+    ],
+    challenge:
+      "Improving frontend performance through lazy loading, code splitting, dynamic imports, SEO optimization, and accessibility best practices while maintaining 60 FPS heavy animations.",
+    image: "https://res.cloudinary.com/duf8kshsz/image/upload/v1783533672/Screenshot_2026-07-08_230542_xgr8x3.png",
+    tech: [
+      { icon: <FaReact />, name: "Next.js & React", color: "text-white" },
+      { icon: <SiTailwindcss />, name: "Tailwind CSS", color: "text-cyan-300" },
+      { icon: <FaRocket />, name: "GSAP & Framer", color: "text-purple-400" },
+    ],
+    demo: "#",
+    github: "#",
+    year: "2024",
+    role: "Frontend Architect",
+    status: "Live",
+    bentoClass: "md:col-span-2 md:row-span-1",
+  },
+  {
     id: "privacy-id",
     title: "Privacy-Preserving ID",
     shortDescription: "Cryptographically secure offline/online ID verification.",

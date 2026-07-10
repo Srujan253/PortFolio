@@ -90,8 +90,8 @@
       "description": "Clash Royale themed portfolio made for fun. First Next.js project."
     },
     {
-      "name": "Friend's Portfolio",
-      "description": "Interactive and premium aesthetic portfolio for friend Sinchana S. Learned scroll effects and storytelling."
+      "name": "Star X Portfolio",
+      "description": "High-performance cinematic portfolio for friend Thilak (Instagram: star_x_creations - 8.6k followers). Features Next.js, GSAP, Framer Motion, Lenis, and Shadcn/UI with 60FPS GPU-accelerated rendering."
     }
   ],
   "achievements": [
