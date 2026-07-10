@@ -49,7 +49,7 @@ const projects = [
     ],
     demo: "https://modx-second-2.onrender.com",
     github: "#",
-    year: "2024",
+    year: "2026",
     role: "Full Stack Developer",
     status: "Live",
     bentoClass: "md:col-span-2 md:row-span-2",
@@ -79,7 +79,7 @@ const projects = [
     ],
     demo: "https://gupshup-rbcp.onrender.com/",
     github: "https://github.com/Srujan253/Gupshup",
-    year: "2024",
+    year: "2025",
     role: "Backend Architect",
     status: "Live",
     bentoClass: "md:col-span-2 md:row-span-2",
@@ -106,7 +106,7 @@ const projects = [
   //   ],
   //   demo: "https://sinchana-frd.vercel.app",
   //   github: "https://github.com/Srujan253/portfolio-frd.git",
-  //   year: "2024",
+  //   year: "2026",
   //   role: "Frontend Developer",
   //   status: "Live",
   //   bentoClass: "md:col-span-2 md:row-span-1",
@@ -126,14 +126,19 @@ const projects = [
     challenge:
       "Improving frontend performance through lazy loading, code splitting, dynamic imports, SEO optimization, and accessibility best practices while maintaining 60 FPS heavy animations.",
     image: "https://res.cloudinary.com/duf8kshsz/image/upload/v1783533672/Screenshot_2026-07-08_230542_xgr8x3.png",
+    images: [
+      "https://res.cloudinary.com/duf8kshsz/image/upload/v1783533672/Screenshot_2026-07-08_230542_xgr8x3.png",
+      "https://res.cloudinary.com/duf8kshsz/image/upload/v1783532714/Screenshot_2026-07-08_230707_db5pst.png",
+      "https://res.cloudinary.com/duf8kshsz/image/upload/v1783532701/Screenshot_2026-07-08_230643_vbhiyz.png"
+    ],
     tech: [
       { icon: <FaReact />, name: "Next.js & React", color: "text-white" },
       { icon: <SiTailwindcss />, name: "Tailwind CSS", color: "text-cyan-300" },
       { icon: <FaRocket />, name: "GSAP & Framer", color: "text-purple-400" },
     ],
-    demo: "#",
+    demo: "https://star-x-creations.onrender.com/",
     github: "#",
-    year: "2024",
+    year: "2026",
     role: "Frontend Architect",
     status: "Live",
     bentoClass: "md:col-span-2 md:row-span-1",
@@ -161,7 +166,7 @@ const projects = [
     ],
     demo: "#",
     github: "#",
-    year: "2023",
+    year: "2025",
     role: "Security Engineer",
     status: "Proof of Concept",
     bentoClass: "md:col-span-2 md:row-span-1",
@@ -188,7 +193,7 @@ const projects = [
     ],
     demo: "https://clash-royal-portfolio.vercel.app/",
     github: "#",
-    year: "2023",
+    year: "2026",
     role: "UI/UX Developer",
     status: "Live",
     bentoClass: "md:col-span-2 md:row-span-1",
@@ -215,7 +220,7 @@ const projects = [
     ],
     demo: "#",
     github: "https://github.com/Srujan253/ArchiCanvas_",
-    year: "2023",
+    year: "2025",
     role: "Frontend Architect",
     status: "Development",
     bentoClass: "md:col-span-2 md:row-span-1",
@@ -374,18 +379,18 @@ const ProjectDetailOverlay = ({ project, onClose, nextProject, prevProject }) =>
             </p>
           </motion.div>
 
-          {/* Placeholders for visual gallery scrolling */}
+          {/* Visual Gallery */}
           <div className="w-full space-y-8">
             <h3 className="text-sm font-bold text-cyan-500 uppercase tracking-widest mb-6">Gallery</h3>
             <div className="w-full aspect-video bg-gray-900 rounded-3xl border border-white/5 overflow-hidden group">
-               <img src="https://placehold.co/1200x800/0f172a/06b6d4?text=Dashboard+Mockup" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Mockup" />
+               <img src={project.images && project.images[0] ? project.images[0] : "https://placehold.co/1200x800/0f172a/06b6d4?text=Dashboard+Mockup"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Gallery Image 1" />
             </div>
             <div className="flex flex-col md:flex-row gap-8">
                <div className="w-full md:w-1/2 aspect-square bg-gray-900 rounded-3xl border border-white/5 overflow-hidden group">
-                 <img src="https://placehold.co/800x800/0f172a/06b6d4?text=Mobile+View" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Mockup" />
+                 <img src={project.images && project.images[1] ? project.images[1] : "https://placehold.co/800x800/0f172a/06b6d4?text=Mobile+View"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Gallery Image 2" />
                </div>
                <div className="w-full md:w-1/2 aspect-square bg-gray-900 rounded-3xl border border-white/5 overflow-hidden group">
-                 <img src="https://placehold.co/800x800/0f172a/06b6d4?text=Dark+Mode" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Mockup" />
+                 <img src={project.images && project.images[2] ? project.images[2] : "https://placehold.co/800x800/0f172a/06b6d4?text=Dark+Mode"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Gallery Image 3" />
                </div>
             </div>
           </div>
