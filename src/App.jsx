@@ -2,7 +2,7 @@ import React, { Suspense, lazy, useState, useEffect } from 'react';
 import Navbar from './components/layout/Navbar';
 import Hero from './pages/Hero';
 import Footer from './components/layout/Footer';
-import LoadingScreen from './components/ui/LoadingScreen';
+import Preloader from './components/ui/Preloader';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -19,12 +19,10 @@ const Certifications = lazy(() => import('./pages/Certifications'));
 const AIAssistant = lazy(() => import('./components/ui/AIAssistant'));
 
 export default function App() {
-  const [isAppLoading, setIsAppLoading] = useState(true);
+  const [isBooting, setIsBooting] = useState(true);
   const [isHeroLoaded, setIsHeroLoaded] = useState(false);
 
   useEffect(() => {
-    // Instantly remove app loading state since index.html handles the CSS loader
-    setIsAppLoading(false);
     // Give the Hero a brief moment to render before mounting the heavy Suspense components
     const timer = setTimeout(() => setIsHeroLoaded(true), 100);
     return () => clearTimeout(timer);
@@ -48,8 +46,8 @@ export default function App() {
       <SmoothScroll>
         <div className="min-h-screen flex flex-col bg-gray-950 transition-colors duration-300 selection:bg-cyan-500/30 selection:text-cyan-200">
           <AnimatePresence mode="wait">
-            {isAppLoading ? (
-              <LoadingScreen key="loading-screen" />
+            {isBooting ? (
+              <Preloader key="preloader" onComplete={() => setIsBooting(false)} />
             ) : (
               <motion.div 
                 key="main-app"
