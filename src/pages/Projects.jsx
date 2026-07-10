@@ -84,33 +84,33 @@ const projects = [
     status: "Live",
     bentoClass: "md:col-span-2 md:row-span-2",
   },
-  {
-    id: "sinchana-portfolio",
-    title: "Sinchana Portfolio",
-    shortDescription: "3D Interactive Portfolio built with React and Three.js.",
-    fullDescription:
-      "A modern, highly interactive portfolio web application built with React, Vite, and 3D graphics. Powered by three.js and cobe for stunning visual elements, featuring fluid animations via framer-motion and smooth scrolling mechanics integrated via lenis.",
-    features: [
-      "Immersive 3D Experiences",
-      "Fluid Animations",
-      "Smooth Scrolling",
-      "Fast Development",
-    ],
-    challenge:
-      "Integrating Three.js and Cobe 3D globes alongside Framer Motion animations while maintaining 60fps performance.",
-    image: "https://res.cloudinary.com/duf8kshsz/image/upload/v1782494695/Screenshot_2026-06-26_224531_nfhabj.png",
-    tech: [
-      { icon: <FaReact />, name: "React", color: "text-cyan-400" },
-      { icon: <SiTailwindcss />, name: "Tailwind CSS", color: "text-cyan-300" },
-      { icon: <SiVite />, name: "Vite", color: "text-purple-400" },
-    ],
-    demo: "https://sinchana-frd.vercel.app",
-    github: "https://github.com/Srujan253/portfolio-frd.git",
-    year: "2024",
-    role: "Frontend Developer",
-    status: "Live",
-    bentoClass: "md:col-span-2 md:row-span-1",
-  },
+  // {
+  //   id: "sinchana-portfolio",
+  //   title: "Sinchana Portfolio",
+  //   shortDescription: "3D Interactive Portfolio built with React and Three.js.",
+  //   fullDescription:
+  //     "A modern, highly interactive portfolio web application built with React, Vite, and 3D graphics. Powered by three.js and cobe for stunning visual elements, featuring fluid animations via framer-motion and smooth scrolling mechanics integrated via lenis.",
+  //   features: [
+  //     "Immersive 3D Experiences",
+  //     "Fluid Animations",
+  //     "Smooth Scrolling",
+  //     "Fast Development",
+  //   ],
+  //   challenge:
+  //     "Integrating Three.js and Cobe 3D globes alongside Framer Motion animations while maintaining 60fps performance.",
+  //   image: "https://res.cloudinary.com/duf8kshsz/image/upload/v1782494695/Screenshot_2026-06-26_224531_nfhabj.png",
+  //   tech: [
+  //     { icon: <FaReact />, name: "React", color: "text-cyan-400" },
+  //     { icon: <SiTailwindcss />, name: "Tailwind CSS", color: "text-cyan-300" },
+  //     { icon: <SiVite />, name: "Vite", color: "text-purple-400" },
+  //   ],
+  //   demo: "https://sinchana-frd.vercel.app",
+  //   github: "https://github.com/Srujan253/portfolio-frd.git",
+  //   year: "2024",
+  //   role: "Frontend Developer",
+  //   status: "Live",
+  //   bentoClass: "md:col-span-2 md:row-span-1",
+  // },
   {
     id: "privacy-id",
     title: "Privacy-Preserving ID",
