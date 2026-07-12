@@ -1,6 +1,6 @@
 # Srujan H M - Premium 3D Portfolio (Srujan OS v2.0)
 
-![Portfolio Banner](https://res.cloudinary.com/duf8kshsz/image/upload/v1779219766/PLACEMENT_PIC2_ckncvk.jpg)
+![Portfolio Banner](https://res.cloudinary.com/duf8kshsz/image/upload/v1783865200/Screenshot_2026-07-12_183615_unseo3.png))
 
 Welcome to the open-source repository for my premium, interactive 3D personal portfolio! Designed to feel like a high-end operating system and an immersive digital experience, this portfolio pushes the boundaries of modern web technologies.
 
